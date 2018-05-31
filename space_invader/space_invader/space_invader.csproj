@@ -49,7 +49,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\kylepulver-otter-578e5a9b3f38\Otter\Otter.csproj">
+    <ProjectReference Include="..\..\..\..\..\Desktop\kylepulver-otter-578e5a9b3f38\Otter\Otter.csproj">
       <Project>{236485c2-a7ba-4dcd-808a-b3a634764402}</Project>
       <Name>Otter</Name>
     </ProjectReference>
