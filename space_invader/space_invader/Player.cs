@@ -33,21 +33,26 @@ namespace space_invader
 
             // Check if player is moving left
             if (Input.KeyDown(Key.A) || Input.KeyDown(Key.Left))
-            {
                 X -= MoveSpeed;
-            }
-            
+
             // Check if player is moving right
             if (Input.KeyDown(Key.D) || Input.KeyDown(Key.Right))
-            {
                 X += MoveSpeed;
-            }
+
+            // Check if player is shooting
+            if (Input.KeyDown(Key.Space))
+                Shoot();
 
             // Check if player is in play area
             if (X < scene.PlayPosition.X)
                 X = scene.PlayPosition.X;
             else if (X > scene.PlayPosition.X + scene.PlayWidth.X)
                 X = scene.PlayPosition.X + scene.PlayWidth.X;
+        }
+
+        void Shoot()
+        {
+
         }
     }
 }
