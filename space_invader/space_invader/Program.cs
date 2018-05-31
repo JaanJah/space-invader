@@ -13,6 +13,12 @@ namespace space_invader
         {
             // Creates game window
             var game = new Game("Space Invader", 800, 600, 60, false);
+
+            // Creates game scene
+            Scene scene = new Scene();
+
+            scene.Add();
+
             // Starts the game
             game.Start();
         }
