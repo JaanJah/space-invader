@@ -17,6 +17,7 @@ Walls
 Game over screen
 Life system
 Name system (high skooridesse läheb nimi)
+Shooting system
 
 Bugid:
 Paranda warningud ära
