@@ -12,7 +12,9 @@ namespace space_invader
         static void Main(string[] args)
         {
             // Creates game window
-            var game = new Game();
+            var game = new Game("Space Invader", 800, 600, 60, false);
+            // Starts the game
+            game.Start();
         }
     }
 }
