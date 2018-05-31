@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Otter;
 
 namespace space_invader
 {
@@ -10,6 +11,8 @@ namespace space_invader
     {
         static void Main(string[] args)
         {
+            // Creates game window
+            var game = new Game();
         }
     }
 }
