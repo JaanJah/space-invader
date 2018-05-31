@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HighScoresScene.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="MainScene.cs" />
     <Compile Include="Program.cs" />
