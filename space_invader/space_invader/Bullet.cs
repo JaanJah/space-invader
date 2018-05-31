@@ -9,9 +9,29 @@ namespace space_invader
 {
     class Bullet : Entity
     {
-        public Bullet()
+        float MoveSpeed = 3.0f;
+        bool IsEnemy;
+        MainScene scene;
+
+        public Bullet(MainScene _scene, bool _IsEnemy)
         {
-            //AddGraphic()
+            scene = _scene;
+            IsEnemy = _IsEnemy;
+
+            AddGraphic(Image.CreateRectangle(2, 5, Color.White));
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+            Y += MoveSpeed;
+
+            if (IsEnemy)
+                if (scene.player.Collide(Position.X, Position.Y))
+                {
+
+                }
         }
     }
 }

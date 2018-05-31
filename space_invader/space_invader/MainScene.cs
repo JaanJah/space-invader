@@ -14,7 +14,7 @@ namespace space_invader
     {
         public Vector2 PlayPosition = new Vector2(20, 20);
         public Vector2 PlayWidth = new Vector2(700, 500);
-        Player player;
+        public Player player;
 
         public MainScene()
         {
