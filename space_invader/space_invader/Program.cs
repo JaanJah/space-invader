@@ -15,6 +15,7 @@ namespace space_invader
             var game = new Game("Space Invader", 800, 600, 60, false);
             // Starts the game
             game.Start();
+
         }
     }
 }
