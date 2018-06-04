@@ -17,6 +17,7 @@ namespace space_invader
         AutoTimer ShootingCooldown;
         float ShootingCooldownTime = 100.0f;
         bool CanShoot = true;
+        BoxCollider collider = new BoxCollider(30, 30, Tags.Player);
 
         public Player(MainScene _scene)
         {
@@ -28,6 +29,9 @@ namespace space_invader
 
             // Set image
             AddGraphic(Image.CreateCircle(12, Color.Red));
+
+            // Add collider
+            AddCollider(collider);
 
             //Initiate shootingCooldown
             ShootingCooldown = new AutoTimer(ShootingCooldownTime);
@@ -68,7 +72,7 @@ namespace space_invader
 
         void Shoot()
         {
-            Bullet bullet = new Bullet(scene, false, -3.0f, Position);
+            Bullet bullet = new Bullet(scene, -3.0f, Position, Tags.Player);
             CanShoot = false;
             ShootingCooldown.Reset();
 

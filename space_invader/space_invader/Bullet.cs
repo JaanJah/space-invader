@@ -7,19 +7,26 @@ using Otter;
 
 namespace space_invader
 {
+    enum Tags
+    {
+        Player,
+        Enemy
+    }
+
     class Bullet : Entity
     {
         public float MoveSpeed;
-        bool IsEnemy;
         MainScene scene;
+        BoxCollider collider;
 
-        public Bullet(MainScene _scene, bool _IsEnemy, float _MoveSpeed, Vector2 pos)
+        public Bullet(MainScene _scene, float _MoveSpeed, Vector2 pos, Tags tag)
         {
             scene = _scene;
-            IsEnemy = _IsEnemy;
             Position = pos;
             MoveSpeed = _MoveSpeed;
+            collider = new BoxCollider(3, 7, tag);
 
+            AddCollider(collider);
             AddGraphic(Image.CreateRectangle(3, 7, Color.White));
         }
 
@@ -27,14 +34,19 @@ namespace space_invader
         {
             base.Update();
 
-
             Y += MoveSpeed;
 
-            /*if (IsEnemy)
-                if (scene.player.Collide(Position.X, Position.Y))
+            if (collider.Tags[0] == (int)Tags.Enemy)
+                if (collider.Overlap(X, Y, Tags.Player))
                 {
+                    RemoveSelf();
+                }
 
-                }*/
+            else
+                if (collider.Overlap(X, Y, Tags.Enemy))
+                {
+                    RemoveSelf();
+                }
         }
     }
 }
