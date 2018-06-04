@@ -10,10 +10,14 @@ namespace space_invader
     class Enemy : Entity
     {
         public static float EnemySize = 32.0f;
+        static float MoveSpeed = 0.025f;
         public static MainScene scene;
-        Enemy EnemyRight;
-        Enemy EnemyLeft;
-        Enemy EnemyBottom;
+        public static Enemy EnemyRight;
+        public static Enemy EnemyLeft;
+        public static Enemy EnemyBottom;
+        public static float HeightCheck = 1000;
+        public static Vector2 MoveDir = new Vector2(MoveSpeed, 0.0f);
+        public static Vector2 NextDir;
 
         public Enemy()
         {
@@ -22,26 +26,62 @@ namespace space_invader
 
         void UpdateMovement()
         {
-            
+            List<Enemy> enemies = scene.GetEntities<Enemy>();
+
+            foreach (Enemy enemy in enemies)
+                enemy.SetPosition(enemy.Position + MoveDir);
+
+            if (EnemyRight.Position.X >= scene.PlayPosition.X + scene.PlayWidth.X &&
+                MoveDir != new Vector2(0.0f, MoveSpeed))
+            {
+                MoveDir = new Vector2(0, MoveSpeed);
+                NextDir = new Vector2(MoveSpeed * -1, 0);
+                HeightCheck = EnemyBottom.Y + EnemySize;
+            }
+
+            if (EnemyLeft.Position.X <= scene.PlayPosition.X &&
+                MoveDir != new Vector2(0.0f, MoveSpeed))
+            {
+                MoveDir = new Vector2(0, MoveSpeed);
+                NextDir = new Vector2(MoveSpeed * 1, 0);
+                HeightCheck = EnemyBottom.Y + EnemySize;
+            }
+                
+            if (EnemyBottom.Y > HeightCheck)
+                MoveDir = NextDir;
+
+            //if (EnemyBottom.Y > scene.player.Y)
+                //End game
         }
 
         public override void Update()
         {
             base.Update();
 
-
+            UpdateMovement();
         }
 
-        void FindEnemies()
+        public static void FindEnemies()
         {
             List<Enemy> enemies = scene.GetEntities<Enemy>();
-            Enemy curEnemy = enemies[0];
+            EnemyRight = enemies[0];
+            EnemyLeft = enemies[0];
+            EnemyBottom = enemies[0];
 
             foreach(Enemy enemy in enemies)
             {
-                //if (cur)
-            }
+                // Find Rightmost enemy
+                if (enemy.Position.X > EnemyRight.Position.X)
+                    EnemyRight = enemy;
 
+                // Find Leftmost enemy
+                if (enemy.Position.X < EnemyLeft.Position.X)
+                    EnemyLeft = enemy;
+
+                // Find Bottommost enemy
+                if (enemy.Position.Y > EnemyBottom.Position.Y)
+                    EnemyBottom = enemy;
+            }
         }
     }
 }

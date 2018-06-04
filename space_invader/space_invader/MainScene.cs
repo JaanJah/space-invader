@@ -36,6 +36,8 @@ namespace space_invader
         {
             base.Update();
 
+            Enemy.FindEnemies();
+
             //Debug - Switches Scene if input is H
             if (Input.KeyPressed(Key.H))
             {
