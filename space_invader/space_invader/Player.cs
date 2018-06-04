@@ -14,6 +14,9 @@ namespace space_invader
     {
         float MoveSpeed = 2.0f;
         MainScene scene;
+        AutoTimer ShootingCooldown;
+        float ShootingCooldownTime = 100.0f;
+        bool CanShoot = true;
 
         public Player(MainScene _scene)
         {
@@ -25,11 +28,24 @@ namespace space_invader
 
             // Set image
             AddGraphic(Image.CreateCircle(12, Color.Red));
+
+            //Initiate shootingCooldown
+            ShootingCooldown = new AutoTimer(ShootingCooldownTime);
+        }
+
+        public void UpdateShooting()
+        {
+            ShootingCooldown.Update();
+            if (ShootingCooldown.AtMax)
+                CanShoot = true;
         }
 
         public override void Update()
         {
             base.Update();
+
+            // Check if shootingtimer is at max
+            UpdateShooting();
 
             // Check if player is moving left
             if (Input.KeyDown(Key.A) || Input.KeyDown(Key.Left))
@@ -40,7 +56,7 @@ namespace space_invader
                 X += MoveSpeed;
 
             // Check if player is shooting
-            if (Input.KeyDown(Key.Space))
+            if (Input.KeyDown(Key.Space) && CanShoot)
                 Shoot();
 
             // Check if player is in play area
@@ -52,7 +68,11 @@ namespace space_invader
 
         void Shoot()
         {
+            Bullet bullet = new Bullet(scene, false, -3.0f, Position);
+            CanShoot = false;
+            ShootingCooldown.Reset();
 
+            scene.Add(bullet);
         }
     }
 }
