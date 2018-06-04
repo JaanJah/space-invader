@@ -17,7 +17,7 @@ namespace space_invader
         AutoTimer ShootingCooldown;
         float ShootingCooldownTime = 100.0f;
         bool CanShoot = true;
-
+        Image playerImage = new Image("../../../assets/player.png");
         public Player(MainScene _scene)
         {
             scene = _scene;
@@ -27,7 +27,7 @@ namespace space_invader
                               scene.PlayPosition.Y + scene.PlayWidth.Y));
 
             // Set image
-            AddGraphic(Image.CreateCircle(12, Color.Red));
+            AddGraphic(playerImage);
 
             //Initiate shootingCooldown
             ShootingCooldown = new AutoTimer(ShootingCooldownTime);

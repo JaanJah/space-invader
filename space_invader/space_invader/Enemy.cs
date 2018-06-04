@@ -60,6 +60,8 @@ namespace space_invader
 
         void UpdateShooting()
         {
+            Image enemyBullet = new Image("../../../Assets/enemyBullet.png");
+            
             if (ShootingCooldown.AtMax)
             {
                 List<Enemy> enemies = scene.GetEntities<Enemy>();
@@ -67,12 +69,14 @@ namespace space_invader
                 int EnemyNumber = rnd.Next(1, enemies.Count);
 
                 Bullet bullet = new Bullet(scene, true, 3.0f, enemies[EnemyNumber].Position);
+                bullet.AddGraphic(enemyBullet);
                 scene.Add(bullet);
 
                 ShootingCooldown.Max = rnd.Next(100, 250);
                 ShootingCooldown.Reset();
             }
         }
+        
 
         public override void Update()
         {

@@ -53,7 +53,7 @@ namespace space_invader
             {
                 Enemy enemy = new Enemy();
                 
-                enemy.AddGraphic(new Image("../../../textures/" + node.GetAttribute("texture")));
+                enemy.AddGraphic(new Image("../../../assets/" + node.GetAttribute("texture")));
                 enemy.Position = CurPos;
 
                 Add(enemy);

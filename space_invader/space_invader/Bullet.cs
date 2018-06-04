@@ -12,15 +12,14 @@ namespace space_invader
         public float MoveSpeed;
         bool IsEnemy;
         MainScene scene;
-
+        Image bullet = new Image("../../../Assets/playerBullet.png");
         public Bullet(MainScene _scene, bool _IsEnemy, float _MoveSpeed, Vector2 pos)
         {
             scene = _scene;
             IsEnemy = _IsEnemy;
             Position = pos;
             MoveSpeed = _MoveSpeed;
-
-            AddGraphic(Image.CreateRectangle(3, 7, Color.White));
+            AddGraphic(bullet);
         }
 
         public override void Update()
