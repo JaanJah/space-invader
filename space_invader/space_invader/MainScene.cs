@@ -24,6 +24,16 @@ namespace space_invader
             this.Add(player);
         }
 
-        
+        //Update scene
+        public override void Update()
+        {
+            base.Update();
+
+            //Debug - Switches Scene if input is H
+            if (Input.KeyPressed(Key.H))
+            {
+                Game.SwitchScene(new HighScoresScene());
+            }
+        }
     }
 }
