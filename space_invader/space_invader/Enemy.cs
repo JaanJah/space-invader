@@ -9,14 +9,16 @@ namespace space_invader
 {
     class Enemy : Entity
     {
-        public static Vector2 EnemySize = new Vector2(12, 12);
+        public static float EnemySize = 32.0f;
+        public static MainScene scene;
+        Enemy EnemyRight;
+        Enemy EnemyLeft;
+        Enemy EnemyBottom;
 
         public Enemy()
         {
 
         }
-
-        
 
         void UpdateMovement()
         {
@@ -27,6 +29,18 @@ namespace space_invader
         {
             base.Update();
 
+
+        }
+
+        void FindEnemies()
+        {
+            List<Enemy> enemies = scene.GetEntities<Enemy>();
+            Enemy curEnemy = enemies[0];
+
+            foreach(Enemy enemy in enemies)
+            {
+                //if (cur)
+            }
 
         }
     }

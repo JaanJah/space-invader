@@ -23,11 +23,12 @@ namespace space_invader
 
         public MainScene()
         {
+            Enemy.scene = this;
             LoadEnemies("level1.xml");
 
             // Create player and add to scene
             player = new Player(this);
-            this.Add(player);
+            Add(player);
         }
 
         //Update scene
@@ -51,11 +52,18 @@ namespace space_invader
             foreach(XmlElement node in doc.DocumentElement.ChildNodes)
             {
                 Enemy enemy = new Enemy();
-
-                enemy.AddGraphic(new Image("../../../textures" + node["texture"]));
+                
+                enemy.AddGraphic(new Image("../../../textures/" + node.GetAttribute("texture")));
                 enemy.Position = CurPos;
 
                 Add(enemy);
+
+                CurPos.X += Enemy.EnemySize;
+                if (CurPos.X > 420)
+                {
+                    CurPos.X = PlayPosition.X;
+                    CurPos.Y += Enemy.EnemySize;
+                }
             }
         }
     }
