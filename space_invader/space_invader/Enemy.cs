@@ -9,16 +9,14 @@ namespace space_invader
 {
     class Enemy : Entity
     {
+        public static Vector2 EnemySize = new Vector2(12, 12);
 
-        Enemy()
+        public Enemy()
         {
 
         }
 
-        void LoadEnemies()
-        {
-
-        }
+        
 
         void UpdateMovement()
         {

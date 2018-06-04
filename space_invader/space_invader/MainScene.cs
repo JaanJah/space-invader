@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Otter;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace space_invader
 {
@@ -15,9 +18,12 @@ namespace space_invader
         public Vector2 PlayPosition = new Vector2(20, 20);
         public Vector2 PlayWidth = new Vector2(700, 500);
         public Player player;
+        List<Enemy> Enemies;
+        public List<Texture> textures;
 
         public MainScene()
         {
+            LoadEnemies("level1.xml");
 
             // Create player and add to scene
             player = new Player(this);
@@ -33,6 +39,23 @@ namespace space_invader
             if (Input.KeyPressed(Key.H))
             {
                 Game.SwitchScene(new HighScoresScene());
+            }
+        }
+
+        void LoadEnemies(string file)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load("../../../levels/" + file);
+            Vector2 CurPos = new Vector2(PlayPosition.X, PlayPosition.Y);
+
+            foreach(XmlElement node in doc.DocumentElement.ChildNodes)
+            {
+                Enemy enemy = new Enemy();
+
+                enemy.AddGraphic(new Image("../../../textures" + node["texture"]));
+                enemy.Position = CurPos;
+
+                Add(enemy);
             }
         }
     }
