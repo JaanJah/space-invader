@@ -10,7 +10,7 @@ namespace space_invader
     class Enemy : Entity
     {
         public static float EnemySize = 32.0f;
-        static float MoveSpeed = 0.025f;
+        static float MoveSpeed = 0.005f;
         public static MainScene scene;
         public static Enemy EnemyRight;
         public static Enemy EnemyLeft;
@@ -19,9 +19,13 @@ namespace space_invader
         public static Vector2 MoveDir = new Vector2(MoveSpeed, 0.0f);
         public static Vector2 NextDir;
 
+        AutoTimer ShootingCooldown;
+        Random rnd = new Random();
+
         public Enemy()
         {
-
+            ShootingCooldown = new AutoTimer(rnd.Next(100, 300));
+            ShootingCooldown.Start();
         }
 
         void UpdateMovement()
@@ -54,11 +58,29 @@ namespace space_invader
                 //End game
         }
 
+        void UpdateShooting()
+        {
+            if (ShootingCooldown.AtMax)
+            {
+                List<Enemy> enemies = scene.GetEntities<Enemy>();
+
+                int EnemyNumber = rnd.Next(1, enemies.Count);
+
+                Bullet bullet = new Bullet(scene, true, 3.0f, enemies[EnemyNumber].Position);
+                scene.Add(bullet);
+
+                ShootingCooldown.Max = rnd.Next(100, 250);
+                ShootingCooldown.Reset();
+            }
+        }
+
         public override void Update()
         {
             base.Update();
 
+            UpdateShooting();
             UpdateMovement();
+            ShootingCooldown.Update();
         }
 
         public static void FindEnemies()
