@@ -8,3 +8,5 @@ enemy2 animation 2
 enemy3 animation 1
 enemy3 animation 2
 enemy4 spaceship
+death animation to enemies
+death animation to player
