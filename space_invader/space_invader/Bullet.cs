@@ -36,17 +36,15 @@ namespace space_invader
 
             Y += MoveSpeed;
 
-            if (collider.Tags[0] == (int)Tags.Enemy)
-                if (collider.Overlap(X, Y, Tags.Player))
-                {
-                    RemoveSelf();
-                }
+            if (collider.Overlap(X, Y, Tags.Player))
+            {
+                RemoveSelf();
+            }
 
-            else
-                if (collider.Overlap(X, Y, Tags.Enemy))
-                {
-                    RemoveSelf();
-                }
+            if (collider.Overlap(X, Y, Tags.Enemy))
+            {
+                RemoveSelf();
+            }
         }
     }
 }
