@@ -16,10 +16,8 @@ namespace space_invader
     class MainScene : Scene
     {
         public Vector2 PlayPosition = new Vector2(20, 20);
-        public Vector2 PlayWidth = new Vector2(700, 500);
+        public Vector2 PlayWidth = new Vector2(736, 500);
         public Player player;
-        List<Enemy> Enemies;
-        public List<Texture> textures;
 
         public MainScene()
         {
