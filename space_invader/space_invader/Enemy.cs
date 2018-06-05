@@ -10,7 +10,7 @@ namespace space_invader
     class Enemy : Entity
     {
         public static float EnemySize = 32.0f;
-        static float MoveSpeed = 0.2f;
+        static float MoveSpeed = 0.005f;
         public static MainScene scene;
         public static Enemy EnemyRight;
         public static Enemy EnemyLeft;
@@ -34,8 +34,6 @@ namespace space_invader
         void UpdateMovement()
         {
             List<Enemy> enemies = scene.GetEntities<Enemy>();
-
-            AfterDeath death = new AfterDeath();
 
             foreach (Enemy enemy in enemies)
                 enemy.SetPosition(enemy.Position + MoveDir);
