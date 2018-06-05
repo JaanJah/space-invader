@@ -46,20 +46,16 @@ namespace space_invader
                         Visible = false;
                         Collidable = false;
                         scene.player.ScoreAmount += 10;
+                        //debug
                         Console.WriteLine("Score amount: {0}", scene.player.ScoreAmount);
+                        scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
+                        scene.curScoreTxt.Refresh();
                     }
 
                 if (collider.Tags[0] == (int)Tags.Enemy)
                     if (Position.Y > Game.Height)
                         RemoveSelf();
 
-                if (collider.Tags[0] == (int)Tags.Player)
-                    if (collider.CollideEntities(X, Y, Tags.Enemy).Count > 0)
-                    {
-                        collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
-                        Visible = false;
-                        Collidable = false;
-                    }
                 if (playerLives == 0)
                     Game.SwitchScene(new HighScoresScene());
 

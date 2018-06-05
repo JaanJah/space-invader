@@ -19,6 +19,7 @@ namespace space_invader
         public Vector2 PlayWidth = new Vector2(736, 500);
         public Player player;
         public RichText livesLeftTxt;
+        public RichText curScoreTxt;
 
         public MainScene()
         {
