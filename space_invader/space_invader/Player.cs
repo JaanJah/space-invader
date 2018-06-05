@@ -17,6 +17,8 @@ namespace space_invader
         AutoTimer ShootingCooldown;
         float ShootingCooldownTime = 100.0f;
         bool CanShoot = true;
+
+        public int ScoreAmount = 0;
         
         Image playerImage = new Image("../../../assets/player.png");
 

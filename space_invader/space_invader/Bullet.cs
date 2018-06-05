@@ -43,6 +43,9 @@ namespace space_invader
                 {
                     collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
                     RemoveSelf();
+                    scene.player.ScoreAmount += 10;
+                    //debug
+                    Console.WriteLine("Score amount: {0}",scene.player.ScoreAmount);
                 }
 
             if (collider.Tags[0] == (int)Tags.Enemy)
@@ -52,7 +55,8 @@ namespace space_invader
                     playerLives = playerLives - 1;
                     scene.player.SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
                     scene.PlayPosition.Y + scene.PlayWidth.Y));
-                    Console.WriteLine(playerLives);
+                    //debug
+                    Console.WriteLine("Lives left: {0}",playerLives);
                 }
             if (playerLives == 0)
             {
