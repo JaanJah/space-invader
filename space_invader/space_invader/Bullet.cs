@@ -35,7 +35,7 @@ namespace space_invader
         public override void Update()
         {
             base.Update();
-
+            //Comment this horrible code
             if (Visible)
             {
                 Y += MoveSpeed;
@@ -46,7 +46,6 @@ namespace space_invader
                         Visible = false;
                         Collidable = false;
                         scene.player.ScoreAmount += 10;
-                        Console.WriteLine("Score amount: {0}", scene.player.ScoreAmount);
                     }
 
                 if (collider.Tags[0] == (int)Tags.Enemy)
@@ -71,8 +70,7 @@ namespace space_invader
                         scene.player.playerLives -= 1;
                         scene.player.SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
                         scene.PlayPosition.Y + scene.PlayWidth.Y));
-                        //debug
-                        Console.WriteLine("Lives left: {0}", scene.player.playerLives);
+                    
                         scene.livesLeftTxt.String = scene.player.playerLives.ToString();
                         scene.livesLeftTxt.Refresh();
                     }
