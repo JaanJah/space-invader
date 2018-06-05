@@ -30,6 +30,7 @@ namespace space_invader
         }
 
         //Update scene
+        
         public override void Update()
         {
             base.Update();
@@ -42,6 +43,7 @@ namespace space_invader
                 Game.SwitchScene(new HighScoresScene());
             }
         }
+        
 
         void LoadEnemies(string file)
         {
