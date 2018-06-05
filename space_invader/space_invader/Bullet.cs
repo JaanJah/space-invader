@@ -17,15 +17,9 @@ namespace space_invader
     {
         public float MoveSpeed;
         MainScene scene;
-
-        Image bullet = new Image("../../../Assets/playerBullet.png");
-        private float v;
-        private Tags player;
-
         BoxCollider collider;
 
         public Bullet(MainScene _scene, float _MoveSpeed, Vector2 pos, Tags tag)
-
         {
             scene = _scene;
             Position = pos;
@@ -42,15 +36,18 @@ namespace space_invader
 
             Y += MoveSpeed;
 
-            /*if (collider.Overlap(X, Y, Tags.Player))
-            {
-                RemoveSelf();
-            }
+            if (collider.Tags[0] == (int)Tags.Player)
+                if (collider.CollideEntities(X, Y, Tags.Enemy).Count > 0)
+                {
+                    collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
+                    RemoveSelf();
+                }
 
-            if (collider.Overlap(X, Y, Tags.Enemy))
-            {
-                RemoveSelf();
-            }*/
+            if (collider.Tags[0] == (int)Tags.Enemy)
+                if (collider.CollideEntities(X, Y, Tags.Player).Count > 0)
+                {
+                    RemoveSelf();
+                }
         }
     }
 }
