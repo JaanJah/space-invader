@@ -14,12 +14,11 @@ namespace space_invader
     {
         float MoveSpeed = 2.0f;
         MainScene scene;
-        AutoTimer ShootingCooldown;
-        float ShootingCooldownTime = 100.0f;
-        bool CanShoot = true;
+        Bullet bullet;
 
         public int ScoreAmount = 0;
         public int playerLives = 3;
+
 
         Image playerImage = new Image("../../../assets/player.png");
 
@@ -38,23 +37,19 @@ namespace space_invader
             // Add collider
             AddCollider(collider);
 
-            //Initiate shootingCooldown
-            ShootingCooldown = new AutoTimer(ShootingCooldownTime);
-        }
-
-        public void UpdateShooting()
-        {
-            ShootingCooldown.Update();
-            if (ShootingCooldown.AtMax)
-                CanShoot = true;
+            // Initiate bullet
+            Image playerBullet = new Image("../../../Assets/playerBullet.png");
+            BoxCollider bulletCollider = new BoxCollider(playerBullet.Width, playerBullet.Height, Tags.Player);
+            bullet = new Bullet(scene, -3.0f, new Vector2(0, 0), bulletCollider);
+            bullet.Visible = false;
+            bullet.Collidable = false;
+            bullet.AddGraphic(playerBullet);
+            scene.Add(bullet);
         }
 
         public override void Update()
         {
             base.Update();
-
-            // Check if shootingtimer is at max
-            UpdateShooting();
 
             // Check if player is moving left
             if (Input.KeyDown(Key.A) || Input.KeyDown(Key.Left))
@@ -65,7 +60,7 @@ namespace space_invader
                 X += MoveSpeed;
 
             // Check if player is shooting
-            if (Input.KeyDown(Key.Space) && CanShoot)
+            if (Input.KeyDown(Key.Space) && !bullet.Visible)
                 Shoot();
 
             // Check if player is in play area
@@ -83,15 +78,9 @@ namespace space_invader
 
         void Shoot()
         {
-            Image playerBullet = new Image("../../../Assets/playerBullet.png");
-
-            Bullet bullet = new Bullet(scene, -3.0f, Position, Tags.Player);
-            bullet.AddGraphic(playerBullet);
-
-            CanShoot = false;
-            ShootingCooldown.Reset();
-
-            scene.Add(bullet);
+            bullet.Collidable = true;
+            bullet.Visible = true;
+            bullet.Position = Position;
         }
 
         public void playerDeath()

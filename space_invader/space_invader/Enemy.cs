@@ -20,12 +20,11 @@ namespace space_invader
         public static Vector2 NextDir;
 
         BoxCollider collider = new BoxCollider(24, 24, Tags.Enemy);
-        AutoTimer ShootingCooldown;
-        Random rnd = new Random();
+        static Random rnd = new Random();
+        static AutoTimer ShootingCooldown = new AutoTimer(rnd.Next(700, 1500));
 
         public Enemy()
         {
-            ShootingCooldown = new AutoTimer(rnd.Next(100, 300));
             ShootingCooldown.Start();
 
             AddCollider(collider);
@@ -63,24 +62,26 @@ namespace space_invader
 
         void UpdateShooting()
         {
-            Image enemyBullet = new Image("../../../Assets/enemyBullet.png");
-            
             if (ShootingCooldown.AtMax)
             {
+                ShootingCooldown.Stop();
+
+                Image enemyBullet = new Image("../../../Assets/enemyBullet.png");
+
                 List<Enemy> enemies = scene.GetEntities<Enemy>();
 
                 int EnemyNumber = rnd.Next(1, enemies.Count);
 
-                Bullet bullet = new Bullet(scene, 3.0f, enemies[EnemyNumber].Position, Tags.Enemy);
+                BoxCollider collider = new BoxCollider(enemyBullet.Width, enemyBullet.Height, Tags.Enemy);
+                Bullet bullet = new Bullet(scene, 3.0f, enemies[EnemyNumber].Position, collider);
                 bullet.AddGraphic(enemyBullet);
 
                 scene.Add(bullet);
 
-                ShootingCooldown.Max = rnd.Next(100, 250);
-                ShootingCooldown.Reset();
+                ShootingCooldown.Max = rnd.Next(2000, 5000);
+                ShootingCooldown.Start();
             }
         }
-        
 
         public override void Update()
         {
