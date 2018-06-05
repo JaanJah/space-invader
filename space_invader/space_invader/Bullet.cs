@@ -22,8 +22,6 @@ namespace space_invader
         private float v;
         private Tags player;
 
-        public Bullet(MainScene _scene, bool _IsEnemy, float _MoveSpeed, Vector2 pos)
-
         BoxCollider collider;
 
         public Bullet(MainScene _scene, float _MoveSpeed, Vector2 pos, Tags tag)
@@ -33,20 +31,9 @@ namespace space_invader
             Position = pos;
             MoveSpeed = _MoveSpeed;
 
-            AddGraphic(bullet);
-
             collider = new BoxCollider(3, 7, tag);
 
             AddCollider(collider);
-            AddGraphic(Image.CreateRectangle(3, 7, Color.White));
-        }
-
-        public Bullet(MainScene scene, float v, Vector2 position, Tags player)
-        {
-            this.scene = scene;
-            this.v = v;
-            Position = position;
-            this.player = player;
         }
 
         public override void Update()
@@ -55,7 +42,7 @@ namespace space_invader
 
             Y += MoveSpeed;
 
-            if (collider.Overlap(X, Y, Tags.Player))
+            /*if (collider.Overlap(X, Y, Tags.Player))
             {
                 RemoveSelf();
             }
@@ -63,7 +50,7 @@ namespace space_invader
             if (collider.Overlap(X, Y, Tags.Enemy))
             {
                 RemoveSelf();
-            }
+            }*/
         }
     }
 }

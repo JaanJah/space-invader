@@ -71,11 +71,8 @@ namespace space_invader
 
                 int EnemyNumber = rnd.Next(1, enemies.Count);
 
-
-                Bullet bullet = new Bullet(scene, true, 3.0f, enemies[EnemyNumber].Position);
-                bullet.AddGraphic(enemyBullet);
-
                 Bullet bullet = new Bullet(scene, 3.0f, enemies[EnemyNumber].Position, Tags.Enemy);
+                bullet.AddGraphic(enemyBullet);
 
                 scene.Add(bullet);
 

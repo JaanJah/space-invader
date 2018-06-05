@@ -20,7 +20,6 @@ namespace space_invader
 
         Image playerImage = new Image("../../../assets/player.png");
 
-        /* Conflict occured here:
         BoxCollider collider = new BoxCollider(30, 30, Tags.Player);
         public Player(MainScene _scene)
         {
