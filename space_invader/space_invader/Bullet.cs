@@ -35,11 +35,12 @@ namespace space_invader
         public override void Update()
         {
             base.Update();
-            //Comment this horrible code
+
             if (Visible)
             {
                 Y += MoveSpeed;
 
+                // Check if player bullet is out of bounds and removes it
                 if (collider.Tags[0] == (int)Tags.Player)
                     if (Position.Y < 0)
                     {
@@ -48,10 +49,12 @@ namespace space_invader
                         scene.player.ScoreAmount += 10;
                     }
 
+                // Check if enemy bullet is out of bounds and removes it
                 if (collider.Tags[0] == (int)Tags.Enemy)
                     if (Position.Y > Game.Height)
                         RemoveSelf();
 
+                // Check if player bullet hits enemy
                 if (collider.Tags[0] == (int)Tags.Player)
                     if (collider.CollideEntities(X, Y, Tags.Enemy).Count > 0)
                     {
@@ -59,9 +62,12 @@ namespace space_invader
                         Visible = false;
                         Collidable = false;
                     }
+
+                // Check if player lives is 0, if true end game
                 if (playerLives == 0)
                     Game.SwitchScene(new HighScoresScene());
 
+                // Check if enemy bullet hits player
                 if (collider.Tags[0] == (int)Tags.Enemy)
                     if (collider.CollideEntities(X, Y, Tags.Player).Count > 0)
                     {
