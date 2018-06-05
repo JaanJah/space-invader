@@ -14,7 +14,7 @@ namespace space_invader
     {
         float MoveSpeed = 2.0f;
         MainScene scene;
-        Bullet bullet;
+        public Bullet bullet;
 
         public int ScoreAmount = 0;
         public int playerLives = 3;
@@ -40,7 +40,7 @@ namespace space_invader
             // Initiate bullet
             Image playerBullet = new Image("../../../Assets/playerBullet.png");
             BoxCollider bulletCollider = new BoxCollider(playerBullet.Width, playerBullet.Height, Tags.Player);
-            bullet = new Bullet(scene, -2.0f, new Vector2(0, 0), bulletCollider);
+            bullet = new Bullet(scene, -3.0f, new Vector2(0, 0), bulletCollider);
             bullet.Visible = false;
             bullet.Collidable = false;
             bullet.AddGraphic(playerBullet);

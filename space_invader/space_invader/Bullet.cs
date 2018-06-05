@@ -40,38 +40,65 @@ namespace space_invader
             {
                 Y += MoveSpeed;
 
+                
+                // Check if player bullet is out of bounds and removes it
                 if (collider.Tags[0] == (int)Tags.Player)
                     if (Position.Y < 0)
                     {
                         Visible = false;
                         Collidable = false;
-                        scene.player.ScoreAmount += 10;
-                        //debug
-                        Console.WriteLine("Score amount: {0}", scene.player.ScoreAmount);
-                        scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
-                        scene.curScoreTxt.Refresh();
+                        
                     }
 
+                // Check if enemy bullet is out of bounds and removes it
                 if (collider.Tags[0] == (int)Tags.Enemy)
                     if (Position.Y > Game.Height)
                         RemoveSelf();
 
+                // Check if player bullet hits enemy
+                if (collider.Tags[0] == (int)Tags.Player)
+                    if (collider.CollideEntities(X, Y, Tags.Enemy).Count > 0)
+                        if (!(collider.CollideEntities(X, Y, Tags.Enemy)[0].GetType() == typeof(Bullet)))
+                        {
+                            collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
+                            Visible = false;
+                            Collidable = false;
+                            scene.player.ScoreAmount += 10;
+                            scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
+                            scene.curScoreTxt.Refresh();
+                        }
+                        else
+                        {
+                            collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
+                            Visible = false;
+                            Collidable = false;
+                        }
+
+
+                // Check if player lives is 0, if true end game
                 if (playerLives == 0)
                     Game.SwitchScene(new HighScoresScene());
 
+                // Check if enemy bullet hits player
                 if (collider.Tags[0] == (int)Tags.Enemy)
                     if (collider.CollideEntities(X, Y, Tags.Player).Count > 0)
-                    {
-                        Enemy.FindEnemies();
-                        RemoveSelf();
-                        scene.player.playerLives -= 1;
-                        scene.player.SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
-                        scene.PlayPosition.Y + scene.PlayWidth.Y));
-                        //debug
-                        Console.WriteLine("Lives left: {0}", scene.player.playerLives);
-                        scene.livesLeftTxt.String = scene.player.playerLives.ToString();
-                        scene.livesLeftTxt.Refresh();
-                    }
+                        if (!(collider.CollideEntities(X, Y, Tags.Player)[0].GetType() == typeof(Bullet)))
+                        {
+                            Enemy.FindEnemies();
+                            RemoveSelf();
+                            scene.player.playerLives -= 1;
+                            scene.player.SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
+                            scene.PlayPosition.Y + scene.PlayWidth.Y));
+
+                            scene.livesLeftTxt.String = scene.player.playerLives.ToString();
+                            scene.livesLeftTxt.Refresh();
+                        }
+                        else
+                        {
+                            RemoveSelf();
+                            scene.player.bullet.Visible = false;
+                            scene.player.bullet.Collidable = false;
+                        }
             }
         }
     }
