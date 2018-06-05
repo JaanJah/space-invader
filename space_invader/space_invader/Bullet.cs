@@ -19,9 +19,6 @@ namespace space_invader
         static MainScene scene;
         BoxCollider collider;
 
-
-        
-
         static int playerLives = 3;
 
         public Bullet(MainScene _scene, float _MoveSpeed, Vector2 pos, BoxCollider _collider)
@@ -47,6 +44,8 @@ namespace space_invader
                     {
                         Visible = false;
                         Collidable = false;
+                        scene.player.ScoreAmount += 10;
+                        Console.WriteLine("Score amount: {0}", scene.player.ScoreAmount);
                     }
 
                 if (collider.Tags[0] == (int)Tags.Enemy)
@@ -70,6 +69,7 @@ namespace space_invader
                         playerLives = playerLives - 1;
                         scene.player.SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
                         scene.PlayPosition.Y + scene.PlayWidth.Y));
+                        Console.WriteLine("Lives left: {0}", playerLives);
                     }
 
                 if (playerLives == 0)

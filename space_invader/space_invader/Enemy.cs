@@ -20,12 +20,11 @@ namespace space_invader
         public static Vector2 NextDir;
 
         BoxCollider collider = new BoxCollider(24, 24, Tags.Enemy);
-        AutoTimer ShootingCooldown;
-        Random rnd = new Random();
+        static Random rnd = new Random();
+        static AutoTimer ShootingCooldown = new AutoTimer(rnd.Next(700, 1500));
 
         public Enemy()
         {
-            ShootingCooldown = new AutoTimer(rnd.Next(100, 300));
             ShootingCooldown.Start();
 
             AddCollider(collider);
@@ -65,6 +64,8 @@ namespace space_invader
         {
             if (ShootingCooldown.AtMax)
             {
+                ShootingCooldown.Stop();
+
                 Image enemyBullet = new Image("../../../Assets/enemyBullet.png");
 
                 List<Enemy> enemies = scene.GetEntities<Enemy>();
@@ -77,11 +78,10 @@ namespace space_invader
 
                 scene.Add(bullet);
 
-                ShootingCooldown.Max = rnd.Next(100, 250);
-                ShootingCooldown.Reset();
+                ShootingCooldown.Max = rnd.Next(2000, 5000);
+                ShootingCooldown.Start();
             }
         }
-        
 
         public override void Update()
         {

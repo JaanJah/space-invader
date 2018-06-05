@@ -15,7 +15,9 @@ namespace space_invader
         float MoveSpeed = 2.0f;
         MainScene scene;
         Bullet bullet;
-        
+
+        public int ScoreAmount = 0;
+
         Image playerImage = new Image("../../../assets/player.png");
 
         BoxCollider collider = new BoxCollider(30, 30, Tags.Player);
@@ -68,8 +70,8 @@ namespace space_invader
 
         void Shoot()
         {
-            bullet.Visible = true;
             bullet.Collidable = true;
+            bullet.Visible = true;
             bullet.Position = Position;
         }
     }
