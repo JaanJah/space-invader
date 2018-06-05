@@ -74,7 +74,11 @@ namespace space_invader
 
         void Shoot()
         {
+            Image playerBullet = new Image("../../../Assets/playerBullet.png");
+
             Bullet bullet = new Bullet(scene, -3.0f, Position, Tags.Player);
+            bullet.AddGraphic(playerBullet);
+
             CanShoot = false;
             ShootingCooldown.Reset();
 
