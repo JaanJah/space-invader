@@ -64,6 +64,13 @@ namespace space_invader
                             Collidable = false;
                         }
 
+                        else
+                        {
+                            collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
+                            Visible = false;
+                            Collidable = false;
+                        }
+
                 // Check if player lives is 0, if true end game
                 if (playerLives == 0)
                     Game.SwitchScene(new HighScoresScene());
@@ -81,6 +88,12 @@ namespace space_invader
 
                             scene.livesLeftTxt.String = scene.player.playerLives.ToString();
                             scene.livesLeftTxt.Refresh();
+                        }
+                        else
+                        {
+                            RemoveSelf();
+                            scene.player.bullet.Visible = false;
+                            scene.player.bullet.Collidable = false;
                         }
             }
         }

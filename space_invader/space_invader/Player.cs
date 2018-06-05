@@ -14,7 +14,7 @@ namespace space_invader
     {
         float MoveSpeed = 2.0f;
         MainScene scene;
-        Bullet bullet;
+        public Bullet bullet;
 
         public int ScoreAmount = 0;
         public int playerLives = 3;
