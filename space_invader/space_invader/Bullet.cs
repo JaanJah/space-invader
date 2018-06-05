@@ -57,11 +57,12 @@ namespace space_invader
                 // Check if player bullet hits enemy
                 if (collider.Tags[0] == (int)Tags.Player)
                     if (collider.CollideEntities(X, Y, Tags.Enemy).Count > 0)
-                    {
-                        collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
-                        Visible = false;
-                        Collidable = false;
-                    }
+                        if (!(collider.CollideEntities(X, Y, Tags.Enemy)[0].GetType() == typeof(Bullet)))
+                        {
+                            collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
+                            Visible = false;
+                            Collidable = false;
+                        }
 
                 // Check if player lives is 0, if true end game
                 if (playerLives == 0)
@@ -70,16 +71,17 @@ namespace space_invader
                 // Check if enemy bullet hits player
                 if (collider.Tags[0] == (int)Tags.Enemy)
                     if (collider.CollideEntities(X, Y, Tags.Player).Count > 0)
-                    {
-                        Enemy.FindEnemies();
-                        RemoveSelf();
-                        scene.player.playerLives -= 1;
-                        scene.player.SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
-                        scene.PlayPosition.Y + scene.PlayWidth.Y));
-                    
-                        scene.livesLeftTxt.String = scene.player.playerLives.ToString();
-                        scene.livesLeftTxt.Refresh();
-                    }
+                        if (!(collider.CollideEntities(X, Y, Tags.Player)[0].GetType() == typeof(Bullet)))
+                        {
+                            Enemy.FindEnemies();
+                            RemoveSelf();
+                            scene.player.playerLives -= 1;
+                            scene.player.SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
+                            scene.PlayPosition.Y + scene.PlayWidth.Y));
+
+                            scene.livesLeftTxt.String = scene.player.playerLives.ToString();
+                            scene.livesLeftTxt.Refresh();
+                        }
             }
         }
     }
