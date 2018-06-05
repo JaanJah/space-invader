@@ -15,7 +15,7 @@ namespace space_invader
         float MoveSpeed = 2.0f;
         MainScene scene;
         Bullet bullet;
-
+        
         Image playerImage = new Image("../../../assets/player.png");
 
         BoxCollider collider = new BoxCollider(30, 30, Tags.Player);

@@ -57,8 +57,8 @@ namespace space_invader
             if (EnemyBottom.Y > HeightCheck)
                 MoveDir = NextDir;
 
-            //if (EnemyBottom.Y > scene.player.Y)
-                //End game
+            if (EnemyBottom.Y > scene.player.Y)
+                Game.SwitchScene(new HighScoresScene());
         }
 
         void UpdateShooting()

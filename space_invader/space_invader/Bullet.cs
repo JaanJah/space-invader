@@ -19,6 +19,11 @@ namespace space_invader
         static MainScene scene;
         BoxCollider collider;
 
+
+        
+
+        static int playerLives = 3;
+
         public Bullet(MainScene _scene, float _MoveSpeed, Vector2 pos, BoxCollider _collider)
         {
             scene = _scene;
@@ -56,12 +61,19 @@ namespace space_invader
                         Collidable = false;
                     }
 
+
                 if (collider.Tags[0] == (int)Tags.Enemy)
                     if (collider.CollideEntities(X, Y, Tags.Player).Count > 0)
                     {
                         Enemy.FindEnemies();
                         RemoveSelf();
+                        playerLives = playerLives - 1;
+                        scene.player.SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
+                        scene.PlayPosition.Y + scene.PlayWidth.Y));
                     }
+
+                if (playerLives == 0)
+                    Game.SwitchScene(new HighScoresScene());
             }
         }
     }
