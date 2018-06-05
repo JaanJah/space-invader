@@ -63,15 +63,16 @@ namespace space_invader
 
         void UpdateShooting()
         {
-            Image enemyBullet = new Image("../../../Assets/enemyBullet.png");
-            
             if (ShootingCooldown.AtMax)
             {
+                Image enemyBullet = new Image("../../../Assets/enemyBullet.png");
+
                 List<Enemy> enemies = scene.GetEntities<Enemy>();
 
                 int EnemyNumber = rnd.Next(1, enemies.Count);
 
-                Bullet bullet = new Bullet(scene, 3.0f, enemies[EnemyNumber].Position, Tags.Enemy);
+                BoxCollider collider = new BoxCollider(enemyBullet.Width, enemyBullet.Height, Tags.Enemy);
+                Bullet bullet = new Bullet(scene, 3.0f, enemies[EnemyNumber].Position, collider);
                 bullet.AddGraphic(enemyBullet);
 
                 scene.Add(bullet);
