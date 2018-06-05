@@ -19,7 +19,8 @@ namespace space_invader
         bool CanShoot = true;
 
         public int ScoreAmount = 0;
-        
+        public int playerLives = 3;
+
         Image playerImage = new Image("../../../assets/player.png");
 
         BoxCollider collider = new BoxCollider(30, 30, Tags.Player);
@@ -72,6 +73,12 @@ namespace space_invader
                 X = scene.PlayPosition.X;
             else if (X > scene.PlayPosition.X + scene.PlayWidth.X)
                 X = scene.PlayPosition.X + scene.PlayWidth.X;
+
+            //If playerLives are 0, then switch to highscore screen
+            if (playerLives == 0)
+            {
+                Game.SwitchScene(new HighScoresScene());
+            }
         }
 
         void Shoot()
@@ -85,6 +92,10 @@ namespace space_invader
             ShootingCooldown.Reset();
 
             scene.Add(bullet);
+        }
+
+        public void playerDeath()
+        {
         }
     }
 }

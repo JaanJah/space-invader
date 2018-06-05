@@ -28,17 +28,19 @@ namespace space_invader
                 SineAmpY = 2,
                 SineRateX = 1,
             };
+            
             // Writing the text graphics and setting position
-            var livesLeftTxt = new RichText("Lives", txtConfig);
-            livesLeftTxt.SetPosition(50, 16);
-            var highScoreTxt = new RichText("Highscore",txtConfig);
-            highScoreTxt.SetPosition(350, 15);
-            var curScoreTxt = new RichText("Score", txtConfig);
-            curScoreTxt.SetPosition(650, 15);
+            var livesLeftTxtLabel = new RichText("Lives", txtConfig);
+            
+            livesLeftTxtLabel.SetPosition(50, 16);
+            var highScoreTxtLabel = new RichText("Highscore",txtConfig);
+            highScoreTxtLabel.SetPosition(350, 15);
+            var curScoreTxtLabel = new RichText("Score", txtConfig);
+            curScoreTxtLabel.SetPosition(650, 15);
             // Adds Graphic to Scene
-            scene.AddGraphic(livesLeftTxt);
-            scene.AddGraphic(highScoreTxt);
-            scene.AddGraphic(curScoreTxt);
+            scene.AddGraphic(livesLeftTxtLabel);
+            scene.AddGraphic(highScoreTxtLabel);
+            scene.AddGraphic(curScoreTxtLabel);
             #endregion gameText
 
             // Starts the game
