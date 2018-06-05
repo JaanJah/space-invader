@@ -75,6 +75,8 @@ namespace space_invader
                         scene.PlayPosition.Y + scene.PlayWidth.Y));
                         //debug
                         Console.WriteLine("Lives left: {0}", scene.player.playerLives);
+                        scene.livesLeftTxt.String = scene.player.playerLives.ToString();
+                        scene.livesLeftTxt.Refresh();
                     }
             }
         }

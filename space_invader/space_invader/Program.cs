@@ -35,17 +35,17 @@ namespace space_invader
 
             // Writing the text graphics and setting position
             var livesLeftTxtLabel = new RichText("Lives", txtConfig);
-            var livesLeftTxt = new RichText(scene.player.playerLives.ToString(), txtConfig);
-            livesLeftTxt.Name = "livesLeftTxt";
+            scene.livesLeftTxt = new RichText(scene.player.playerLives.ToString(), txtConfig);
+            scene.livesLeftTxt.Name = "livesLeftTxt";
             livesLeftTxtLabel.SetPosition(50, 16);
-            livesLeftTxt.SetPosition(70, 32);
+            scene.livesLeftTxt.SetPosition(70, 32);
             var highScoreTxtLabel = new RichText("Highscore",txtConfig);
             highScoreTxtLabel.SetPosition(350, 15);
             var curScoreTxtLabel = new RichText("Score", txtConfig);
             curScoreTxtLabel.SetPosition(650, 15);
             // Adds Graphic to Scene
             scene.AddGraphic(livesLeftTxtLabel);
-            scene.AddGraphic(livesLeftTxt);
+            scene.AddGraphic(scene.livesLeftTxt);
             scene.AddGraphic(highScoreTxtLabel);
             scene.AddGraphic(curScoreTxtLabel);
             #endregion gameText
