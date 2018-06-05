@@ -40,7 +40,7 @@ namespace space_invader
             // Initiate bullet
             Image playerBullet = new Image("../../../Assets/playerBullet.png");
             BoxCollider bulletCollider = new BoxCollider(playerBullet.Width, playerBullet.Height, Tags.Player);
-            bullet = new Bullet(scene, -2.0f, new Vector2(0, 0), bulletCollider);
+            bullet = new Bullet(scene, -3.0f, new Vector2(0, 0), bulletCollider);
             bullet.Visible = false;
             bullet.Collidable = false;
             bullet.AddGraphic(playerBullet);
