@@ -36,8 +36,6 @@ namespace space_invader
         {
             base.Update();
 
-            Y += MoveSpeed;
-
             if (Visible)
             {
                 Y += MoveSpeed;
