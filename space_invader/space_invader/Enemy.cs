@@ -73,7 +73,7 @@ namespace space_invader
                 int EnemyNumber = rnd.Next(1, enemies.Count);
 
                 BoxCollider collider = new BoxCollider(enemyBullet.Width, enemyBullet.Height, Tags.Enemy);
-                Bullet bullet = new Bullet(scene, 3.0f, enemies[EnemyNumber].Position, collider);
+                Bullet bullet = new Bullet(scene, 2.0f, enemies[EnemyNumber].Position, collider);
                 bullet.AddGraphic(enemyBullet);
 
                 scene.Add(bullet);
