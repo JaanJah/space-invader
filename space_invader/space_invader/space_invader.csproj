@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AfterDeath.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="HighScoresScene.cs" />

@@ -15,7 +15,7 @@ namespace space_invader
     /// </summary>
     class MainScene : Scene
     {
-        public Vector2 PlayPosition = new Vector2(20, 20);
+        public Vector2 PlayPosition = new Vector2(20, 60);
         public Vector2 PlayWidth = new Vector2(736, 500);
         public Player player;
 
@@ -30,6 +30,7 @@ namespace space_invader
         }
 
         //Update scene
+        
         public override void Update()
         {
             base.Update();
@@ -42,6 +43,7 @@ namespace space_invader
                 Game.SwitchScene(new HighScoresScene());
             }
         }
+        
 
         void LoadEnemies(string file)
         {
