@@ -57,7 +57,7 @@ namespace space_invader
                 // Check if player bullet hits enemy
                 if (collider.Tags[0] == (int)Tags.Player)
                     if (collider.CollideEntities(X, Y, Tags.Enemy).Count > 0)
-                        if (!(collider.CollideEntities(X, Y, Tags.Enemy)[0].GetType() == typeof(Bullet)))
+                        if ((collider.CollideEntities(X, Y, Tags.Enemy)[0].GetType() == typeof(Bullet)))
                         {
                             collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
                             Visible = false;
