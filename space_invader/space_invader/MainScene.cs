@@ -41,28 +41,10 @@ namespace space_invader
             Add(player);
 
             livesLeftTxt = new RichText(player.playerLives.ToString(), txtConfig);
-            InitiateBarricades();
+            Barricade.Initialize(this);
         }
 
-        void InitiateBarricades()
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load("../../../barricades.xml");
 
-            foreach (XmlElement node in doc.DocumentElement.ChildNodes)
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    Barricade barricade = new Barricade();
-
-                    barricade.Position = new Vector2(Convert.ToSingle(node.GetAttribute("posx")) + i * 200, Convert.ToSingle(node.GetAttribute("posy")));
-
-                    Add(barricade);
-                }
-
-                
-            }
-        }
 
         //Update scene
         

@@ -10,7 +10,8 @@ namespace space_invader
     enum Tags
     {
         Player,
-        Enemy
+        Enemy,
+        Barricade
     }
 
     class Bullet : Entity
@@ -99,6 +100,12 @@ namespace space_invader
                             scene.player.bullet.Visible = false;
                             scene.player.bullet.Collidable = false;
                         }
+
+                //Check if bullet hits barricade
+                if(collider.CollideEntities(X, Y, Tags.Barricade).Count > 0)
+                {
+                    collider.Collide(X, Y, Tags)
+                }
             }
         }
     }
