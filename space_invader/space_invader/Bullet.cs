@@ -22,6 +22,7 @@ namespace space_invader
         static int playerLives = 3;
 
         public Bullet(MainScene _scene, float _MoveSpeed, Vector2 pos, BoxCollider _collider)
+
         {
             scene = _scene;
             Position = pos;
@@ -59,21 +60,20 @@ namespace space_invader
                         Visible = false;
                         Collidable = false;
                     }
-
+                if (playerLives == 0)
+                    Game.SwitchScene(new HighScoresScene());
 
                 if (collider.Tags[0] == (int)Tags.Enemy)
                     if (collider.CollideEntities(X, Y, Tags.Player).Count > 0)
                     {
                         Enemy.FindEnemies();
                         RemoveSelf();
-                        playerLives = playerLives - 1;
+                        scene.player.playerLives -= 1;
                         scene.player.SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
                         scene.PlayPosition.Y + scene.PlayWidth.Y));
-                        Console.WriteLine("Lives left: {0}", playerLives);
+                        //debug
+                        Console.WriteLine("Lives left: {0}", scene.player.playerLives);
                     }
-
-                if (playerLives == 0)
-                    Game.SwitchScene(new HighScoresScene());
             }
         }
     }
