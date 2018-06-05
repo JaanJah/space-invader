@@ -40,13 +40,14 @@ namespace space_invader
             {
                 Y += MoveSpeed;
 
+                
                 // Check if player bullet is out of bounds and removes it
                 if (collider.Tags[0] == (int)Tags.Player)
                     if (Position.Y < 0)
                     {
                         Visible = false;
                         Collidable = false;
-                        scene.player.ScoreAmount += 10;
+                        
                     }
 
                 // Check if enemy bullet is out of bounds and removes it
@@ -62,14 +63,17 @@ namespace space_invader
                             collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
                             Visible = false;
                             Collidable = false;
+                            scene.player.ScoreAmount += 10;
+                            scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
+                            scene.curScoreTxt.Refresh();
                         }
-
                         else
                         {
                             collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
                             Visible = false;
                             Collidable = false;
                         }
+
 
                 // Check if player lives is 0, if true end game
                 if (playerLives == 0)
