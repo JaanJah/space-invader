@@ -18,15 +18,28 @@ namespace space_invader
         public Vector2 PlayPosition = new Vector2(20, 60);
         public Vector2 PlayWidth = new Vector2(736, 500);
         public Player player;
+        public RichText livesLeftTxt;
 
         public MainScene()
         {
             Enemy.scene = this;
             LoadEnemies("level1.xml");
 
+            var txtConfig = new RichTextConfig()
+            {
+                TextAlign = TextAlign.Center,
+                CharColor = Color.Green,
+                FontSize = 16,
+                SineAmpX = 3,
+                SineAmpY = 2,
+                SineRateX = 1,
+            };
+
             // Create player and add to scene
             player = new Player(this);
             Add(player);
+
+            livesLeftTxt = new RichText(player.playerLives.ToString(), txtConfig);
         }
 
         //Update scene

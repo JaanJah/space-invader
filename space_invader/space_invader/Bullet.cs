@@ -34,6 +34,16 @@ namespace space_invader
         {
             base.Update();
 
+            var txtConfig = new RichTextConfig()
+            {
+                TextAlign = TextAlign.Center,
+                CharColor = Color.Green,
+                FontSize = 16,
+                SineAmpX = 3,
+                SineAmpY = 2,
+                SineRateX = 1,
+            };
+
             Y += MoveSpeed;
 
             if (collider.Tags[0] == (int)Tags.Player)
@@ -55,6 +65,15 @@ namespace space_invader
                     scene.PlayPosition.Y + scene.PlayWidth.Y));
                     //debug
                     Console.WriteLine("Lives left: {0}",scene.player.playerLives);
+
+                    scene.livesLeftTxt.Visible = false;
+
+                    var livesLeftTxt = new RichText(scene.player.playerLives.ToString(), txtConfig);
+                    livesLeftTxt.Name = "livesLeftTxt";
+                    livesLeftTxt.SetPosition(70, 32);
+                    livesLeftTxt.Refresh();
+                    livesLeftTxt.String = "te";
+                    scene.AddGraphic(livesLeftTxt);
                 }
         }
     }

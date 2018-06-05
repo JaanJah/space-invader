@@ -14,8 +14,7 @@ namespace space_invader
             // Creates game window
             var game = new Game("Space Invader", 800, 600, 60, false);
 
-            // Creates game scene
-            Scene scene = new MainScene();
+            
 
             #region gameText
             //Setting a default config file for the RichText to use
@@ -28,17 +27,25 @@ namespace space_invader
                 SineAmpY = 2,
                 SineRateX = 1,
             };
-            
+
+            // Creates game scene
+            MainScene scene = new MainScene();
+
+
+
             // Writing the text graphics and setting position
             var livesLeftTxtLabel = new RichText("Lives", txtConfig);
-            
+            var livesLeftTxt = new RichText(scene.player.playerLives.ToString(), txtConfig);
+            livesLeftTxt.Name = "livesLeftTxt";
             livesLeftTxtLabel.SetPosition(50, 16);
+            livesLeftTxt.SetPosition(70, 32);
             var highScoreTxtLabel = new RichText("Highscore",txtConfig);
             highScoreTxtLabel.SetPosition(350, 15);
             var curScoreTxtLabel = new RichText("Score", txtConfig);
             curScoreTxtLabel.SetPosition(650, 15);
             // Adds Graphic to Scene
             scene.AddGraphic(livesLeftTxtLabel);
+            scene.AddGraphic(livesLeftTxt);
             scene.AddGraphic(highScoreTxtLabel);
             scene.AddGraphic(curScoreTxtLabel);
             #endregion gameText
