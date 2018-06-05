@@ -19,6 +19,8 @@ namespace space_invader
         MainScene scene;
         BoxCollider collider;
 
+        static int playerLives = 3;
+
         public Bullet(MainScene _scene, float _MoveSpeed, Vector2 pos, Tags tag)
         {
             scene = _scene;
@@ -47,7 +49,15 @@ namespace space_invader
                 if (collider.CollideEntities(X, Y, Tags.Player).Count > 0)
                 {
                     RemoveSelf();
+                    playerLives = playerLives - 1;
+                    scene.player.SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
+                    scene.PlayPosition.Y + scene.PlayWidth.Y));
+                    Console.WriteLine(playerLives);
                 }
+            if (playerLives == 0)
+            {
+                Game.SwitchScene(new HighScoresScene());
+            }
         }
     }
 }

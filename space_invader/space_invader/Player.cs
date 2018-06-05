@@ -17,7 +17,7 @@ namespace space_invader
         AutoTimer ShootingCooldown;
         float ShootingCooldownTime = 100.0f;
         bool CanShoot = true;
-
+        
         Image playerImage = new Image("../../../assets/player.png");
 
         BoxCollider collider = new BoxCollider(30, 30, Tags.Player);
