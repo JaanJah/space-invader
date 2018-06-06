@@ -20,7 +20,8 @@ namespace space_invader
         public Player player;
         public RichText livesLeftTxt;
         public RichText curScoreTxt;
-
+        public static Game game;
+             
         public MainScene()
         {
             Enemy.scene = this;

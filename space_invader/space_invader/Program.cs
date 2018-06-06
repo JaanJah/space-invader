@@ -9,13 +9,14 @@ namespace space_invader
 {
     class Program
     {
+        public static Game game;
+
         static void Main(string[] args)
         {
             // Creates game window
-            var game = new Game("Space Invader", 800, 600, 60, false);
+            game = new Game("Space Invader", 800, 600, 60, false);
             game.Color = Color.Black;
             
-
             #region gameText
             //Setting a default config file for the RichText to use
             var txtConfig = new RichTextConfig()
@@ -30,8 +31,6 @@ namespace space_invader
 
             // Creates game scene
             MainScene scene = new MainScene();
-
-
 
             // Writing the text graphics and setting position
             var livesLeftTxtLabel = new RichText("Lives", txtConfig);

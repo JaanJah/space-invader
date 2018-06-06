@@ -12,11 +12,10 @@ namespace space_invader
         // Stuff in the HighScores Scene
         public HighScoresScene() : base()
         {
-            var game = new Game();
             var scene = new Scene();
-            game.MouseVisible = true;
+            Program.game.MouseVisible = true;
             scene.Add(new TextBox(100, 100));
-            game.Start(scene);
+            Program.game.AddScene(scene);
         }
         // Updates Scene
 
