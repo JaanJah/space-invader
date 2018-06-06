@@ -22,6 +22,9 @@ namespace space_invader
             game.FirstScene = scene;
             scene.Initialize();
 
+            //Change window variables
+            game.WindowResize = false;
+
             #region gameText
             //Setting a default config file for the RichText to use
             var txtConfig = new RichTextConfig()
