@@ -43,6 +43,8 @@ namespace space_invader
             MainScene scene = (MainScene)Program.game.FirstScene;
             List<Enemy> enemies = Scene.GetEntities<Enemy>();
 
+            
+
             foreach (Enemy enemy in enemies)
             {
                 enemy.SetPosition(enemy.Position + MoveDir);
@@ -50,7 +52,6 @@ namespace space_invader
                 if (HeightToMove <= 0)
                 {
                     MoveDir = NextMoveDir;
-                    //enemy.SetPosition(Position.X, Position.Y - HeightToMove);
                     HeightToMove = 24;
                 }
 
