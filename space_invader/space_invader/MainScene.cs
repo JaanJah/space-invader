@@ -23,13 +23,15 @@ namespace space_invader
 
         public int CurLevel = 1;
 
-        public static Game game;
-
         public MainScene()
         {
             
         }
 
+        /// <summary>
+        /// Called to initialize the game
+        /// Note: must be added to Game.FirstScene before calling
+        /// </summary>
         public void Initialize()
         {
             Barricade.Initialize();
@@ -55,10 +57,10 @@ namespace space_invader
                 Game.SwitchScene(new HighScoresScene());
             }
         }
-        
 
-
-
+        /// <summary>
+        /// Sets next level, if CurLevel == 6 then ends the game
+        /// </summary>
         public void NextLevel()
         {
             CurLevel++;

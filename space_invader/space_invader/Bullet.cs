@@ -16,17 +16,14 @@ namespace space_invader
 
     class Bullet : Entity
     {
-        public float MoveSpeed;
-        BoxCollider collider;
-        
         static int playerLives = 3;
 
-        public Bullet(float _MoveSpeed, Vector2 pos, BoxCollider _collider)
+        public float MoveSpeed;
 
+        public Bullet(float _MoveSpeed, Vector2 pos, BoxCollider collider)
         {
             Position = pos;
             MoveSpeed = _MoveSpeed;
-            collider = _collider;
 
             AddCollider(collider);
         }
@@ -51,7 +48,7 @@ namespace space_invader
         void CheckBulletBounds()
         {
             // Check if player bullet is out of bounds and removes it
-            if (collider.Tags[0] == (int)Tags.Player)
+            if (Collider.Tags[0] == (int)Tags.Player)
                 if (Position.Y < 0)
                 {
                     Visible = false;
@@ -59,7 +56,7 @@ namespace space_invader
                 }
 
             // Check if enemy bullet is out of bounds and removes it
-            if (collider.Tags[0] == (int)Tags.Enemy)
+            if (Collider.Tags[0] == (int)Tags.Enemy)
                 if (Position.Y > Game.Height)
                     RemoveSelf();
         }
@@ -68,34 +65,43 @@ namespace space_invader
         {
             MainScene scene = (MainScene)Program.game.FirstScene;
 
-            // Check if player bullet hits enemy
-            if (collider.Tags[0] == (int)Tags.Player)
-                if (collider.CollideEntities(X, Y, Tags.Enemy).Count > 0)
-                    if ((collider.CollideEntities(X, Y, Tags.Enemy)[0].GetType() == typeof(Bullet)))
+            CheckPlayerBullet(scene);
+            CheckEnemyBullet(scene);
+            CheckBarricade(scene);
+        }
+
+        void CheckPlayerBullet(MainScene scene)
+        {
+            if (Collider.Tags[0] == (int)Tags.Player)
+                if (Collider.CollideEntities(X, Y, Tags.Enemy).Count > 0)
+                    if ((Collider.CollideEntities(X, Y, Tags.Enemy)[0].GetType() == typeof(Bullet)))
                     {
-                        collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
+                        Collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
                         Visible = false;
                         Collidable = false;
-                        
+
                         scene.player.ScoreAmount += 10;
                         scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
                         scene.curScoreTxt.Refresh();
                     }
+
                     else
                     {
-                        collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
+                        Collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
                         Visible = false;
                         Collidable = false;
                         Console.WriteLine(scene.GetEntities<Enemy>().Count);
-                        
+
                         if (scene.GetEntities<Enemy>().Count <= 1)
                             scene.NextLevel();
                     }
+        }
 
-            // Check if enemy bullet hits player
-            if (collider.Tags[0] == (int)Tags.Enemy)
-                if (collider.CollideEntities(X, Y, Tags.Player).Count > 0)
-                    if (!(collider.CollideEntities(X, Y, Tags.Player)[0].GetType() == typeof(Bullet)))
+        void CheckEnemyBullet(MainScene scene)
+        {
+            if (Collider.Tags[0] == (int)Tags.Enemy)
+                if (Collider.CollideEntities(X, Y, Tags.Player).Count > 0)
+                    if (!(Collider.CollideEntities(X, Y, Tags.Player)[0].GetType() == typeof(Bullet)))
                     {
                         RemoveSelf();
                         scene.player.playerLives -= 1;
@@ -105,24 +111,28 @@ namespace space_invader
                         scene.livesLeftTxt.String = scene.player.playerLives.ToString();
                         scene.livesLeftTxt.Refresh();
                     }
+
                     else
                     {
                         RemoveSelf();
                         scene.player.bullet.Visible = false;
                         scene.player.bullet.Collidable = false;
                     }
+        }
 
-            //Check if bullet hits barricade
-            if (collider.CollideEntity(X, Y, Tags.Barricade) != null)
+        void CheckBarricade(MainScene scene)
+        {
+            if (Collider.CollideEntity(X, Y, Tags.Barricade) != null)
             {
-                Barricade barricade = (Barricade)collider.CollideEntity(X, Y, Tags.Barricade);
+                Barricade barricade = (Barricade)Collider.CollideEntity(X, Y, Tags.Barricade);
 
-                if (collider.Tags[0] == (int)Tags.Player)
+                if (Collider.Tags[0] == (int)Tags.Player)
                 {
                     barricade.TakeDamage();
                     Visible = false;
                     Collidable = false;
                 }
+
                 else
                 {
                     barricade.TakeDamage();

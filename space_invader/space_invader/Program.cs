@@ -22,8 +22,6 @@ namespace space_invader
             game.FirstScene = scene;
             scene.Initialize();
 
-
-
             #region gameText
             //Setting a default config file for the RichText to use
             var txtConfig = new RichTextConfig()
@@ -61,9 +59,6 @@ namespace space_invader
             scene.AddGraphic(scene.curScoreTxt);
 
             #endregion gameText
-
-
-
 
             // Starts the game
             game.Start();

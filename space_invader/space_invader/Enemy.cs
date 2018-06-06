@@ -23,13 +23,12 @@ namespace space_invader
         static Random rnd = new Random();
         static AutoTimer ShootingCooldown = new AutoTimer(rnd.Next(700, 1500));
 
-        BoxCollider collider = new BoxCollider(24, 24, Tags.Enemy);
-
         public Enemy()
         {
-            ShootingCooldown.Start();
-
+            BoxCollider collider = new BoxCollider(24, 24, Tags.Enemy);
             AddCollider(collider);
+
+            ShootingCooldown.Start();
         }
 
         public static void Initialize()
@@ -106,6 +105,9 @@ namespace space_invader
             ShootingCooldown.Update();
         }
 
+        /// <summary>
+        /// Finds the most right, left and bottom enemy and uses it for movement
+        /// </summary>
         public static void FindEnemies()
         {
             List<Enemy> enemies = Program.game.FirstScene.GetEntities<Enemy>();

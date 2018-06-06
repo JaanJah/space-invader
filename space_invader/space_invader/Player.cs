@@ -14,14 +14,14 @@ namespace space_invader
     {
         float MoveSpeed = 2.0f;
         public Bullet bullet;
-
         public int ScoreAmount = 0;
         public int playerLives = 3;
-
-
         Image playerImage = new Image("../../../assets/player.png");
+        BoxCollider Collider = new BoxCollider(30, 30, Tags.Player);
 
-        BoxCollider collider = new BoxCollider(30, 30, Tags.Player);
+        /// <summary>
+        /// class used for the player
+        /// </summary>
         public Player()
         {
             MainScene scene = (MainScene)Program.game.FirstScene;
@@ -34,9 +34,9 @@ namespace space_invader
             AddGraphic(playerImage);
 
             // Add collider
-            AddCollider(collider);
+            AddCollider(Collider);
 
-            // Initiate bullet
+            // Initialize bullet
             Image playerBullet = new Image("../../../Assets/playerBullet.png");
             BoxCollider bulletCollider = new BoxCollider(playerBullet.Width, playerBullet.Height, Tags.Player);
             bullet = new Bullet(-3.0f, new Vector2(0, 0), bulletCollider);
@@ -46,11 +46,26 @@ namespace space_invader
             scene.Add(bullet);
         }
 
+        /// <summary>
+        /// Called every frame
+        /// </summary>
         public override void Update()
         {
-            MainScene scene = (MainScene)Program.game.FirstScene;
-
             base.Update();
+
+            UpdateMovement();
+
+            //If playerLives are 0, then switch to highscore screen
+            if (playerLives == 0)
+                Game.SwitchScene(new HighScoresScene());
+        }
+
+        /// <summary>
+        /// Handles player movement
+        /// </summary>
+        void UpdateMovement()
+        {
+            MainScene scene = (MainScene)Program.game.FirstScene;
 
             // Check if player is moving left
             if (Input.KeyDown(Key.A) || Input.KeyDown(Key.Left))
@@ -69,13 +84,8 @@ namespace space_invader
                 X = scene.PlayPosition.X;
             else if (X > scene.PlayPosition.X + scene.PlayWidth.X)
                 X = scene.PlayPosition.X + scene.PlayWidth.X;
-
-            //If playerLives are 0, then switch to highscore screen
-            if (playerLives == 0)
-            {
-                Game.SwitchScene(new HighScoresScene());
-            }
         }
+
 
         void Shoot()
         {
@@ -86,6 +96,7 @@ namespace space_invader
 
         public void playerDeath()
         {
+
         }
     }
 }

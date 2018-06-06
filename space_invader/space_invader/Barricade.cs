@@ -13,15 +13,14 @@ namespace space_invader
         static Vector2 Size = new Vector2(24, 24);
         static List<Image> Images = new List<Image>();
         
-        BoxCollider Collider;
         int CurImage = 0;
 
         public Barricade()
         {
-            Collider = new BoxCollider(Images[0].Width, Images[0].Height, Tags.Barricade);
+            Collider collider = new BoxCollider(Images[0].Width, Images[0].Height, Tags.Barricade);
             
             AddGraphic(Images[0]);
-            AddCollider(Collider);
+            AddCollider(collider);
         }
 
         public void TakeDamage()
