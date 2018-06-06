@@ -27,21 +27,9 @@ namespace space_invader
             Enemy.scene = this;
             LoadEnemies("level1.xml");
 
-            var txtConfig = new RichTextConfig()
-            {
-                TextAlign = TextAlign.Center,
-                CharColor = Color.Green,
-                FontSize = 16,
-                SineAmpX = 3,
-                SineAmpY = 2,
-                SineRateX = 1,
-            };
-
             // Create player and add to scene
             player = new Player(this);
             Add(player);
-
-            livesLeftTxt = new RichText(player.playerLives.ToString(), txtConfig);
         }
 
         //Update scene
