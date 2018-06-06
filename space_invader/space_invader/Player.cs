@@ -13,7 +13,6 @@ namespace space_invader
     class Player : Entity
     {
         float MoveSpeed = 2.0f;
-        MainScene scene;
         public Bullet bullet;
 
         public int ScoreAmount = 0;
@@ -23,9 +22,9 @@ namespace space_invader
         Image playerImage = new Image("../../../assets/player.png");
 
         BoxCollider collider = new BoxCollider(30, 30, Tags.Player);
-        public Player(MainScene _scene)
+        public Player()
         {
-            scene = _scene;
+            MainScene scene = (MainScene)Program.game.FirstScene;
 
             // Set position
             SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
@@ -40,7 +39,7 @@ namespace space_invader
             // Initiate bullet
             Image playerBullet = new Image("../../../Assets/playerBullet.png");
             BoxCollider bulletCollider = new BoxCollider(playerBullet.Width, playerBullet.Height, Tags.Player);
-            bullet = new Bullet(scene, -3.0f, new Vector2(0, 0), bulletCollider);
+            bullet = new Bullet(-3.0f, new Vector2(0, 0), bulletCollider);
             bullet.Visible = false;
             bullet.Collidable = false;
             bullet.AddGraphic(playerBullet);
@@ -49,6 +48,8 @@ namespace space_invader
 
         public override void Update()
         {
+            MainScene scene = (MainScene)Program.game.FirstScene;
+
             base.Update();
 
             // Check if player is moving left

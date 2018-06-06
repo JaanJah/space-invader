@@ -13,7 +13,6 @@ namespace space_invader
     {
         public static float EnemySize = 32.0f;
         static float MoveSpeed = 0.005f;
-        public static MainScene Scene;
         public static Enemy EnemyRight;
         public static Enemy EnemyLeft;
         public static Enemy EnemyBottom;
@@ -21,10 +20,10 @@ namespace space_invader
         public static Vector2 MoveDir = new Vector2(MoveSpeed, 0.0f);
         public static Vector2 NextDir;
         public static IDictionary<string, Func<Enemy>> AllEnemies = new Dictionary<string, Func<Enemy>>(); //https://codereview.stackexchange.com/questions/4174/better-way-to-create-objects-from-strings
-
-        BoxCollider collider = new BoxCollider(24, 24, Tags.Enemy);
         static Random rnd = new Random();
         static AutoTimer ShootingCooldown = new AutoTimer(rnd.Next(700, 1500));
+
+        BoxCollider collider = new BoxCollider(24, 24, Tags.Enemy);
 
         public Enemy()
         {
@@ -33,9 +32,8 @@ namespace space_invader
             AddCollider(collider);
         }
 
-        public static void Initialize(MainScene scene)
+        public static void Initialize()
         {
-            Scene = scene;
             InitializeAllEnemies();
             LoadEnemies("level1.xml");
         }
@@ -47,12 +45,13 @@ namespace space_invader
 
         void UpdateMovement()
         {
+            MainScene scene = (MainScene)Program.game.FirstScene;
             List<Enemy> enemies = Scene.GetEntities<Enemy>();
 
             foreach (Enemy enemy in enemies)
                 enemy.SetPosition(enemy.Position + MoveDir);
 
-            if (EnemyRight.Position.X >= Scene.PlayPosition.X + Scene.PlayWidth.X &&
+            if (EnemyRight.Position.X >= scene.PlayPosition.X + scene.PlayWidth.X &&
                 MoveDir != new Vector2(0.0f, MoveSpeed))
             {
                 MoveDir = new Vector2(0, MoveSpeed);
@@ -60,7 +59,7 @@ namespace space_invader
                 HeightCheck = EnemyBottom.Y + EnemySize;
             }
 
-            if (EnemyLeft.Position.X <= Scene.PlayPosition.X &&
+            if (EnemyLeft.Position.X <= scene.PlayPosition.X &&
                 MoveDir != new Vector2(0.0f, MoveSpeed))
             {
                 MoveDir = new Vector2(0, MoveSpeed);
@@ -71,7 +70,7 @@ namespace space_invader
             if (EnemyBottom.Y > HeightCheck)
                 MoveDir = NextDir;
 
-            if (EnemyBottom.Y > Scene.player.Y)
+            if (EnemyBottom.Y > scene.player.Y)
                 Game.SwitchScene(new HighScoresScene());
         }
 
@@ -88,7 +87,7 @@ namespace space_invader
                 int EnemyNumber = rnd.Next(1, enemies.Count);
 
                 BoxCollider collider = new BoxCollider(enemyBullet.Width, enemyBullet.Height, Tags.Enemy);
-                Bullet bullet = new Bullet(Scene, 2.0f, enemies[EnemyNumber].Position, collider);
+                Bullet bullet = new Bullet(2.0f, enemies[EnemyNumber].Position, collider);
                 bullet.AddGraphic(enemyBullet);
 
                 Scene.Add(bullet);
@@ -109,7 +108,7 @@ namespace space_invader
 
         public static void FindEnemies()
         {
-            List<Enemy> enemies = Scene.GetEntities<Enemy>();
+            List<Enemy> enemies = Program.game.FirstScene.GetEntities<Enemy>();
             EnemyRight = enemies[0];
             EnemyLeft = enemies[0];
             EnemyBottom = enemies[0];
@@ -132,21 +131,22 @@ namespace space_invader
 
         public static void LoadEnemies(string file)
         {
+            MainScene scene = (MainScene)Program.game.FirstScene;
             XmlDocument doc = new XmlDocument();
             doc.Load("../../../levels/" + file);
-            Vector2 CurPos = new Vector2(Scene.PlayPosition.X, Scene.PlayPosition.Y);
+            Vector2 CurPos = new Vector2(scene.PlayPosition.X, scene.PlayPosition.Y);
 
             foreach (XmlElement node in doc.DocumentElement.ChildNodes)
             {
                 Enemy enemy = AllEnemies[node.GetAttribute("type")]();
                 enemy.Position = CurPos;
 
-                Scene.Add(enemy);
+                scene.Add(enemy);
 
                 CurPos.X += EnemySize;
                 if (CurPos.X > 420)
                 {
-                    CurPos.X = Scene.PlayPosition.X;
+                    CurPos.X = scene.PlayPosition.X;
                     CurPos.Y += EnemySize;
                 }
             }
