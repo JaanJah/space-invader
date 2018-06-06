@@ -16,7 +16,7 @@ namespace space_invader
             // Creates game window
             game = new Game("Space Invader", 800, 600, 60, false);
             game.Color = Color.Black;
-            
+
             #region gameText
             //Setting a default config file for the RichText to use
             var txtConfig = new RichTextConfig()

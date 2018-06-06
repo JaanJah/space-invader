@@ -27,10 +27,8 @@ namespace space_invader
 
         public MainScene()
         {
-            Enemy.scene = this;
-            Enemy.LoadEnemies("level1.xml");
-
             Barricade.Initialize(this);
+            Enemy.Initialize(this);
 
             // Create player and add to scene
             player = new Player(this);
