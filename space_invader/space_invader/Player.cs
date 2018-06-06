@@ -31,7 +31,7 @@ namespace space_invader
             SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
                               scene.PlayPosition.Y + scene.PlayWidth.Y));
 
-            // Set image jaan on pede
+            // Set image 
             AddGraphic(playerImage);
 
             // Add collider
