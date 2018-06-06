@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Otter;
+using System.IO;
 
 namespace space_invader
 {
@@ -11,13 +12,25 @@ namespace space_invader
     {
         public Button (float x, float y) : base(x, y)
         {
-            var submitTxt = new RichText("Submit", 16);
-            
-            AddGraphic(Image.CreateRectangle(80, 30, Color.Blue));
-            submitTxt.SetPosition(100,100);
-            
-            AddGraphic(submitTxt);
+            Image buttonOutline = new Image("../../../Assets/buttonOutline.png");
+            AddGraphic(buttonOutline);
         }
-        
+
+        public override void Update()
+        {
+            base.Update();
+
+            if (Input.MouseButtonPressed(MouseButton.Left))
+            {
+                if (Util.InRect(Scene.MouseX, Scene.MouseY, X,Y, 80, 30))
+                {
+                    var inputText = Scene.GetEntity<TextBox>().inputString;
+                    File.WriteAllText("../../../savefile/save.txt", inputText);
+                    // debug
+                    Console.WriteLine("MouseX: {0}, MouseY: {1}", Scene.MouseX, Scene.MouseY);
+                }
+            }
+        }
+
     }
 }
