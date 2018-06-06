@@ -44,6 +44,8 @@ namespace space_invader
             Add(player);
 
             livesLeftTxt = new RichText(player.playerLives.ToString(), txtConfig);
+
+            
         }
 
         //Update scene
@@ -52,7 +54,8 @@ namespace space_invader
         {
             base.Update();
 
-            Enemy.FindEnemies();
+            if (GetEntities<Enemy>().Count >= 1)
+                Enemy.FindEnemies();
 
             //Debug - Switches Scene if input is H
             if (Input.KeyPressed(Key.H))
@@ -89,6 +92,9 @@ namespace space_invader
         public void NextLevel()
         {
             CurLevel++;
+
+            if (CurLevel == 6)
+                Game.SwitchScene(new HighScoresScene());
 
             LoadEnemies("level" + CurLevel.ToString() + ".xml");
         }

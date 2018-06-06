@@ -58,7 +58,6 @@ namespace space_invader
                 {
                     Visible = false;
                     Collidable = false;
-
                 }
 
             // Check if enemy bullet is out of bounds and removes it
@@ -80,15 +79,16 @@ namespace space_invader
                         scene.player.ScoreAmount += 10;
                         scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
                         scene.curScoreTxt.Refresh();
-
-                        if (scene.GetEntities<Enemy>().Count <= 0)
-                            scene.NextLevel();
                     }
                     else
                     {
                         collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
                         Visible = false;
                         Collidable = false;
+                        Console.WriteLine(scene.GetEntities<Enemy>().Count);
+                        
+                        if (scene.GetEntities<Enemy>().Count <= 1)
+                            scene.NextLevel();
                     }
 
             // Check if enemy bullet hits player
@@ -96,7 +96,6 @@ namespace space_invader
                 if (collider.CollideEntities(X, Y, Tags.Player).Count > 0)
                     if (!(collider.CollideEntities(X, Y, Tags.Player)[0].GetType() == typeof(Bullet)))
                     {
-                        Enemy.FindEnemies();
                         RemoveSelf();
                         scene.player.playerLives -= 1;
                         scene.player.SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,

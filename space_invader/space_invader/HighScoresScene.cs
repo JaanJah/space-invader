@@ -14,8 +14,8 @@ namespace space_invader
         {
             AddGraphic(Image.CreateRectangle(Game.Instance.Width, Game.Instance.Height, Color.Green));  
         }
-        // Updates Scene
 
+        // Updates Scene
 
         public override void Update()
         {
@@ -27,6 +27,5 @@ namespace space_invader
                 Game.SwitchScene(new MainScene());
             }
         }
-
     }
 }
