@@ -11,7 +11,8 @@ namespace space_invader
     {
         Player,
         Enemy,
-        Barricade
+        Barricade,
+        Ufo
     }
 
     class Bullet : Entity
@@ -68,6 +69,7 @@ namespace space_invader
             CheckPlayerBullet(scene);
             CheckEnemyBullet(scene);
             CheckBarricade(scene);
+            CheckUfo(scene);
         }
 
         void CheckPlayerBullet(MainScene scene)
@@ -139,5 +141,18 @@ namespace space_invader
                 }
             }
         }
+
+        void CheckUfo(MainScene scene)
+        {
+            if (Collider.CollideEntity(X, Y, Tags.Ufo) != null)
+            {
+                UFO ufo = (UFO)Collider.CollideEntity(X, Y, Tags.Ufo);
+
+                ufo.Die();
+                Visible = false;
+                Collidable = false;
+            }
+        }
+
     }
 }

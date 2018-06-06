@@ -19,12 +19,16 @@ namespace space_invader
         static Random rnd = new Random();
         static AutoTimer ShootingCooldown = new AutoTimer(rnd.Next(700, 1500));
         static float HeightToMove = 24.0f;
+        UFO Ufo;
 
         public Enemy()
         {
             BoxCollider collider = new BoxCollider(24, 24, Tags.Enemy);
             AddCollider(collider);
             ShootingCooldown.Start();
+            Ufo = new UFO();
+
+            Program.game.FirstScene.Add(Ufo);
         }
 
         public static void Initialize()
@@ -42,8 +46,6 @@ namespace space_invader
         {
             MainScene scene = (MainScene)Program.game.FirstScene;
             List<Enemy> enemies = Scene.GetEntities<Enemy>();
-
-            
 
             foreach (Enemy enemy in enemies)
             {
