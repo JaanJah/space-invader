@@ -12,20 +12,13 @@ namespace space_invader
         // Stuff in the HighScores Scene
         public HighScoresScene() : base()
         {
-            AddGraphic(Image.CreateRectangle(Game.Instance.Width, Game.Instance.Height, Color.Green));  
-        }
 
-        // Updates Scene
-
-        public override void Update()
-        {
-            base.Update();
-
-            //Debug - Switches Scene if Input is H
-            if (Input.KeyPressed(Key.H))
-            {
-                Game.SwitchScene(new MainScene());
-            }
+            var scene = new Scene();
+            Program.game.MouseVisible = true;
+            scene.Add(new TextBox(200, 100));
+            scene.Add(new Button(400, 95));
+            Program.game.AddScene(scene);
+            
         }
     }
 }

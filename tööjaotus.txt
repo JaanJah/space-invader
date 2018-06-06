@@ -1,15 +1,15 @@
 Hindrek:
 
 Jaan:
-Assetid
-
-
 
 Features to be added:
 Highscores
 Score system
+<<<<<<< HEAD
 Game over screen
 Life system
+=======
+>>>>>>> aftergame
 Name system (high skooridesse läheb nimi)
 
 Bugid:

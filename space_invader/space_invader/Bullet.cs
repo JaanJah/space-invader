@@ -19,7 +19,7 @@ namespace space_invader
         public float MoveSpeed;
         static MainScene scene;
         BoxCollider collider;
-
+        
         static int playerLives = 3;
 
         public Bullet(MainScene _scene, float _MoveSpeed, Vector2 pos, BoxCollider _collider)

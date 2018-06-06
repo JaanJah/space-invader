@@ -20,7 +20,10 @@ namespace space_invader
         public Player player;
         public RichText livesLeftTxt;
         public RichText curScoreTxt;
+
         public int CurLevel = 1;
+
+        public static Game game;
 
         public MainScene()
         {
@@ -29,23 +32,9 @@ namespace space_invader
 
             Barricade.Initialize(this);
 
-            var txtConfig = new RichTextConfig()
-            {
-                TextAlign = TextAlign.Center,
-                CharColor = Color.Green,
-                FontSize = 16,
-                SineAmpX = 3,
-                SineAmpY = 2,
-                SineRateX = 1,
-            };
-
             // Create player and add to scene
             player = new Player(this);
             Add(player);
-
-            livesLeftTxt = new RichText(player.playerLives.ToString(), txtConfig);
-
-            
         }
 
         //Update scene
