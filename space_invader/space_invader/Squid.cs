@@ -11,12 +11,10 @@ namespace space_invader
     {
         static Image image = new Image("../../../Assets/enemy1.png");
 
-        public Squid(Vector2 pos)
+        public Squid()
         {
             AddGraphic(image);
-            Position = pos;
         }
-
 
     }
 }

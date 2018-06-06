@@ -14,8 +14,6 @@ namespace space_invader
             // Creates game window
             var game = new Game("Space Invader", 800, 600, 60, false);
 
-            
-
             #region gameText
             //Setting a default config file for the RichText to use
             var txtConfig = new RichTextConfig()

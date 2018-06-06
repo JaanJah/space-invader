@@ -24,10 +24,8 @@ namespace space_invader
 
         public MainScene()
         {
-            Enemy.scene = this;
-            Enemy.LoadEnemies("level1.xml");
-
             Barricade.Initialize(this);
+            Enemy.Initialize(this);
 
             var txtConfig = new RichTextConfig()
             {
