@@ -12,7 +12,7 @@ namespace space_invader
         public Text text = new Text();
         public Image imageBox = Image.CreateRectangle(150, 20);
         public bool hasFocus;
-        public int charLimit = 12;
+        public int charLimit = 16;
         public string inputString = "";
         public int firstTime = 0;
 
