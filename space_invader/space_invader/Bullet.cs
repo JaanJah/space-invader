@@ -17,15 +17,13 @@ namespace space_invader
     class Bullet : Entity
     {
         public float MoveSpeed;
-        static MainScene scene;
         BoxCollider collider;
         
         static int playerLives = 3;
 
-        public Bullet(MainScene _scene, float _MoveSpeed, Vector2 pos, BoxCollider _collider)
+        public Bullet(float _MoveSpeed, Vector2 pos, BoxCollider _collider)
 
         {
-            scene = _scene;
             Position = pos;
             MoveSpeed = _MoveSpeed;
             collider = _collider;
@@ -68,6 +66,8 @@ namespace space_invader
 
         void CheckBulletCollision()
         {
+            MainScene scene = (MainScene)Program.game.FirstScene;
+
             // Check if player bullet hits enemy
             if (collider.Tags[0] == (int)Tags.Player)
                 if (collider.CollideEntities(X, Y, Tags.Enemy).Count > 0)
@@ -76,6 +76,13 @@ namespace space_invader
                         collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
                         Visible = false;
                         Collidable = false;
+<<<<<<< HEAD
+=======
+                        
+                        scene.player.ScoreAmount += 10;
+                        scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
+                        scene.curScoreTxt.Refresh();
+>>>>>>> master
                     }
                     else
                     {

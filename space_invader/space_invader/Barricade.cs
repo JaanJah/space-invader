@@ -12,8 +12,7 @@ namespace space_invader
     {
         static Vector2 Size = new Vector2(24, 24);
         static List<Image> Images = new List<Image>();
-        static MainScene Scene;
-
+        
         BoxCollider Collider;
         int CurImage = 0;
 
@@ -39,10 +38,8 @@ namespace space_invader
             AddGraphic(Images[CurImage]);
         }
 
-        public static void Initialize(MainScene scene)
+        public static void Initialize()
         {
-            Scene = scene;
-
             InitializeImages();
             InitializeBarricades();
         }
@@ -71,8 +68,9 @@ namespace space_invader
                     Barricade barricade = new Barricade();
 
                     barricade.Position = new Vector2(Convert.ToSingle(node.GetAttribute("posx")) + i * 200, Convert.ToSingle(node.GetAttribute("posy")));
-
-                    Scene.Add(barricade);
+                    
+                    Console.WriteLine(Program.game.Scene);
+                    Program.game.FirstScene.Add(barricade);
                 }
         }
     }

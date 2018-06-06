@@ -16,7 +16,14 @@ namespace space_invader
             // Creates game window
             game = new Game("Space Invader", 800, 600, 60, false);
             game.Color = Color.Black;
-            
+
+            // Creates game scene
+            MainScene scene = new MainScene();
+            game.FirstScene = scene;
+            scene.Initialize();
+
+
+
             #region gameText
             //Setting a default config file for the RichText to use
             var txtConfig = new RichTextConfig()
@@ -28,10 +35,6 @@ namespace space_invader
                 SineAmpY = 2,
                 SineRateX = 1,
             };
-
-            // Creates game scene
-            MainScene scene = new MainScene();
-
             // Writing the text graphics and setting position
             var livesLeftTxtLabel = new RichText("Lives", txtConfig);
             livesLeftTxtLabel.SetPosition(50, 16);
@@ -59,8 +62,11 @@ namespace space_invader
 
             #endregion gameText
 
+
+
+
             // Starts the game
-            game.Start(scene);
+            game.Start();
         }
     }
 }
