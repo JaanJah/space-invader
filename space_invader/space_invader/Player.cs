@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,7 @@ namespace space_invader
             SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
                               scene.PlayPosition.Y + scene.PlayWidth.Y));
 
-            // Set image
+            // Set image jaan on pede
             AddGraphic(playerImage);
 
             // Add collider

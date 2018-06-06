@@ -76,13 +76,6 @@ namespace space_invader
                         collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
                         Visible = false;
                         Collidable = false;
-<<<<<<< HEAD
-=======
-                        
-                        scene.player.ScoreAmount += 10;
-                        scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
-                        scene.curScoreTxt.Refresh();
->>>>>>> master
                     }
                     else
                     {
