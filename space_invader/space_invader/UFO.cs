@@ -70,12 +70,5 @@ namespace space_invader
             UpdateMovement();
             CheckAppear();
         }
-
-        public override void Render()
-        {
-            base.Render();
-
-            Collider.Render();
-        }
     }
 }

@@ -12,7 +12,7 @@ namespace space_invader
     class Enemy : Entity
     {
         static float EnemySize = 32.0f;
-        static float MoveSpeed = 0.03f;
+        static float MoveSpeed = 0.5f;
         static Vector2 MoveDir = new Vector2(MoveSpeed, 0.0f);
         static Vector2 NextMoveDir;
         static IDictionary<string, Func<Enemy>> AllEnemies = new Dictionary<string, Func<Enemy>>(); //https://codereview.stackexchange.com/questions/4174/better-way-to-create-objects-from-strings
@@ -49,33 +49,30 @@ namespace space_invader
             MainScene scene = (MainScene)Program.game.FirstScene;
             List<Enemy> enemies = Scene.GetEntities<Enemy>();
 
-            foreach (Enemy enemy in enemies)
+            SetPosition(Position + MoveDir);
+
+            if (HeightToMove <= 0)
             {
-                enemy.SetPosition(enemy.Position + MoveDir);
-
-                if (HeightToMove <= 0)
-                {
-                    MoveDir = NextMoveDir;
-                    HeightToMove = 24;
-                }
-
-                if (enemy.Position.X > scene.GetPlayArea().X)
-                {
-                    enemy.SetPosition(enemy.Position - MoveDir);
-                    MoveDir = new Vector2(0.0f, MoveSpeed);
-                    NextMoveDir = new Vector2(-1.0f * MoveSpeed, 0.0f);
-                }
-
-                if (enemy.Position.X < scene.PlayPosition.X)
-                {
-                    enemy.SetPosition(enemy.Position - MoveDir);
-                    MoveDir = new Vector2(0.0f, MoveSpeed);
-                    NextMoveDir = new Vector2(1.0f * MoveSpeed, 0.0f);
-                }
-
-                if (enemy.Position.Y >= scene.GetPlayArea().Y - 100)
-                    Game.SwitchScene(new HighScoresScene());
+                MoveDir = NextMoveDir;
+                HeightToMove = 24;
             }
+
+            if (Position.X > scene.GetPlayArea().X)
+            {
+                SetPosition(Position - MoveDir);
+                MoveDir = new Vector2(0.0f, MoveSpeed);
+                NextMoveDir = new Vector2(-1.0f * MoveSpeed, 0.0f);
+            }
+
+            if (Position.X < scene.PlayPosition.X)
+            {
+                SetPosition(Position - MoveDir);
+                MoveDir = new Vector2(0.0f, MoveSpeed);
+                NextMoveDir = new Vector2(1.0f * MoveSpeed, 0.0f);
+            }
+
+            if (Position.Y >= scene.GetPlayArea().Y - 100)
+                Game.SwitchScene(new HighScoresScene());
 
             HeightToMove -= MoveDir.Y;
         }
