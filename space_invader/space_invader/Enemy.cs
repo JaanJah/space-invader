@@ -40,6 +40,8 @@ namespace space_invader
         public static void InitializeAllEnemies()
         {
             AllEnemies.Add("squid", () => { return new Squid(); });
+            AllEnemies.Add("crab", () => { return new Crab(); });
+            AllEnemies.Add("octopus", () => { return new Octopus(); });
         }
 
         void UpdateMovement()

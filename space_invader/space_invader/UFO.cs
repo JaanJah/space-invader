@@ -76,8 +76,6 @@ namespace space_invader
             base.Render();
 
             Collider.Render();
-
-               
         }
     }
 }

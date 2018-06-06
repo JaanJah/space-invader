@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0"?>
 <Enemies>
   <Enemy type="squid"/>
+  <Enemy type="octopus"/>
+  <Enemy type="crab"/>
+  <Enemy type="squid"/>
 
 </Enemies>
