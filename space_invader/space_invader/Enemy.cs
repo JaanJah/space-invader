@@ -12,7 +12,7 @@ namespace space_invader
     class Enemy : Entity
     {
         static float EnemySize = 32.0f;
-        static float MoveSpeed = 0.5f;
+        static float MoveSpeed = 0.8f;
         static Vector2 MoveDir = new Vector2(MoveSpeed, 0.0f);
         static Vector2 NextMoveDir;
         static IDictionary<string, Func<Enemy>> AllEnemies = new Dictionary<string, Func<Enemy>>(); //https://codereview.stackexchange.com/questions/4174/better-way-to-create-objects-from-strings
@@ -74,7 +74,7 @@ namespace space_invader
             if (Position.Y >= scene.GetPlayArea().Y - 100)
                 Game.SwitchScene(new HighScoresScene());
 
-            HeightToMove -= MoveDir.Y;
+            HeightToMove -= MoveDir.Y / enemies.Count;
         }
 
         void UpdateShooting()
