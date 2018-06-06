@@ -41,14 +41,14 @@ namespace space_invader
             {
                 Y += MoveSpeed;
 
-                
+
                 // Check if player bullet is out of bounds and removes it
                 if (collider.Tags[0] == (int)Tags.Player)
                     if (Position.Y < 0)
                     {
                         Visible = false;
                         Collidable = false;
-                        
+
                     }
 
                 // Check if enemy bullet is out of bounds and removes it
@@ -102,9 +102,11 @@ namespace space_invader
                         }
 
                 //Check if bullet hits barricade
-                if(collider.CollideEntities(X, Y, Tags.Barricade).Count > 0)
+                if (collider.CollideEntity(X, Y, Tags.Barricade) != null)
                 {
-                    collider.Collide(X, Y, Tags)
+                    Barricade barricade = (Barricade)collider.CollideEntity(X, Y, Tags.Barricade);
+                    barricade.TakeDamage();
+                    RemoveSelf();
                 }
             }
         }

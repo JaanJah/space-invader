@@ -20,7 +20,23 @@ namespace space_invader
         public Barricade()
         {
             Collider = new BoxCollider(Images[0].Width, Images[0].Height, Tags.Barricade);
+            
             AddGraphic(Images[0]);
+            AddCollider(Collider);
+        }
+
+        public void TakeDamage()
+        {
+            CurImage++;
+
+            if (CurImage > 3)
+            {
+                RemoveSelf();
+                return;
+            }
+                
+            RemoveGraphic(Images[CurImage - 1]);
+            AddGraphic(Images[CurImage]);
         }
 
         public static void Initialize(MainScene scene)

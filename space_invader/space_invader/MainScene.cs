@@ -26,6 +26,8 @@ namespace space_invader
             Enemy.scene = this;
             LoadEnemies("level1.xml");
 
+            Barricade.Initialize(this);
+
             var txtConfig = new RichTextConfig()
             {
                 TextAlign = TextAlign.Center,
@@ -41,7 +43,6 @@ namespace space_invader
             Add(player);
 
             livesLeftTxt = new RichText(player.playerLives.ToString(), txtConfig);
-            Barricade.Initialize(this);
         }
 
 
