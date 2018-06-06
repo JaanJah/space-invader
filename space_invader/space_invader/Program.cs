@@ -13,7 +13,7 @@ namespace space_invader
         {
             // Creates game window
             var game = new Game("Space Invader", 800, 600, 60, false);
-
+            game.Color = Color.Black;
             
 
             #region gameText
