@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using Otter;
 
 namespace space_invader
@@ -112,6 +113,30 @@ namespace space_invader
                 // Find Bottommost enemy
                 if (enemy.Position.Y > EnemyBottom.Position.Y)
                     EnemyBottom = enemy;
+            }
+        }
+
+        public static void LoadEnemies(string file)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load("../../../levels/" + file);
+            Vector2 CurPos = new Vector2(scene.PlayPosition.X, scene.PlayPosition.Y);
+
+            foreach (XmlElement node in doc.DocumentElement.ChildNodes)
+            {
+                Enemy enemy = new Enemy();
+
+                enemy.AddGraphic(new Image("../../../assets/" + node.GetAttribute("texture")));
+                enemy.Position = CurPos;
+
+                scene.Add(enemy);
+
+                CurPos.X += EnemySize;
+                if (CurPos.X > 420)
+                {
+                    CurPos.X = scene.PlayPosition.X;
+                    CurPos.Y += EnemySize;
+                }
             }
         }
     }

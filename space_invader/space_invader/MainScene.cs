@@ -25,7 +25,7 @@ namespace space_invader
         public MainScene()
         {
             Enemy.scene = this;
-            LoadEnemies("level1.xml");
+            Enemy.LoadEnemies("level1.xml");
 
             Barricade.Initialize(this);
 
@@ -65,29 +65,7 @@ namespace space_invader
         }
         
 
-        void LoadEnemies(string file)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load("../../../levels/" + file);
-            Vector2 CurPos = new Vector2(PlayPosition.X, PlayPosition.Y);
 
-            foreach(XmlElement node in doc.DocumentElement.ChildNodes)
-            {
-                Enemy enemy = new Enemy();
-                
-                enemy.AddGraphic(new Image("../../../assets/" + node.GetAttribute("texture")));
-                enemy.Position = CurPos;
-
-                Add(enemy);
-
-                CurPos.X += Enemy.EnemySize;
-                if (CurPos.X > 420)
-                {
-                    CurPos.X = PlayPosition.X;
-                    CurPos.Y += Enemy.EnemySize;
-                }
-            }
-        }
 
         public void NextLevel()
         {
@@ -96,7 +74,7 @@ namespace space_invader
             if (CurLevel == 6)
                 Game.SwitchScene(new HighScoresScene());
 
-            LoadEnemies("level" + CurLevel.ToString() + ".xml");
+            Enemy.LoadEnemies("level" + CurLevel.ToString() + ".xml");
         }
     }
 }
