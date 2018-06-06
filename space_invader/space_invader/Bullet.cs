@@ -80,6 +80,9 @@ namespace space_invader
                         scene.player.ScoreAmount += 10;
                         scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
                         scene.curScoreTxt.Refresh();
+
+                        if (scene.GetEntities<Enemy>().Count <= 0)
+                            scene.NextLevel();
                     }
                     else
                     {

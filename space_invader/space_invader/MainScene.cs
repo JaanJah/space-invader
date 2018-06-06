@@ -20,6 +20,7 @@ namespace space_invader
         public Player player;
         public RichText livesLeftTxt;
         public RichText curScoreTxt;
+        public int CurLevel = 1;
 
         public MainScene()
         {
@@ -44,8 +45,6 @@ namespace space_invader
 
             livesLeftTxt = new RichText(player.playerLives.ToString(), txtConfig);
         }
-
-
 
         //Update scene
         
@@ -85,6 +84,13 @@ namespace space_invader
                     CurPos.Y += Enemy.EnemySize;
                 }
             }
+        }
+
+        public void NextLevel()
+        {
+            CurLevel++;
+
+            LoadEnemies("level" + CurLevel.ToString() + ".xml");
         }
     }
 }

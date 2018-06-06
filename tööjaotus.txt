@@ -1,7 +1,4 @@
 Hindrek:
-Enemy behaviours
-
-
 
 Jaan:
 Assetid
@@ -10,14 +7,10 @@ Assetid
 
 Features to be added:
 Highscores
-Player
 Score system
-Game time (ticks)
-Walls
 Game over screen
 Life system
 Name system (high skooridesse läheb nimi)
-Shooting system
 
 Bugid:
 Paranda warningud ära
