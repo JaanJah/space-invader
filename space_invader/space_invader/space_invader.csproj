@@ -76,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Squid.cs" />
     <Compile Include="TextBox.cs" />
+    <Compile Include="UFO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

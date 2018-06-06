@@ -47,6 +47,13 @@ namespace space_invader
             {
                 enemy.SetPosition(enemy.Position + MoveDir);
 
+                if (HeightToMove <= 0)
+                {
+                    MoveDir = NextMoveDir;
+                    //enemy.SetPosition(Position.X, Position.Y - HeightToMove);
+                    HeightToMove = 24;
+                }
+
                 if (enemy.Position.X > scene.GetPlayArea().X)
                 {
                     enemy.SetPosition(enemy.Position - MoveDir);
@@ -59,13 +66,6 @@ namespace space_invader
                     enemy.SetPosition(enemy.Position - MoveDir);
                     MoveDir = new Vector2(0.0f, MoveSpeed);
                     NextMoveDir = new Vector2(1.0f * MoveSpeed, 0.0f);
-                }
-
-                if (HeightToMove <= 0)
-                {
-                    MoveDir = NextMoveDir;
-                    enemy.SetPosition(Position.X, Position.Y - HeightToMove);
-                    HeightToMove = 24;
                 }
 
                 if (enemy.Position.Y >= scene.GetPlayArea().Y - 100)

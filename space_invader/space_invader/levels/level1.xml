@@ -49,5 +49,7 @@
   <Enemy type="squid"/>
   <Enemy type="squid"/>
   <Enemy type="squid"/>
-
+  <Enemy type="squid"/>
+  <Enemy type="squid"/>
+  <Enemy type="squid"/>
 </Enemies>
