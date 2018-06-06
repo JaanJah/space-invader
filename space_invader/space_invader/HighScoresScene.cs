@@ -31,7 +31,7 @@ namespace space_invader
 
         public TextBox(float x, float y) : base(x, y)
         {
-            imageBox.OutlineColor = Color.Green;
+            imageBox.OutlineColor = Color.Blue;
             imageBox.OutlineThickness = 2;
             text.Color = Color.Black;
 
@@ -94,6 +94,7 @@ namespace space_invader
                     if (hasFocus)
                     {
                         hasFocus = false;
+                        imageBox.OutlineColor = Color.Blue;
                     }
                 }
             }
