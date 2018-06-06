@@ -68,6 +68,7 @@
     <Compile Include="Button.cs" />
     <Compile Include="Crab.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="HighScoreLeaderboard.cs" />
     <Compile Include="HighScoresScene.cs" />
     <Compile Include="Leaderboard.cs" />
     <Compile Include="Octopus.cs" />
