@@ -77,7 +77,7 @@ namespace space_invader
                         Visible = false;
                         Collidable = false;
                         
-                        //scene.ScoreAmount += 10;
+                        scene.player.ScoreAmount += 10;
                         scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
                         scene.curScoreTxt.Refresh();
                     }
