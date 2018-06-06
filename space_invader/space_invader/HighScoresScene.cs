@@ -28,6 +28,7 @@ namespace space_invader
         public bool hasFocus;
         public int charLimit = 12;
         public string inputString = "";
+        public int firstTime = 0;
 
         public TextBox(float x, float y) : base(x, y)
         {
@@ -42,9 +43,14 @@ namespace space_invader
         public override void Update()
         {
             base.Update();
-
+            
             if (hasFocus)
             {
+                firstTime++;
+                if (firstTime == 1)
+                {
+                    Input.ClearKeystring();
+                }
                 inputString = Input.KeyString;
                 // If we exceed the character limit
                 if (inputString.Length > charLimit)
