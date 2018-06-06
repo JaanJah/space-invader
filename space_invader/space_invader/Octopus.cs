@@ -7,14 +7,13 @@ using Otter;
 
 namespace space_invader
 {
-    class Squid : Enemy
+    class Octopus : Entity
     {
-        static Image EnemyImage = new Image("../../../Assets/enemy1.png");
+        static Image EnemyImage = new Image("../../../enemy3.png");
 
-        public Squid()
+        public Octopus()
         {
             AddGraphic(EnemyImage);
         }
-
     }
 }

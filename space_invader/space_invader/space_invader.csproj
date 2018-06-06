@@ -66,8 +66,10 @@
     <Compile Include="Barricade.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="Button.cs" />
+    <Compile Include="Crab.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="HighScoresScene.cs" />
+    <Compile Include="Octopus.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="MainScene.cs" />
     <Compile Include="Program.cs" />

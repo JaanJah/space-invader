@@ -48,9 +48,6 @@ namespace space_invader
         {
             base.Update();
 
-            if (GetEntities<Enemy>().Count >= 1)
-                Enemy.FindEnemies();
-
             //Debug - Switches Scene if input is H
             if (Input.KeyPressed(Key.H))
             {
@@ -69,6 +66,11 @@ namespace space_invader
                 Game.SwitchScene(new HighScoresScene());
 
             Enemy.LoadEnemies("level" + CurLevel.ToString() + ".xml");
+        }
+
+        public Vector2 GetPlayArea()
+        {
+            return PlayPosition + PlayWidth;
         }
     }
 }

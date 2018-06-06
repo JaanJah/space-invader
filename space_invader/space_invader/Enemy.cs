@@ -11,23 +11,19 @@ namespace space_invader
 {
     class Enemy : Entity
     {
-        public static float EnemySize = 32.0f;
-        static float MoveSpeed = 0.005f;
-        public static Enemy EnemyRight;
-        public static Enemy EnemyLeft;
-        public static Enemy EnemyBottom;
-        public static float HeightCheck = 1000;
-        public static Vector2 MoveDir = new Vector2(MoveSpeed, 0.0f);
-        public static Vector2 NextDir;
-        public static IDictionary<string, Func<Enemy>> AllEnemies = new Dictionary<string, Func<Enemy>>(); //https://codereview.stackexchange.com/questions/4174/better-way-to-create-objects-from-strings
+        static float EnemySize = 32.0f;
+        static float MoveSpeed = 0.03f;
+        static Vector2 MoveDir = new Vector2(MoveSpeed, 0.0f);
+        static Vector2 NextMoveDir;
+        static IDictionary<string, Func<Enemy>> AllEnemies = new Dictionary<string, Func<Enemy>>(); //https://codereview.stackexchange.com/questions/4174/better-way-to-create-objects-from-strings
         static Random rnd = new Random();
         static AutoTimer ShootingCooldown = new AutoTimer(rnd.Next(700, 1500));
+        static float HeightToMove = 24.0f;
 
         public Enemy()
         {
             BoxCollider collider = new BoxCollider(24, 24, Tags.Enemy);
             AddCollider(collider);
-
             ShootingCooldown.Start();
         }
 
@@ -48,29 +44,35 @@ namespace space_invader
             List<Enemy> enemies = Scene.GetEntities<Enemy>();
 
             foreach (Enemy enemy in enemies)
+            {
                 enemy.SetPosition(enemy.Position + MoveDir);
 
-            if (EnemyRight.Position.X >= scene.PlayPosition.X + scene.PlayWidth.X &&
-                MoveDir != new Vector2(0.0f, MoveSpeed))
-            {
-                MoveDir = new Vector2(0, MoveSpeed);
-                NextDir = new Vector2(MoveSpeed * -1, 0);
-                HeightCheck = EnemyBottom.Y + EnemySize;
+                if (enemy.Position.X > scene.GetPlayArea().X)
+                {
+                    enemy.SetPosition(enemy.Position - MoveDir);
+                    MoveDir = new Vector2(0.0f, MoveSpeed);
+                    NextMoveDir = new Vector2(-1.0f * MoveSpeed, 0.0f);
+                }
+
+                if (enemy.Position.X < scene.PlayPosition.X)
+                {
+                    enemy.SetPosition(enemy.Position - MoveDir);
+                    MoveDir = new Vector2(0.0f, MoveSpeed);
+                    NextMoveDir = new Vector2(1.0f * MoveSpeed, 0.0f);
+                }
+
+                if (HeightToMove <= 0)
+                {
+                    MoveDir = NextMoveDir;
+                    enemy.SetPosition(Position.X, Position.Y - HeightToMove);
+                    HeightToMove = 24;
+                }
+
+                if (enemy.Position.Y >= scene.GetPlayArea().Y - 100)
+                    Game.SwitchScene(new HighScoresScene());
             }
 
-            if (EnemyLeft.Position.X <= scene.PlayPosition.X &&
-                MoveDir != new Vector2(0.0f, MoveSpeed))
-            {
-                MoveDir = new Vector2(0, MoveSpeed);
-                NextDir = new Vector2(MoveSpeed * 1, 0);
-                HeightCheck = EnemyBottom.Y + EnemySize;
-            }
-                
-            if (EnemyBottom.Y > HeightCheck)
-                MoveDir = NextDir;
-
-            if (EnemyBottom.Y > scene.player.Y)
-                Game.SwitchScene(new HighScoresScene());
+            HeightToMove -= MoveDir.Y;
         }
 
         void UpdateShooting()
@@ -103,32 +105,6 @@ namespace space_invader
             UpdateShooting();
             UpdateMovement();
             ShootingCooldown.Update();
-        }
-
-        /// <summary>
-        /// Finds the most right, left and bottom enemy and uses it for movement
-        /// </summary>
-        public static void FindEnemies()
-        {
-            List<Enemy> enemies = Program.game.FirstScene.GetEntities<Enemy>();
-            EnemyRight = enemies[0];
-            EnemyLeft = enemies[0];
-            EnemyBottom = enemies[0];
-
-            foreach(Enemy enemy in enemies)
-            {
-                // Find Rightmost enemy
-                if (enemy.Position.X > EnemyRight.Position.X)
-                    EnemyRight = enemy;
-
-                // Find Leftmost enemy
-                if (enemy.Position.X < EnemyLeft.Position.X)
-                    EnemyLeft = enemy;
-
-                // Find Bottommost enemy
-                if (enemy.Position.Y > EnemyBottom.Position.Y)
-                    EnemyBottom = enemy;
-            }
         }
 
         public static void LoadEnemies(string file)
