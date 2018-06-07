@@ -8,23 +8,38 @@ using System.Xml;
 
 namespace space_invader
 {
-    public class Leaderboard
+    public static class Leaderboard
     {
-        public string Name { get; set; }
-        public string Score { get; set; }
-        public Leaderboard()
+        public static string SaveDirectory = "savefile.xml";
+
+        public static void AddScore(string Name, string Score)
         {
             XmlDocument xmlDoc = new XmlDocument();
-            XmlNode rootNode = xmlDoc.CreateElement("leaderboard");
-            xmlDoc.AppendChild(rootNode);
-            XmlNode playerNode = xmlDoc.CreateElement("player");
-            XmlAttribute nameAttribute = xmlDoc.CreateAttribute("name");
-            XmlAttribute scoreAttribute = xmlDoc.CreateAttribute("score");
-            nameAttribute.Value = Name;
-            scoreAttribute.Value = Score;
-            playerNode.Attributes.Append(nameAttribute);
-            playerNode.Attributes.Append(scoreAttribute);
-            rootNode.AppendChild(playerNode);
+            XmlElement root;
+
+
+
+            if (!System.IO.File.Exists(SaveDirectory))
+            {
+                root = xmlDoc.CreateElement("leaderboard");
+                xmlDoc.AppendChild(root);
+                return;
+            }
+            else
+            {
+                xmlDoc.Load(SaveDirectory);
+                root = xmlDoc.DocumentElement;
+
+            }
+            
+            XmlElement playerNode = xmlDoc.CreateElement("player");
+
+            playerNode.SetAttribute("name", Name);
+            playerNode.SetAttribute("score", Score);
+
+            root.AppendChild(playerNode);
+
+            xmlDoc.Save(SaveDirectory);
         }
     }
 }
