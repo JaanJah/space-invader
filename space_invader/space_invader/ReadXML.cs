@@ -65,7 +65,7 @@ namespace space_invader
                 scene.hslb.AddGraphic(name);
 
                 score.String = curElement.Attributes["score"].Value;
-                score.SetPosition(64, i * 50 + 116);
+                score.SetPosition(200, i * 50 + 116);
                 scene.hslb.AddGraphic(score);
 
                 xmlnodes.Remove(curElement);
