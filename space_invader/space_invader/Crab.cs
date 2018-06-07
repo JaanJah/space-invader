@@ -14,6 +14,7 @@ namespace space_invader
         public Crab()
         {
             AddGraphic(EnemyImage);
+            Score = 25;
         }
     }
 }

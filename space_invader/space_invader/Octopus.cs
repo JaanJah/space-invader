@@ -14,6 +14,7 @@ namespace space_invader
         public Octopus()
         {
             AddGraphic(EnemyImage);
+            Score = 50;
         }
     }
 }

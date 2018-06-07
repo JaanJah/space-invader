@@ -25,6 +25,8 @@ namespace space_invader
 
             BoxCollider collider = new BoxCollider(24, 24, Tags.Ufo);
 
+            //Score = 50;
+
             AddCollider(collider);
             AddGraphic(EnemyImage);
         }
