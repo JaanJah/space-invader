@@ -49,7 +49,7 @@ namespace space_invader
 
         void UpdateMovement()
         {
-            MainScene scene = (MainScene)Program.game.FirstScene;
+            MainScene scene = Program.game.GetScene<MainScene>();
             List<Enemy> enemies = Scene.GetEntities<Enemy>();
 
             SetPosition(Position + MoveDir);
@@ -115,7 +115,7 @@ namespace space_invader
 
         public static void LoadEnemies(string file)
         {
-            MainScene scene = (MainScene)Program.game.FirstScene;
+            MainScene scene = (MainScene)Program.game.GetScene<MainScene>();
             XmlDocument doc = new XmlDocument();
             doc.Load("../../../levels/" + file);
             Vector2 CurPos = new Vector2(scene.PlayPosition.X, scene.PlayPosition.Y);

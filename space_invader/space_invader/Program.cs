@@ -19,8 +19,15 @@ namespace space_invader
 
             // Creates game scene
             MainScene scene = new MainScene();
-            game.FirstScene = scene;
+            game.AddScene(scene);
+
+
+
+            var a = game.Scenes;
+
             scene.Initialize();
+
+            
 
             //Change window variables
             game.WindowResize = false;

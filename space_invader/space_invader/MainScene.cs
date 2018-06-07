@@ -32,8 +32,9 @@ namespace space_invader
         /// </summary>
         public void Initialize()
         {
-            Barricade.Initialize();
+            
             Enemy.Initialize();
+            Barricade.Initialize();
 
             Ufo = new UFO();
 

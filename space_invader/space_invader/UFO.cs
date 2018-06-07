@@ -19,7 +19,7 @@ namespace space_invader
         public UFO()
         {
             Random rnd = new Random();
-            MainScene scene = (MainScene)Program.game.FirstScene;
+            MainScene scene = Program.game.GetScene<MainScene>();
 
             AppearTimer = new AutoTimer(rnd.Next(1000, 2000));
             if (Enemy.hasMoved)

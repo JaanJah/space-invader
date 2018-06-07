@@ -68,7 +68,7 @@ namespace space_invader
 
                     barricade.Position = new Vector2(Convert.ToSingle(node.GetAttribute("posx")) + i * 200, Convert.ToSingle(node.GetAttribute("posy")));
 
-                    Program.game.FirstScene.Add(barricade);
+                    Program.game.GetScene<MainScene>().Add(barricade);
                 }
         }
     }
