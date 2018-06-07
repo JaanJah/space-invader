@@ -10,16 +10,16 @@ namespace space_invader
 {
     static class ReadXML
     {
-        public static string highScoreTxt;
-
-        public static string MainScreenXML(RichText highScoreTxt)
+        public static void MainScreenXML()
         {
+            /*
             MainScene scene = (MainScene)Program.game.FirstScene;
 
             XmlDocument xdoc = new XmlDocument();
             xdoc.Load("savefile.xml");
 
             var xmlnodes = xdoc.DocumentElement.ChildNodes;
+            
             int curScore = Int32.Parse(xmlnodes[0].Attributes["score"].Value);
 
             for (int i = 0; i < xmlnodes.Count; i++)
@@ -32,7 +32,9 @@ namespace space_invader
 
             }
             highScoreTxt.String = curScore.ToString();
+            
             return curScore.ToString();
+            */
         }
 
         public static void WriteScores()
@@ -82,10 +84,6 @@ namespace space_invader
                 name.String = curElement.Attributes["name"].Value;
                 name.SetPosition(8, i * 50 + 116);
                 scene.hslb.AddGraphic(name);
-                if (i == 0)
-                {
-                    highScoreTxt = score.ToString();
-                }
                 score.String = curElement.Attributes["score"].Value;
                 score.SetPosition(200, i * 50 + 116);
                 scene.hslb.AddGraphic(score);
