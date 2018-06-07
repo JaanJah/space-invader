@@ -29,8 +29,6 @@ namespace space_invader
             game.WindowResize = false;
             game.SetIcon("../../../Assets/enemy1.png");
 
-
-
             // Starts the game
             game.Start();
         }
