@@ -48,7 +48,6 @@ namespace space_invader
             else
                 count = 5;
 
-            int lowered = 0;
             for (int i = 0; i < count; i++)
             {
                 XmlElement curElement = xmlnodes[0];
@@ -69,7 +68,6 @@ namespace space_invader
                 scene.hslb.AddGraphic(score);
 
                 xmlnodes.Remove(curElement);
-                lowered++;
             }
         }
     }
