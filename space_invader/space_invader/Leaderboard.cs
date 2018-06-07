@@ -20,8 +20,8 @@ namespace space_invader
             {
                 root = xmlDoc.CreateElement("leaderboard");
                 xmlDoc.AppendChild(root);
-                return;
             }
+
             else
             {
                 xmlDoc.Load(SaveDirectory);
