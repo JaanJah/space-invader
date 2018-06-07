@@ -21,16 +21,16 @@ namespace space_invader
         static float HeightToMove = 24.0f;
 
         public int Score;
-        UFO Ufo;
+        
 
         public Enemy()
         {
             BoxCollider collider = new BoxCollider(24, 24, Tags.Enemy);
             AddCollider(collider);
             ShootingCooldown.Start();
-            Ufo = new UFO();
+            
 
-            Program.game.FirstScene.Add(Ufo);
+            
         }
 
         public static void Initialize()

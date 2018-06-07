@@ -12,7 +12,7 @@ namespace space_invader
         static Image EnemyImage = new Image("../../../Assets/enemy4.png");
         AutoTimer AppearTimer;
         Vector2 MovementDir;
-        public int Score = 50;
+        public int Score;
         
         public UFO()
         {
@@ -21,10 +21,27 @@ namespace space_invader
             AppearTimer = new AutoTimer(rnd.Next(500, 1000));
             AppearTimer.Start();
 
+            BoxCollider collider = new BoxCollider(24, 24, Tags.Ufo);
+
             Visible = false;
             Collidable = false;
 
+            Score = 50;
+
+            AddCollider(collider);
+            AddGraphic(EnemyImage);
+        }
+
+        public UFO(int X, int Y)
+        {
+            Random rnd = new Random();
+
+            AppearTimer = new AutoTimer(rnd.Next(500, 1000));
+            AppearTimer.Start();
+
             BoxCollider collider = new BoxCollider(24, 24, Tags.Ufo);
+
+            SetPosition(X, Y);
 
             Score = 50;
 
@@ -70,8 +87,8 @@ namespace space_invader
 
             AppearTimer.Update();
 
-            UpdateMovement();
             CheckAppear();
+            UpdateMovement();
         }
     }
 }
