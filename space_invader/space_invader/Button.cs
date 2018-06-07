@@ -28,7 +28,6 @@ namespace space_invader
                 if (Util.InRect(Scene.MouseX, Scene.MouseY, X,Y, 80, 30))
                 {
                     var inputText = Scene.GetEntity<TextBox>().inputString;
-                    File.WriteAllText("../../../savefile/save.txt", inputText);
                     MainScene scene = (MainScene)Program.game.FirstScene;
 
                     if (!File.Exists("savefile.xml"))
@@ -38,8 +37,7 @@ namespace space_invader
                         using (var writer = XmlWriter.Create("savefile.xml"))
                         {
                             serializer.Serialize(writer, place);
-                        }
-                        
+                        }      
                     }
                     else
                     {
@@ -55,9 +53,6 @@ namespace space_invader
                             newSerializer.Serialize(writer, newPlace);
                         }
                     }
-
-                    // debug
-                    Console.WriteLine("MouseX: {0}, MouseY: {1}", Scene.MouseX, Scene.MouseY);
                 }
             }
         }
