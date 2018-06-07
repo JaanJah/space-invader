@@ -10,23 +10,31 @@ namespace space_invader
 {
     static class ReadXML
     {
+        public static string highScoreTxt;
 
-        public static string MainScreenXML()
+        public static string MainScreenXML(RichText highScoreTxt)
         {
             MainScene scene = (MainScene)Program.game.FirstScene;
 
             XmlDocument xdoc = new XmlDocument();
             xdoc.Load("savefile.xml");
 
-            var scores = xdoc.DocumentElement.ChildNodes;
-            var curScore = scores[0].Attributes["score"].Value;
+            var xmlnodes = xdoc.DocumentElement.ChildNodes;
+            int curScore = Int32.Parse(xmlnodes[0].Attributes["score"].Value);
 
-            foreach (XmlNode i in scores)
-                if (Int32.Parse(i.Attributes["score"].Value) > Int32.Parse(curScore))
-                    curScore = i.Attributes["score"].Value;
+            for (int i = 0; i < xmlnodes.Count; i++)
+            {
 
-            return curScore;
+                if (Int32.Parse(xmlnodes[i].Attributes["score"].Value) > curScore)
+                {
+                    curScore = Int32.Parse(xmlnodes[i].Attributes["score"].Value);
+                }
+
+            }
+            highScoreTxt.String = curScore.ToString();
+            return curScore.ToString();
         }
+
         public static void WriteScores()
         {
             HighScoresScene scene = Program.game.GetScene<HighScoresScene>();
@@ -65,7 +73,7 @@ namespace space_invader
                             if (Int32.Parse(curElement.Attributes["score"].Value) < Int32.Parse(xmlnodes[j].Attributes["score"].Value))
                             {
                                 curElement = xmlnodes[j];
-                            } 
+                            }
                         }
                     }
                 }
@@ -74,7 +82,10 @@ namespace space_invader
                 name.String = curElement.Attributes["name"].Value;
                 name.SetPosition(8, i * 50 + 116);
                 scene.hslb.AddGraphic(name);
-
+                if (i == 0)
+                {
+                    highScoreTxt = score.ToString();
+                }
                 score.String = curElement.Attributes["score"].Value;
                 score.SetPosition(200, i * 50 + 116);
                 scene.hslb.AddGraphic(score);

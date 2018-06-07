@@ -74,6 +74,10 @@ namespace space_invader
                 var highScoreTxtLabel = new RichText("Highscore", txtConfig);
                 highScoreTxtLabel.SetPosition(350, 15);
 
+                var highScoreTxt = new RichText("", txtConfig);
+                highScoreTxt.Name = "highScoreTxt";
+                highScoreTxt.SetPosition(380, 30);
+
                 var curScoreTxtLabel = new RichText("Score", txtConfig);
                 curScoreTxtLabel.SetPosition(650, 15);
 
@@ -86,6 +90,7 @@ namespace space_invader
                 scene.AddGraphic(curScoreTxtLabel);
 
                 scene.AddGraphic(scene.livesLeftTxt);
+                scene.AddGraphic(scene.highScoreTxt);
                 scene.AddGraphic(scene.curScoreTxt);
 
                 #endregion gameText
