@@ -88,7 +88,6 @@ namespace space_invader
                         Collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
                         Visible = false;
                         Collidable = false;
-                        Console.WriteLine(scene.GetEntities<Enemy>().Count);
 
                         if (scene.GetEntities<Enemy>().Count <= 1)
                             scene.NextLevel();

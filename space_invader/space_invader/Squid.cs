@@ -15,6 +15,11 @@ namespace space_invader
         {
             AddGraphic(EnemyImage);
         }
-
+        
+        public Squid(int X, int Y)
+        {
+            AddGraphic(EnemyImage);
+            SetPosition(X, Y);
+        }
     }
 }
