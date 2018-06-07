@@ -22,7 +22,7 @@ namespace space_invader
             MainScene scene = (MainScene)Program.game.FirstScene;
 
             AppearTimer = new AutoTimer(rnd.Next(1000, 2000));
-            if (scene.GetEntities<Enemy>()[0].hasMoved)
+            if (Enemy.hasMoved)
             {
                 AppearTimer.Start();
             }
