@@ -53,7 +53,7 @@ namespace space_invader
             {
                 XmlElement curElement = xmlnodes[0];
 
-                for (int j = 0; j < xmlnodes.Count - lowered + 1; j++)
+                for (int j = 0; j < xmlnodes.Count; j++)
                     if (Int32.Parse(curElement.Attributes["score"].Value) < Int32.Parse(xmlnodes[j].Attributes["score"].Value))
                         curElement = xmlnodes[j];
 
