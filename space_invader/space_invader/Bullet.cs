@@ -121,8 +121,6 @@ namespace space_invader
                     else
                     {
                         RemoveSelf();
-                        scene.player.bullet.Visible = false;
-                        scene.player.bullet.Collidable = false;
                     }
         }
 
@@ -155,10 +153,8 @@ namespace space_invader
 
                 ufo.Die();
                 scene.player.ScoreAmount += ufo.Score;
-                RemoveSelf();
-                Visible = false;
-                Collidable = false;
-
+                scene.player.bullet.Visible = false;
+                scene.player.bullet.Collidable = false;
             }
         }
 

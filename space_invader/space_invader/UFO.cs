@@ -20,7 +20,7 @@ namespace space_invader
         {
             Random rnd = new Random();
 
-            AppearTimer = new AutoTimer(rnd.Next(500, 1000));
+            AppearTimer = new AutoTimer(rnd.Next(1000, 2000));
             AppearTimer.Start();
 
             BoxCollider collider = new BoxCollider(24, 24, Tags.Ufo);
