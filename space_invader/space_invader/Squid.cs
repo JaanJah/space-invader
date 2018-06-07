@@ -9,12 +9,13 @@ namespace space_invader
 {
     class Squid : Enemy
     {
+        // Small Invader
         static Image EnemyImage = new Image("../../../Assets/enemy1.png");
 
         public Squid()
         {
             AddGraphic(EnemyImage);
-            Score = 50;
+            Score = 10;
         }
         
         public Squid(int X, int Y)

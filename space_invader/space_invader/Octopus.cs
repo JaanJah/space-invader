@@ -9,12 +9,13 @@ namespace space_invader
 {
     class Octopus : Enemy
     {
+        // Large Invader
         static Image EnemyImage = new Image("../../../Assets/enemy3.png");
 
         public Octopus()
         {
             AddGraphic(EnemyImage);
-            Score = 50;
+            Score = 40;
         }
     }
 }

@@ -14,6 +14,8 @@ namespace space_invader
         Vector2 MovementDir;
         public int Score;
         
+        public int[] scoreArray = new int[] { 50, 100, 150 };
+
         public UFO()
         {
             Random rnd = new Random();
@@ -26,7 +28,7 @@ namespace space_invader
             Visible = false;
             Collidable = false;
 
-            Score = 50;
+            Score = rnd.Next(scoreArray.Length);
 
             AddCollider(collider);
             AddGraphic(EnemyImage);
