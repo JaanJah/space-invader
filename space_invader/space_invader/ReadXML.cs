@@ -42,7 +42,7 @@ namespace space_invader
                 xmlnodes.Add(i);
 
             List<XmlNode> sortednodes = (from x in xmlnodes
-                               orderby x.Attributes["score"].Value ascending
+                               orderby int.Parse(x.Attributes["score"].Value) ascending
                                select x).ToList();
 
             for (int i = 0; i < 5; i++)
@@ -50,11 +50,11 @@ namespace space_invader
                 RichText name = new RichText();
                 RichText score = new RichText();
                 
-                name.String = xmlElements[i].Attributes["name"].Value;
+                name.String = sortednodes[i].Attributes["name"].Value;
                 name.SetPosition(8, i * 50 + 116);
                 scene.hslb.AddGraphic(name);
 
-                score.String = xmlElements[i].Attributes["score"].Value;
+                score.String = sortednodes[i].Attributes["score"].Value;
                 score.SetPosition(64, i * 50 + 116);
                 scene.hslb.AddGraphic(score);
             }
