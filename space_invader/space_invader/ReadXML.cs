@@ -32,31 +32,47 @@ namespace space_invader
         {
             HighScoresScene scene = Program.game.GetScene<HighScoresScene>();
 
+            if (!System.IO.File.Exists("savefile.xml"))
+                return;
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load("savefile.xml");
 
             XmlNodeList xmlElements = xmlDoc.DocumentElement.ChildNodes;
-            List<XmlNode> xmlnodes = new List<XmlNode>();
+            List<XmlElement> xmlnodes = new List<XmlElement>();
+            int lowered = 0;
 
-            foreach(XmlNode i in xmlElements)
+            foreach(XmlElement i in xmlElements)
                 xmlnodes.Add(i);
 
-            List<XmlNode> sortednodes = (from x in xmlnodes
-                               orderby int.Parse(x.Attributes["score"].Value) ascending
-                               select x).ToList();
 
-            for (int i = 0; i < 5; i++)
+
+            int count;
+            if (xmlnodes.Count < 5)
+                count = xmlnodes.Count;
+            else
+                count = 5;
+
+            for (int i = 0; i < count; i++)
             {
+                XmlElement curElement = xmlnodes.ElementAt(0);
+
+                for (int j = 0; j < xmlnodes.Count - lowered; j++)
+                    if (Int32.Parse(curElement.Attributes["score"].Value) < Int32.Parse(xmlnodes[j].Attributes["score"].Value))
+                        curElement = xmlnodes[j];
+
                 RichText name = new RichText();
                 RichText score = new RichText();
-                
-                name.String = sortednodes[i].Attributes["name"].Value;
+
+                name.String = curElement.Attributes["name"].Value;
                 name.SetPosition(8, i * 50 + 116);
                 scene.hslb.AddGraphic(name);
 
-                score.String = sortednodes[i].Attributes["score"].Value;
+                score.String = curElement.Attributes["score"].Value;
                 score.SetPosition(64, i * 50 + 116);
                 scene.hslb.AddGraphic(score);
+
+                xmlnodes.Remove(curElement);
+                lowered++;
             }
         }
     }
