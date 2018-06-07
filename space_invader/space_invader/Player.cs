@@ -66,7 +66,7 @@ namespace space_invader
         /// </summary>
         void UpdateMovement()
         {
-            MainScene scene = (MainScene)Program.game.FirstScene;
+            MainScene scene = Program.game.GetScene<MainScene>();
 
             // Check if player is moving left
             if (Input.KeyDown(Key.A) || Input.KeyDown(Key.Left))
