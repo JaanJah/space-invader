@@ -25,12 +25,11 @@ namespace space_invader
             //Change window variables
             game.WindowResize = false;
             game.SetIcon("../../../Assets/enemy1.png");
-
-            #region gameText
-
+            // Game background
             var background = new Image("../../../Assets/background.png");
             background.Alpha = 0.4f;
             scene.AddGraphic(background);
+            #region gameText
 
             //Setting a default config file for the RichText to use
             var txtConfig = new RichTextConfig()
@@ -53,6 +52,10 @@ namespace space_invader
             var highScoreTxtLabel = new RichText("Highscore",txtConfig);
             highScoreTxtLabel.SetPosition(350, 15);
 
+            var highScoreTxt = new RichText(ReadXML.MainScreenXML(),txtConfig);
+            highScoreTxt.Name = "highScoreTxt";
+            highScoreTxt.SetPosition(380, 30);
+
             var curScoreTxtLabel = new RichText("Score", txtConfig);
             curScoreTxtLabel.SetPosition(650, 15);
 
@@ -65,6 +68,7 @@ namespace space_invader
             scene.AddGraphic(curScoreTxtLabel);
 
             scene.AddGraphic(scene.livesLeftTxt);
+            scene.AddGraphic(highScoreTxt);
             scene.AddGraphic(scene.curScoreTxt);
 
             #endregion gameText

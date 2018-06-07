@@ -17,6 +17,7 @@ namespace space_invader
         public Player player;
         public RichText livesLeftTxt;
         public RichText curScoreTxt;
+        public RichText highScoreTxt;
         UFO Ufo;
 
         public int CurLevel = 1;
