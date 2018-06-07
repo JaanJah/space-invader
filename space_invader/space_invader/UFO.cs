@@ -13,8 +13,6 @@ namespace space_invader
         AutoTimer AppearTimer;
         Vector2 MovementDir;
         public int Score;
-        
-        public int[] scoreArray = new int[] { 50, 100, 150 };
 
         public UFO()
         {
@@ -32,7 +30,7 @@ namespace space_invader
             Visible = false;
             Collidable = false;
 
-            Score = rnd.Next(scoreArray.Length);
+            Score = rnd.Next(0, 3) * 50;
 
             AddCollider(collider);
             AddGraphic(EnemyImage);
