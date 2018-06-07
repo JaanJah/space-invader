@@ -10,6 +10,7 @@ namespace space_invader
     class Program
     {
         public static Game game;
+        public static string curScoreTxt;
 
         static void Main(string[] args)
         {

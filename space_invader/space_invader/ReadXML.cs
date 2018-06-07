@@ -28,26 +28,34 @@ namespace space_invader
 
             return curScore;
         }
-        public static void WriteScores(XmlNodeList xmlElements)
+        public static void WriteScores()
         {
             HighScoresScene scene = Program.game.GetScene<HighScoresScene>();
 
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load("savefile.xml");
 
-            xmlElements = xmlDoc.DocumentElement.ChildNodes;
+            XmlNodeList xmlElements = xmlDoc.DocumentElement.ChildNodes;
+            List<XmlNode> xmlnodes = new List<XmlNode>();
 
-            for (int i = 0; i > 5; i++)
+            foreach(XmlNode i in xmlElements)
+                xmlnodes.Add(i);
+
+            List<XmlNode> sortednodes = (from x in xmlnodes
+                               orderby x.Attributes["score"].Value ascending
+                               select x).ToList();
+
+            for (int i = 0; i < 5; i++)
             {
                 RichText name = new RichText();
                 RichText score = new RichText();
-
+                
                 name.String = xmlElements[i].Attributes["name"].Value;
-                name.SetPosition(8, i * 50);
+                name.SetPosition(8, i * 50 + 116);
                 scene.hslb.AddGraphic(name);
 
                 score.String = xmlElements[i].Attributes["score"].Value;
-                name.SetPosition(64, i * 50);
+                score.SetPosition(64, i * 50 + 116);
                 scene.hslb.AddGraphic(score);
             }
         }

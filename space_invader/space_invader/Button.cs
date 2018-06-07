@@ -28,9 +28,9 @@ namespace space_invader
                 if (Util.InRect(Scene.MouseX, Scene.MouseY, X,Y, 80, 30))
                 {
                     var inputText = Scene.GetEntity<TextBox>().inputString;
-                    MainScene scene = (MainScene)Program.game.FirstScene;
-
-                    Leaderboard.AddScore(inputText, scene.curScoreTxt.String);
+                    MainScene scene = Program.game.GetScene<MainScene>();
+                    var a = Program.game.Scene;
+                    Leaderboard.AddScore(inputText, Program.curScoreTxt);
                 }
             }
         }

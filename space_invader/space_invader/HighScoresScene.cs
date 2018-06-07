@@ -36,9 +36,13 @@ namespace space_invader
 
                 hslb = new HighScoreLeaderboard(250, 150);
                 _scene.Add(hslb);
-            };
 
-            Program.game.SwitchScene(this);
+                ReadXML.WriteScores();
+            };
+            var a = Program.game.Scenes;
+            Program.game.AddScene(this);
+            a = Program.game.Scenes;
+            var l = 0;
         }
     }
 }

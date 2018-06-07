@@ -97,6 +97,7 @@ namespace space_invader
 
                         scene.player.ScoreAmount += enemy.Score;
                         scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
+                        Program.curScoreTxt = scene.player.ScoreAmount.ToString();
                         scene.curScoreTxt.Refresh();
 
                         Console.WriteLine(scene.player.ScoreAmount);
