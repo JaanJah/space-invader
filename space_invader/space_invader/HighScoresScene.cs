@@ -9,6 +9,8 @@ namespace space_invader
 {
     class HighScoresScene : Scene
     {
+        public HighScoreLeaderboard hslb;
+
         // Stuff in the HighScores Scene
         public HighScoresScene() : base()
         {
@@ -28,9 +30,11 @@ namespace space_invader
             Program.game.MouseVisible = true;
             scene.Add(new TextBox(250, 100));
             scene.Add(new Button(420, 95));
-            scene.Add(new HighScoreLeaderboard(250, 150));
-            
-            Program.game.AddScene(scene);
+
+            hslb = new HighScoreLeaderboard(250, 150);
+            scene.Add(hslb);
+
+            Program.game.SwitchScene(scene);
         }
     }
 }

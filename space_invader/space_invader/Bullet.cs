@@ -64,7 +64,7 @@ namespace space_invader
 
         void CheckBulletCollision()
         {
-            MainScene scene = (MainScene)Program.game.FirstScene;
+            MainScene scene = Program.game.GetScene<MainScene>();
 
             CheckPlayerBullet(scene);
             CheckEnemyBullet(scene);

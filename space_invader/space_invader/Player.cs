@@ -25,7 +25,7 @@ namespace space_invader
         /// </summary>
         public Player()
         {
-            MainScene scene = (MainScene)Program.game.FirstScene;
+            MainScene scene = Program.game.GetScene<MainScene>();
 
             // Set position
             SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
