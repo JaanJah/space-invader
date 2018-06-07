@@ -25,8 +25,13 @@ namespace space_invader
             //Change window variables
             game.WindowResize = false;
             game.SetIcon("../../../Assets/enemy1.png");
-            
+
             #region gameText
+
+            var background = new Image("../../../Assets/background.png");
+            background.Alpha = 0.4f;
+            scene.AddGraphic(background);
+
             //Setting a default config file for the RichText to use
             var txtConfig = new RichTextConfig()
             {
