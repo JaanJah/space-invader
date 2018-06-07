@@ -4,9 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Otter;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Serialization;
 
 namespace space_invader
 {
@@ -20,6 +17,7 @@ namespace space_invader
         public Player player;
         public RichText livesLeftTxt;
         public RichText curScoreTxt;
+        UFO Ufo;
 
         public int CurLevel = 1;
 
@@ -36,6 +34,10 @@ namespace space_invader
         {
             Barricade.Initialize();
             Enemy.Initialize();
+
+            Ufo = new UFO();
+
+            Program.game.FirstScene.Add(Ufo);
 
             // Create player and add to scene
             player = new Player();

@@ -22,16 +22,16 @@ namespace space_invader
         static int hasMoved = 0;
 
         public int Score;
-        UFO Ufo;
+        
 
         public Enemy()
         {
             BoxCollider collider = new BoxCollider(24, 24, Tags.Enemy);
             AddCollider(collider);
             ShootingCooldown.Start();
-            Ufo = new UFO();
+            
 
-            Program.game.FirstScene.Add(Ufo);
+            
         }
 
         public static void Initialize()
@@ -93,7 +93,7 @@ namespace space_invader
                 int EnemyNumber = rnd.Next(1, enemies.Count);
 
                 BoxCollider collider = new BoxCollider(enemyBullet.Width, enemyBullet.Height, Tags.Enemy);
-                Bullet bullet = new Bullet(6.0f, enemies[EnemyNumber].Position, collider);
+                Bullet bullet = new Bullet(6.0f, enemies[EnemyNumber - 1].Position, collider);
                 bullet.AddGraphic(enemyBullet);
 
                 Scene.Add(bullet);

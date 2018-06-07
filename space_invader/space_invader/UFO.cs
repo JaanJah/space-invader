@@ -13,25 +13,26 @@ namespace space_invader
         AutoTimer AppearTimer;
         Vector2 MovementDir;
         public int Score;
+        
         public int[] scoreArray = new int[] { 50, 100, 150 };
+
         public UFO()
         {
             Random rnd = new Random();
             MainScene scene = (MainScene)Program.game.FirstScene;
 
-            AppearTimer = new AutoTimer(rnd.Next(500, 1000));
+            AppearTimer = new AutoTimer(rnd.Next(1000, 2000));
             if (scene.GetEntities<Enemy>()[0].hasMoved)
             {
                 AppearTimer.Start();
             }
 
+            BoxCollider collider = new BoxCollider(24, 24, Tags.Ufo);
+
             Visible = false;
             Collidable = false;
 
-            BoxCollider collider = new BoxCollider(24, 24, Tags.Ufo);
-            Random rndScore = new Random();
-
-            Score = rndScore.Next(scoreArray.Length);
+            Score = rnd.Next(scoreArray.Length);
 
             AddCollider(collider);
             AddGraphic(EnemyImage);
@@ -75,8 +76,8 @@ namespace space_invader
 
             AppearTimer.Update();
 
-            UpdateMovement();
             CheckAppear();
+            UpdateMovement();
         }
     }
 }
