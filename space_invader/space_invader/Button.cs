@@ -30,7 +30,7 @@ namespace space_invader
                     var inputText = Scene.GetEntity<TextBox>().inputString;
                     MainScene scene = (MainScene)Program.game.FirstScene;
 
-                    Leaderboard.AddScore(inputText, "50");
+                    Leaderboard.AddScore(inputText, scene.curScoreTxt.String);
                 }
             }
         }
