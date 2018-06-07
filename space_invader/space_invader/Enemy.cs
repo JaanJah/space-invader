@@ -58,6 +58,7 @@ namespace space_invader
             {
                 MoveDir = NextMoveDir;
                 HeightToMove = 24;
+                hasMoved = true;
             }
 
             if (Position.X > scene.GetPlayArea().X)
