@@ -17,9 +17,13 @@ namespace space_invader
         public UFO()
         {
             Random rnd = new Random();
+            MainScene scene = (MainScene)Program.game.FirstScene;
 
             AppearTimer = new AutoTimer(rnd.Next(500, 1000));
-            AppearTimer.Start();
+            if (scene.GetEntities<Enemy>()[0].hasMoved)
+            {
+                AppearTimer.Start();
+            }
 
             Visible = false;
             Collidable = false;

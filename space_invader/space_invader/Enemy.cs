@@ -19,6 +19,7 @@ namespace space_invader
         static Random rnd = new Random();
         static AutoTimer ShootingCooldown = new AutoTimer(rnd.Next(700, 1500));
         static float HeightToMove = 24.0f;
+        static int hasMoved = 0;
 
         public int Score;
         UFO Ufo;
