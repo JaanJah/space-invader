@@ -14,7 +14,7 @@ namespace space_invader
         {
             #region HighScoreWalls
             Image otherWall = Image.CreateRectangle(1, 350);
-            otherWall.SetPosition(550, 150);
+            otherWall.SetPosition(549, 150);
             otherWall.Color = Color.Blue;
             AddGraphic(otherWall);
 
