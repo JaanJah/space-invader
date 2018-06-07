@@ -76,13 +76,14 @@ namespace space_invader
         {
             if (Collider.Tags[0] == (int)Tags.Player)
                 if (Collider.CollideEntities(X, Y, Tags.Enemy).Count > 0)
+                    // Bullet hits bullet
                     if ((Collider.CollideEntities(X, Y, Tags.Enemy)[0].GetType() == typeof(Bullet)))
                     {
                         Collider.CollideEntities(X, Y, Tags.Enemy)[0].RemoveSelf();
                         Visible = false;
                         Collidable = false;
                     }
-
+                    // Bullet hits enemy
                     else
                     {
                         Enemy enemy = (Enemy)Collider.CollideEntities(X, Y, Tags.Enemy)[0];
@@ -93,11 +94,20 @@ namespace space_invader
 
                         if (scene.GetEntities<Enemy>().Count <= 1)
                             scene.NextLevel();
+<<<<<<< HEAD
                         scene.player.ScoreAmount += enemy.Score;
                         scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
                         scene.curScoreTxt.Refresh();
 
                         Console.WriteLine(scene.player.ScoreAmount);
+=======
+
+                        
+                        scene.player.ScoreAmount += 10;
+                        scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
+                        scene.curScoreTxt.Refresh();
+                        
+>>>>>>> aftergame
                     }
         }
 

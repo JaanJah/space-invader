@@ -15,6 +15,7 @@ namespace space_invader
         public static void AddScore(string Name, string Score)
         {
             XmlDocument xmlDoc = new XmlDocument();
+<<<<<<< HEAD
             XmlElement root;
             if (!System.IO.File.Exists(SaveDirectory))
             {
@@ -36,6 +37,20 @@ namespace space_invader
             root.AppendChild(playerNode);
 
             xmlDoc.Save(SaveDirectory);
+=======
+            XmlNode rootNode = xmlDoc.CreateElement("leaderboard");
+            xmlDoc.AppendChild(rootNode);
+
+            XmlNode playerNode = xmlDoc.CreateElement("player");
+
+            XmlAttribute nameAttribute = xmlDoc.CreateAttribute("name");
+            XmlAttribute scoreAttribute = xmlDoc.CreateAttribute("score");
+            nameAttribute.Value = Name;
+            scoreAttribute.Value = Score;
+            playerNode.Attributes.Append(nameAttribute);
+            playerNode.Attributes.Append(scoreAttribute);
+            rootNode.AppendChild(playerNode);
+>>>>>>> aftergame
         }
     }
 }

@@ -12,8 +12,9 @@ namespace space_invader
         // Stuff in the HighScores Scene
         public HighScoresScene() : base()
         {
+            #region HighScoreWalls
             Image otherWall = Image.CreateRectangle(1, 350);
-            otherWall.SetPosition(550, 150);
+            otherWall.SetPosition(549, 150);
             otherWall.Color = Color.Blue;
             AddGraphic(otherWall);
 
@@ -21,11 +22,12 @@ namespace space_invader
             bottomWall.SetPosition(250, 500);
             bottomWall.Color = Color.Blue;
             AddGraphic(bottomWall);
+            #endregion
 
             var scene = new Scene();
             Program.game.MouseVisible = true;
-            scene.Add(new TextBox(200, 100));
-            scene.Add(new Button(400, 95));
+            scene.Add(new TextBox(250, 100));
+            scene.Add(new Button(420, 95));
             scene.Add(new HighScoreLeaderboard(250, 150));
             
             Program.game.AddScene(scene);
