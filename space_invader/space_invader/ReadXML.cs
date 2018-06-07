@@ -59,9 +59,13 @@ namespace space_invader
                 {
                     if (xmlnodes[j].Attributes["score"].Value != "")
                     {
-                        if (Int32.Parse(curElement.Attributes["score"].Value) < Int32.Parse(xmlnodes[j].Attributes["score"].Value))
+                        if (xmlnodes[j].Attributes["name"].Value != "")
                         {
-                            curElement = xmlnodes[j];
+
+                            if (Int32.Parse(curElement.Attributes["score"].Value) < Int32.Parse(xmlnodes[j].Attributes["score"].Value))
+                            {
+                                curElement = xmlnodes[j];
+                            } 
                         }
                     }
                 }
