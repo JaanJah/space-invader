@@ -38,8 +38,8 @@ namespace space_invader
 
             XmlNodeList xmlElements = xmlDoc.DocumentElement.ChildNodes;
             List<XmlElement> xmlnodes = new List<XmlElement>();
-            
-            foreach(XmlElement i in xmlElements)
+
+            foreach (XmlElement i in xmlElements)
                 xmlnodes.Add(i);
 
             int count;
@@ -52,12 +52,20 @@ namespace space_invader
             {
                 XmlElement curElement = xmlnodes[0];
 
-                for (int j = 0; j < xmlnodes.Count; j++)
-                    if (Int32.Parse(curElement.Attributes["score"].Value) < Int32.Parse(xmlnodes[j].Attributes["score"].Value))
-                        curElement = xmlnodes[j];
-
                 RichText name = new RichText();
                 RichText score = new RichText();
+
+                for (int j = 0; j < xmlnodes.Count; j++)
+                {
+                    if (xmlnodes[j].Attributes["score"].Value != "")
+                    {
+                        if (Int32.Parse(curElement.Attributes["score"].Value) < Int32.Parse(xmlnodes[j].Attributes["score"].Value))
+                        {
+                            curElement = xmlnodes[j];
+                        }
+                    }
+                }
+
 
                 name.String = curElement.Attributes["name"].Value;
                 name.SetPosition(8, i * 50 + 116);
@@ -66,7 +74,6 @@ namespace space_invader
                 score.String = curElement.Attributes["score"].Value;
                 score.SetPosition(200, i * 50 + 116);
                 scene.hslb.AddGraphic(score);
-
                 xmlnodes.Remove(curElement);
             }
         }
