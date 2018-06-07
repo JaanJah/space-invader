@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -39,12 +38,9 @@ namespace space_invader
 
             XmlNodeList xmlElements = xmlDoc.DocumentElement.ChildNodes;
             List<XmlElement> xmlnodes = new List<XmlElement>();
-            int lowered = 0;
-
+            
             foreach(XmlElement i in xmlElements)
                 xmlnodes.Add(i);
-
-
 
             int count;
             if (xmlnodes.Count < 5)
@@ -52,11 +48,12 @@ namespace space_invader
             else
                 count = 5;
 
+            int lowered = 0;
             for (int i = 0; i < count; i++)
             {
-                XmlElement curElement = xmlnodes.ElementAt(0);
+                XmlElement curElement = xmlnodes[0];
 
-                for (int j = 0; j < xmlnodes.Count - lowered; j++)
+                for (int j = 0; j < xmlnodes.Count - lowered + 1; j++)
                     if (Int32.Parse(curElement.Attributes["score"].Value) < Int32.Parse(xmlnodes[j].Attributes["score"].Value))
                         curElement = xmlnodes[j];
 
