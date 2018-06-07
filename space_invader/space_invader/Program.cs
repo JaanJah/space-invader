@@ -27,7 +27,7 @@ namespace space_invader
 
             //Change window variables
             game.WindowResize = false;
-            game.SetIcon("../../../Assets/enemy1.png");
+            game.SetIcon("../../../Assets/windowPicture.png");
 
             // Starts the game
             game.Start();
