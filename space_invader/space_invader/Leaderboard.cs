@@ -16,9 +16,6 @@ namespace space_invader
         {
             XmlDocument xmlDoc = new XmlDocument();
             XmlElement root;
-
-
-
             if (!System.IO.File.Exists(SaveDirectory))
             {
                 root = xmlDoc.CreateElement("leaderboard");
@@ -29,7 +26,6 @@ namespace space_invader
             {
                 xmlDoc.Load(SaveDirectory);
                 root = xmlDoc.DocumentElement;
-
             }
             
             XmlElement playerNode = xmlDoc.CreateElement("player");
