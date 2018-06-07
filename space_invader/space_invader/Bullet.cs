@@ -154,6 +154,7 @@ namespace space_invader
                 ufo.Die();
                 Visible = false;
                 Collidable = false;
+                scene.player.ScoreAmount += ufo.Score;
             }
         }
 
