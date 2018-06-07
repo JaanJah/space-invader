@@ -94,20 +94,12 @@ namespace space_invader
 
                         if (scene.GetEntities<Enemy>().Count <= 1)
                             scene.NextLevel();
-<<<<<<< HEAD
+
                         scene.player.ScoreAmount += enemy.Score;
                         scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
                         scene.curScoreTxt.Refresh();
 
                         Console.WriteLine(scene.player.ScoreAmount);
-=======
-
-                        
-                        scene.player.ScoreAmount += 10;
-                        scene.curScoreTxt.String = scene.player.ScoreAmount.ToString();
-                        scene.curScoreTxt.Refresh();
-                        
->>>>>>> aftergame
                     }
         }
 

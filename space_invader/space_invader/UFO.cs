@@ -12,8 +12,8 @@ namespace space_invader
         static Image EnemyImage = new Image("../../../Assets/enemy4.png");
         AutoTimer AppearTimer;
         Vector2 MovementDir;
-        public int Score = 50;
-        
+        public int Score;
+        public int[] scoreArray = new int[] { 50, 100, 150 };
         public UFO()
         {
             Random rnd = new Random();
@@ -25,8 +25,9 @@ namespace space_invader
             Collidable = false;
 
             BoxCollider collider = new BoxCollider(24, 24, Tags.Ufo);
+            Random rndScore = new Random();
 
-            Score = 50;
+            Score = rndScore.Next(scoreArray.Length);
 
             AddCollider(collider);
             AddGraphic(EnemyImage);
