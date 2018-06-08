@@ -56,10 +56,10 @@ namespace space_invader
         /// </summary>
         static void InitializeImages()
         {
-            Image block100 = new Image("../../../Assets/wall100.png");
-            Image block75 = new Image("../../../Assets/wall75.png");
-            Image block50 = new Image("../../../Assets/wall50.png");
-            Image block25 = new Image("../../../Assets/wall25.png");
+            Image block100 = new Image("Assets/wall100.png");
+            Image block75 = new Image("Assets/wall75.png");
+            Image block50 = new Image("Assets/wall50.png");
+            Image block25 = new Image("Assets/wall25.png");
 
             Images.Add(block100);
             Images.Add(block75);
@@ -74,7 +74,7 @@ namespace space_invader
         {
             // Open XML document
             XmlDocument doc = new XmlDocument();
-            doc.Load("../../../barricades.xml");
+            doc.Load("barricades.xml");
 
             // Loop through each node to spawn barricade
             

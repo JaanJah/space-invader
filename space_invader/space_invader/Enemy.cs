@@ -19,7 +19,7 @@ namespace space_invader
         static AutoTimer ShootingCooldown = new AutoTimer(rnd.Next(700, 1500));
         static float HeightToMove = 24.0f;
         public static bool hasMoved = false;
-        static Image enemyBullet = new Image("../../../Assets/enemyBullet.png");
+        static Image enemyBullet = new Image("Assets/enemyBullet.png");
 
         public int Score;
         
@@ -134,7 +134,7 @@ namespace space_invader
 
         /// <summary>
         /// Load enemies from file.
-        /// Loads from "../../../levels/", you only need to put "level1.xml"
+        /// Loads from "/levels/", you only need to put "level1.xml"
         /// </summary>
         /// <param name="file">file name to load</param>
         public static void LoadEnemies(string file)
@@ -143,7 +143,7 @@ namespace space_invader
 
             // Open document
             XmlDocument doc = new XmlDocument();
-            doc.Load("../../../levels/" + file);
+            doc.Load("levels/" + file);
 
             // Current enemy position to load
             Vector2 CurPos = new Vector2(scene.PlayPosition.X, scene.PlayPosition.Y);

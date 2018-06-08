@@ -14,7 +14,7 @@ namespace space_invader
         /// <param name="y">positionY</param>
         public HighScoreLeaderboard(float x, float y) : base(x,y)
         {
-            Image highScoreTableTitle = new Image("../../../Assets/highScoreTableTitle.png");
+            Image highScoreTableTitle = new Image("Assets/highScoreTableTitle.png");
             AddGraphic(highScoreTableTitle);
             AddGraphic(Image.CreateRectangle(1, 350, Color.Blue));
         }

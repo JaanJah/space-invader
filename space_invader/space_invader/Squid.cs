@@ -8,7 +8,7 @@ namespace space_invader
     class Squid : Enemy
     {
         // Small Invader
-        static Image EnemyImage = new Image("../../../Assets/enemy1.png");
+        static Image EnemyImage = new Image("Assets/enemy1.png");
         // Adds squid to the scene
         public Squid()
         {

@@ -44,7 +44,7 @@ namespace space_invader
                 // Gametext for the entire game pretty much
                 #region gameText
 
-                var background = new Image("../../../Assets/background.png");
+                var background = new Image("Assets/background.png");
                 background.Alpha = 0.4f;
                 scene.AddGraphic(background);
 

@@ -8,7 +8,7 @@ namespace space_invader
         /// <summary>
         /// UFO enemy in the game
         /// </summary>
-        static Image EnemyImage = new Image("../../../Assets/enemy4.png");
+        static Image EnemyImage = new Image("Assets/enemy4.png");
         AutoTimer AppearTimer;
         Vector2 MovementDir;
         public int Score;

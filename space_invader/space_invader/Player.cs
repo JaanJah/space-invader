@@ -13,8 +13,8 @@ namespace space_invader
         public int ScoreAmount = 0;
         public int playerLives = 3;
         public bool Alive = true;
-        Image playerImage = new Image("../../../Assets/player.png");
-        Image playerDieImage = new Image("../../../Assets/playerDead.png");
+        Image playerImage = new Image("Assets/player.png");
+        Image playerDieImage = new Image("Assets/playerDead.png");
         AutoTimer Ressurrection = new AutoTimer(50.0f);
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace space_invader
             AddCollider(Collider);
 
             // Initialize bullet
-            Image playerBullet = new Image("../../../Assets/playerBullet.png");
+            Image playerBullet = new Image("Assets/playerBullet.png");
             BoxCollider bulletCollider = new BoxCollider(playerBullet.Width, playerBullet.Height, Tags.Player);
             bullet = new Bullet(-6.0f, new Vector2(0, 0), bulletCollider);
             bullet.Visible = false;

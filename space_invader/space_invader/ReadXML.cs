@@ -30,13 +30,13 @@ namespace space_invader
 
             var xmlnodes = xmlDoc.DocumentElement.ChildNodes;
             //Gets the score value from the "score" attribute
-            int curScore;
-            if (xmlnodes.Count == 0)
-                curScore = 0;
-            else
-                curScore = Int32.Parse(xmlnodes[0].Attributes["score"].Value);
+            int curScore = 0;
 
-
+            if (xmlnodes.Count >= 1)
+                if (xmlnodes[0].Attributes["score"].Value != "")
+                    curScore = Int32.Parse(xmlnodes[0].Attributes["score"].Value);
+                
+            // TODO: if score is 0 then it throws error
             //Checks if the attributes are empty, if not, then curscore gets highest score value.
             for (int i = 0; i < xmlnodes.Count; i++)
                 if (Int32.Parse(xmlnodes[i].Attributes["score"].Value) > curScore)
@@ -73,7 +73,10 @@ namespace space_invader
                 XmlElement curElement = xmlnodes[0];
 
                 RichText name = new RichText();
+                name.Name = "scoreName";
                 RichText score = new RichText();
+                score.Name = "scoreScore";
+
                 //Checks if the attributes are empty, if not, then sets current element the score value
                 for (int j = 0; j < xmlnodes.Count; j++)
                 {

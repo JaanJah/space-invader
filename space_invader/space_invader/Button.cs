@@ -16,7 +16,7 @@ namespace space_invader
         /// <param name="y">positionY</param>
         public Button (float x, float y) : base(x, y)
         {
-            Image buttonOutline = new Image("../../../Assets/buttonOutline.png");
+            Image buttonOutline = new Image("Assets/buttonOutline.png");
             AddGraphic(buttonOutline);
         }
 
@@ -41,6 +41,7 @@ namespace space_invader
                         MainScene scene = Program.game.GetScene<MainScene>();
 
                         Leaderboard.AddScore(inputText, Program.curScoreTxt);
+                        
 
                         pressed = true;
                     }

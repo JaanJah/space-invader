@@ -8,7 +8,7 @@ namespace space_invader
     class Crab : Enemy
     {
         // Medium Invader
-        static Image EnemyImage = new Image("../../../Assets/enemy2.png");
+        static Image EnemyImage = new Image("Assets/enemy2.png");
 
         /// <summary>
         /// Initializes new Crab

@@ -8,7 +8,7 @@ namespace space_invader
     class Octopus : Enemy
     {
         // Large Invader
-        static Image EnemyImage = new Image("../../../Assets/enemy3.png");
+        static Image EnemyImage = new Image("Assets/enemy3.png");
         // Adds octupus graphic to the game and sets the scoreamount.
         public Octopus()
         {
