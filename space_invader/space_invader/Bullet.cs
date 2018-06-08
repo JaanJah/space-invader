@@ -120,7 +120,6 @@ namespace space_invader
                         Program.curScoreTxt = scene.player.ScoreAmount.ToString();
                         scene.curScoreTxt.Refresh();
 
-                        Console.WriteLine(scene.player.ScoreAmount);
                     }
         }
 
