@@ -8,12 +8,16 @@ using System.Xml;
 
 namespace space_invader
 {
+    /// <summary>
+    /// Leaderboard class
+    /// </summary>
     public static class Leaderboard
     {
         public static string SaveDirectory = "savefile.xml";
 
         public static void AddScore(string Name, string Score)
         {
+            //Writes the XML elements and attributes
             XmlDocument xmlDoc = new XmlDocument();
             XmlElement root;
             if (!System.IO.File.Exists(SaveDirectory))
