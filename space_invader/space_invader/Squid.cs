@@ -15,7 +15,7 @@ namespace space_invader
         public Squid()
         {
             AddGraphic(EnemyImage);
-            Score = 10;
+            Score = 20;
         }
         
         public Squid(int X, int Y)
