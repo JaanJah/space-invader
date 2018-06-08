@@ -1,0 +1,25 @@
+<scene>
+  <textures>
+    <!-- Barricades-->
+    <texture path="/Barricades/wall0.png" name="wall0"/>
+    <texture path="/Barricades/wall1.png" name="wall1"/>
+    <texture path="/Barricades/wall2.png" name="wall2"/>
+    <texture path="/Barricades/wall3.png" name="wall3"/>
+
+    <!-- Enemies-->
+    <texture path="/Enemies/enemy1.png" name="squid"/>
+    <texture path="/Enemies/enemy2.png" name="crab"/>
+    <texture path="/Enemies/enemy3.png" name="octopus"/>
+    <texture path="/Enemies/enemy4.png" name="ufo"/>
+    <texture path="/Enemies/enemyBullet.png" name="enemybullet"/>
+    
+    <!-- Player-->
+    <texture path="/Player/player.png" name="player"/>
+    <texture path="/Player/playerDead.png" name="playerDead"/>
+    <texture path="/Player/playerBullet.png" name="playerBullet"/>
+    
+    <!-- UI -->
+    <texture path="/UI/background.png" name="background"/>
+    
+  </textures>
+</scene>
