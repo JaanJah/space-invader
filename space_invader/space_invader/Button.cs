@@ -1,4 +1,6 @@
-﻿using Otter;
+﻿using System;
+using Otter;
+using System.Threading;
 
 namespace space_invader
 {
@@ -28,7 +30,7 @@ namespace space_invader
             base.Update();
 
             //Check if mouse is pressed
-            if (Input.MouseButtonPressed(MouseButton.Left))
+            if (Input.MouseButtonReleased(MouseButton.Left))
             {
                 // Check if button is pressed before
                 if (!pressed)
@@ -36,18 +38,19 @@ namespace space_invader
                     // Check if cursor position is in button bounds
                     if (Util.InRect(Scene.MouseX, Scene.MouseY, X, Y, 80, 30))
                     {
+                        pressed = true;
+
                         // Get player input and adds it to leaderboard
                         var inputText = Scene.GetEntity<TextBox>().inputString;
-                        MainScene scene = Program.game.GetScene<MainScene>();
+
+                        Program.game.GetScene<HighScoresScene>().hslb.RemoveGraphics(Program.game.GetScene<HighScoresScene>().hslb.GetGraphic<RichText>());
 
                         Leaderboard.AddScore(inputText, Program.curScoreTxt);
-                        
 
-                        pressed = true;
+                        ReadXML.WriteScores();
                     }
                 }
             }
         }
-
     }
 }

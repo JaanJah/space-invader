@@ -39,9 +39,10 @@ namespace space_invader
             // TODO: if score is 0 then it throws error
             //Checks if the attributes are empty, if not, then curscore gets highest score value.
             for (int i = 0; i < xmlnodes.Count; i++)
-                if (Int32.Parse(xmlnodes[i].Attributes["score"].Value) > curScore)
-                    if (xmlnodes[i].Attributes["name"].Value != "")
-                        curScore = Int32.Parse(xmlnodes[i].Attributes["score"].Value);
+                if (xmlnodes[i].Attributes["score"].Value != "")
+                    if (Int32.Parse(xmlnodes[i].Attributes["score"].Value) > curScore)
+                        if (xmlnodes[i].Attributes["name"].Value != "")
+                            curScore = Int32.Parse(xmlnodes[i].Attributes["score"].Value);
             //Returns the score as a string
             return curScore.ToString();
         }

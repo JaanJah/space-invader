@@ -9,6 +9,7 @@ namespace space_invader
     public static class Leaderboard
     {
         public static string SaveDirectory = "savefile.xml";
+        public static XmlElement prevElement;
 
         public static void AddScore(string Name, string Score)
         {
@@ -26,6 +27,16 @@ namespace space_invader
                 xmlDoc.Load(SaveDirectory);
                 root = xmlDoc.DocumentElement;
             }
+
+            if (prevElement != null)
+            {
+                if (prevElement.Attributes["name"].Value == Name &&
+                prevElement.Attributes["score"].Value == Score)
+                {
+                    return;
+                }
+            }
+            
             
             XmlElement playerNode = xmlDoc.CreateElement("player");
 
@@ -34,7 +45,7 @@ namespace space_invader
 
             root.AppendChild(playerNode);
 
-            Thread.Sleep(1000);
+            prevElement = playerNode;
             
             xmlDoc.Save(SaveDirectory);
         }
