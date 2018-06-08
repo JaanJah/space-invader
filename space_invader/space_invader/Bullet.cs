@@ -110,17 +110,23 @@ namespace space_invader
                 if (Collider.CollideEntities(X, Y, Tags.Player).Count > 0)
                     if (!(Collider.CollideEntities(X, Y, Tags.Player)[0].GetType() == typeof(Bullet)))
                     {
-                        RemoveSelf();
-                        scene.player.playerLives -= 1;
-                        scene.player.SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
-                        scene.PlayPosition.Y + scene.PlayWidth.Y));
+                        if (scene.player.Alive)
+                        {
+                            RemoveSelf();
+                            scene.player.playerLives -= 1;
 
-                        scene.livesLeftTxt.String = scene.player.playerLives.ToString();
-                        scene.livesLeftTxt.Refresh();
+                            scene.player.Die();
+
+                            scene.livesLeftTxt.String = scene.player.playerLives.ToString();
+                            scene.livesLeftTxt.Refresh();
+                        }
+
+                        
                     }
 
                     else
                     {
+                        
                         RemoveSelf();
                     }
         }
