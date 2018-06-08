@@ -17,7 +17,10 @@ namespace space_invader
         public Bullet bullet;
         public int ScoreAmount = 0;
         public int playerLives = 3;
-        Image playerImage = new Image("../../../assets/player.png");
+        public bool Alive = true;
+        Image playerImage = new Image("../../../Assets/player.png");
+        Image playerDieImage = new Image("../../../Assets/playerDead.png");
+        AutoTimer Ressurrection = new AutoTimer(50.0f);
 
         /// <summary>
         /// class used for the player
@@ -54,6 +57,19 @@ namespace space_invader
         {
             base.Update();
 
+            Ressurrection.Update();
+
+            if (!Alive && Ressurrection.AtMax)
+            {
+                MainScene scene = Program.game.GetScene<MainScene>();
+
+                Alive = true;
+                RemoveGraphic(playerDieImage);
+                AddGraphic(playerImage);
+                scene.player.SetPosition(new Vector2(scene.PlayPosition.X + scene.PlayWidth.X,
+                        scene.PlayPosition.Y + scene.PlayWidth.Y));
+            }
+
             UpdateMovement();
 
             //If playerLives are 0, then switch to highscore screen
@@ -68,17 +84,20 @@ namespace space_invader
         {
             MainScene scene = Program.game.GetScene<MainScene>();
 
-            // Check if player is moving left
-            if (Input.KeyDown(Key.A) || Input.KeyDown(Key.Left))
-                X -= MoveSpeed;
+            if (Alive)
+            {
+                // Check if player is moving left
+                if (Input.KeyDown(Key.A) || Input.KeyDown(Key.Left))
+                    X -= MoveSpeed;
 
-            // Check if player is moving right
-            if (Input.KeyDown(Key.D) || Input.KeyDown(Key.Right))
-                X += MoveSpeed;
+                // Check if player is moving right
+                if (Input.KeyDown(Key.D) || Input.KeyDown(Key.Right))
+                    X += MoveSpeed;
 
-            // Check if player is shooting
-            if (Input.KeyDown(Key.Space) && !bullet.Visible)
-                Shoot();
+                // Check if player is shooting
+                if (Input.KeyDown(Key.Space) && !bullet.Visible)
+                    Shoot();
+            }
 
             // Check if player is in play area
             if (X < scene.PlayPosition.X)
@@ -95,9 +114,13 @@ namespace space_invader
             bullet.Position = Position;
         }
 
-        public void playerDeath()
+        public void Die()
         {
-
+            Alive = false;
+            Ressurrection.Reset();
+            Ressurrection.Start();
+            RemoveGraphic(playerImage);
+            AddGraphic(playerDieImage);
         }
     }
 }
