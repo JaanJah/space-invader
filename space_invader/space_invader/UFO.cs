@@ -1,21 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Otter;
 
 namespace space_invader
 {
     class UFO : Entity
     {
+        /// <summary>
+        /// UFO enemy in the game
+        /// </summary>
         static Image EnemyImage = new Image("../../../Assets/enemy4.png");
         AutoTimer AppearTimer;
         Vector2 MovementDir;
         public int Score;
 
+        //Sets a random timer when UFO appears
         public UFO()
         {
+            
             Random rnd = new Random();
             MainScene scene = Program.game.GetScene<MainScene>();
 
@@ -35,13 +36,14 @@ namespace space_invader
             AddCollider(collider);
             AddGraphic(EnemyImage);
         }
-
+        //UFO death
         public void Die()
         {
             Visible = false;
             Collidable = false;
         }
 
+        //If UFO appears then it starts moving
         void CheckAppear()
         {
             Random rnd = new Random();
@@ -62,12 +64,12 @@ namespace space_invader
                 AppearTimer.Reset();
             }
         }
-
+        //Update UFO's movement
         public void UpdateMovement()
         {
             SetPosition(Position + MovementDir);
         }
-
+        //Update functions
         public override void Update()
         {
             base.Update();

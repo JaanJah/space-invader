@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Otter;
+﻿using Otter;
 
 namespace space_invader
 {
@@ -12,6 +7,7 @@ namespace space_invader
     /// </summary>
     class MainScene : Scene
     {
+        //Sets basic variables
         public Vector2 PlayPosition = new Vector2(20, 60);
         public Vector2 PlayWidth = new Vector2(736, 500);
         public Player player;
@@ -19,7 +15,6 @@ namespace space_invader
         public RichText curScoreTxt;
         public RichText highScoreTxt;
         UFO Ufo;
-
         public int CurLevel = 1;
 
         public MainScene()
@@ -46,7 +41,7 @@ namespace space_invader
                 // Create player and add to scene
                 player = new Player();
                 Add(player);
-
+                // Gametext for the entire game pretty much
                 #region gameText
 
                 var background = new Image("../../../Assets/background.png");
@@ -122,7 +117,7 @@ namespace space_invader
 
             Enemy.LoadEnemies("level" + CurLevel.ToString() + ".xml");
         }
-
+        //Gets play area
         public Vector2 GetPlayArea()
         {
             return PlayPosition + PlayWidth;

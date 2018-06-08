@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Otter;
+﻿using Otter;
 
 namespace space_invader
 {
+    /// <summary>
+    /// Highscore Scene, happens after the game ends
+    /// </summary>
     class HighScoresScene : Scene
     {
         public HighScoreLeaderboard hslb;
@@ -17,7 +15,7 @@ namespace space_invader
             OnBegin = delegate
             {
                 HighScoresScene _scene = Program.game.GetScene<HighScoresScene>();
-
+                //Highscore walls
                 #region HighScoreWalls
                 Image otherWall = Image.CreateRectangle(1, 350);
                 otherWall.SetPosition(549, 150);
@@ -29,7 +27,7 @@ namespace space_invader
                 bottomWall.Color = Color.Blue;
                 AddGraphic(bottomWall);
                 #endregion
-
+                //Adds Textbox and button and highscore leaderboard (hslb)
                 Program.game.MouseVisible = true;
                 _scene.Add(new TextBox(250, 100));
                 _scene.Add(new Button(420, 95));
@@ -39,10 +37,7 @@ namespace space_invader
 
                 ReadXML.WriteScores();
             };
-            var a = Program.game.Scenes;
             Program.game.AddScene(this);
-            a = Program.game.Scenes;
-            var l = 0;
         }
     }
 }
