@@ -21,7 +21,13 @@ namespace space_invader
 
             var xmlnodes = xdoc.DocumentElement.ChildNodes;
             //Gets the score value from the "score" attribute
-            int curScore = Int32.Parse(xmlnodes[0].Attributes["score"].Value);
+            int curScore;
+            if (xmlnodes.Count == 0)
+                curScore = 0;
+            else
+                curScore = Int32.Parse(xmlnodes[0].Attributes["score"].Value);
+
+
             //Checks if the attributes are empty, if not, then curscore gets highest score value.
             for (int i = 0; i < xmlnodes.Count; i++)
                 if (Int32.Parse(xmlnodes[i].Attributes["score"].Value) > curScore)

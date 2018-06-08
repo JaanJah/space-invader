@@ -1,5 +1,5 @@
 ﻿using System.Xml;
-
+using System.Threading;
 
 namespace space_invader
 {
@@ -34,6 +34,8 @@ namespace space_invader
 
             root.AppendChild(playerNode);
 
+            Thread.Sleep(1000);
+            
             xmlDoc.Save(SaveDirectory);
         }
     }
