@@ -117,7 +117,7 @@ namespace space_invader
         {
             CurLevel++;
 
-            if (CurLevel == 6)
+            if (CurLevel == 5)
                 Game.SwitchScene(new HighScoresScene());
 
             Enemy.LoadEnemies("level" + CurLevel.ToString() + ".xml");
