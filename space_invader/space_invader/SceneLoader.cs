@@ -11,33 +11,32 @@ namespace space_invader
 {
     static class SceneLoader
     {
-        static IDictionary<string, Func<Graphic>> NodeTypes = new Dictionary<string, Func<Otter.Graphic>>();
+        static IDictionary<string, Action<XElement>> NodeTypes = new Dictionary<string, Action<XElement>>();
+        static IDictionary<string, Func<>>
 
         public static void Initialize()
         {
-            NodeTypes.Add(new KeyValuePair<string, Func<Graphic>("texture", XMLLoader.LoadTexture()>)
+            NodeTypes["texture"] = new Action<XElement>(XMLLoader.LoadImage);
         }
 
-        public static void 
-
-        public static Scene Load(string filename)
+        public static Scene Load(string filepath)
         {
             // Create scene
             Scene scene = new Scene();
 
             // open XML document
-            XDocument doc = new XDocument(Program.game.Filepath + filename);
+            XDocument doc = XDocument.Load(Program.game.GameFolder + filepath);
 
             // Get all nodes
             IEnumerable<XElement> nodes = doc.Root.Elements();
 
             foreach(XElement node in nodes)
             {
-                foreach (XAttribute type in node.Attributes())
+                foreach (KeyValuePair<string, Action<XElement>> type in NodeTypes)
                 {
-                    if (NodeTypes.ContainsKey(type.Value))
+                    if (node.Name == type.Key)
                     {
-                        Console.WriteLine("test");
+                        type.Value(node);
                     }
                 }
             }

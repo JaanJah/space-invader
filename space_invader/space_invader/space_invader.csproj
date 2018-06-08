@@ -86,6 +86,7 @@
     <Compile Include="Squid.cs" />
     <Compile Include="TextBox.cs" />
     <Compile Include="UFO.cs" />
+    <Compile Include="XMLLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
