@@ -18,7 +18,6 @@ namespace space_invader
         public int ScoreAmount = 0;
         public int playerLives = 3;
         Image playerImage = new Image("../../../assets/player.png");
-        BoxCollider Collider = new BoxCollider(30, 30, Tags.Player);
 
         /// <summary>
         /// class used for the player
@@ -35,6 +34,7 @@ namespace space_invader
             AddGraphic(playerImage);
 
             // Add collider
+            BoxCollider Collider = new BoxCollider(30, 30, Tags.Player);
             AddCollider(Collider);
 
             // Initialize bullet
