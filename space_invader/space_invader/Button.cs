@@ -5,17 +5,18 @@ using System.Threading;
 namespace space_invader
 {
     /// <summary>
-    /// Class for highscore button
+    /// Class for highscore button.
     /// </summary>
     class Button : Entity
     {
+        // Check if button is pressed
         bool pressed = false;
 
         /// <summary>
-        /// Initializes new Button
+        /// Create Button.
         /// </summary>
-        /// <param name="x">positionX</param>
-        /// <param name="y">positionY</param>
+        /// <param name="x">Position X</param>
+        /// <param name="y">Position Y</param>
         public Button (float x, float y) : base(x, y)
         {
             Image buttonOutline = new Image("Assets/buttonOutline.png");
@@ -23,7 +24,7 @@ namespace space_invader
         }
 
         /// <summary>
-        /// Updates button
+        /// Update button.
         /// </summary>
         public override void Update()
         {
@@ -43,10 +44,13 @@ namespace space_invader
                         // Get player input and adds it to leaderboard
                         var inputText = Scene.GetEntity<TextBox>().inputString;
 
+                        // Remove previous scores
                         Program.game.GetScene<HighScoresScene>().hslb.RemoveGraphics(Program.game.GetScene<HighScoresScene>().hslb.GetGraphic<RichText>());
 
+                        // Add score to save file
                         Leaderboard.AddScore(inputText, Program.curScoreTxt);
 
+                        // Load new scores
                         ReadXML.WriteScores();
                     }
                 }

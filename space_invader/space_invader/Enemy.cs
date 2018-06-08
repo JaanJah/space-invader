@@ -10,26 +10,47 @@ namespace space_invader
     /// </summary>
     class Enemy : Entity
     {
-        static float EnemySize = 32.0f;
-        static float MoveSpeed = 0.8f;
-        static Vector2 MoveDir = new Vector2(MoveSpeed, 0.0f);
-        static Vector2 NextMoveDir;
+        // Hold every enemy type
         static IDictionary<string, Func<Enemy>> AllEnemies = new Dictionary<string, Func<Enemy>>(); //https://codereview.stackexchange.com/questions/4174/better-way-to-create-objects-from-strings
-        static Random rnd = new Random();
-        static AutoTimer ShootingCooldown = new AutoTimer(rnd.Next(700, 1500));
-        static float HeightToMove = 24.0f;
-        public static bool hasMoved = false;
+
         static Image enemyBullet = new Image("Assets/enemyBullet.png");
 
+        // Check if enemy has moved in Y axis
+        public static bool hasMoved = false;
+
+        // Enemy size
+        static float Size = 32.0f;
+
+        float MoveSpeed;
+        float HeightToMove;
+
         public int Score;
+
+        Vector2 MoveDir;
+        Vector2 NextMoveDir;
+
+        AutoTimer ShootingCooldown;
         
         /// <summary>
-        /// Initializes new enemy.
+        /// Create enemy.
         /// </summary>
         public Enemy()
         {
+            // Create Random object
+            Random rnd = new Random();
+
+            // Create collider
             BoxCollider collider = new BoxCollider(24, 24, Tags.Enemy);
             AddCollider(collider);
+           
+            // Set move variables
+            MoveDir = new Vector2(MoveSpeed, 0.0f);
+            NextMoveDir = new Vector2(0.0f, 0.0f);
+            MoveSpeed = 0.8f;
+            HeightToMove = 24.0f;
+
+            // Start shooting cooldown
+            ShootingCooldown = new AutoTimer(rnd.Next(700, 1500));
             ShootingCooldown.Start();
         }
 
@@ -57,8 +78,8 @@ namespace space_invader
         /// </summary>
         void UpdateMovement()
         {
+            // Get main scene
             MainScene scene = Program.game.GetScene<MainScene>();
-            List<Enemy> enemies = Scene.GetEntities<Enemy>();
 
             SetPosition(Position + MoveDir);
 
@@ -91,7 +112,7 @@ namespace space_invader
                 Game.SwitchScene(new HighScoresScene());
 
             // Moves enemy
-            HeightToMove -= MoveDir.Y / enemies.Count;
+            HeightToMove -= MoveDir.Y;
         }
 
         /// <summary>
@@ -102,6 +123,8 @@ namespace space_invader
             // Check if ShootingCooldown is at max
             if (ShootingCooldown.AtMax)
             {
+                Random rnd = new Random();
+
                 ShootingCooldown.Stop();
 
                 // Chooses the enemy that shoots
@@ -139,6 +162,7 @@ namespace space_invader
         /// <param name="file">file name to load</param>
         public static void LoadEnemies(string file)
         {
+            // Get main scene
             MainScene scene = Program.game.GetScene<MainScene>();
 
             // Open document
@@ -148,6 +172,7 @@ namespace space_invader
             // Current enemy position to load
             Vector2 CurPos = new Vector2(scene.PlayPosition.X, scene.PlayPosition.Y);
 
+            // Loop through each element
             foreach (XmlElement node in doc.DocumentElement.ChildNodes)
             {
                 // Create new enemy and add to scene
@@ -156,11 +181,13 @@ namespace space_invader
                 scene.Add(enemy);
 
                 // Set enemy position
-                CurPos.X += EnemySize;
+                CurPos.X += Size;
+
+                // Move spawn position to left side of screen
                 if (CurPos.X > 420)
                 {
                     CurPos.X = scene.PlayPosition.X;
-                    CurPos.Y += EnemySize;
+                    CurPos.Y += Size;
                 }
             }
         }

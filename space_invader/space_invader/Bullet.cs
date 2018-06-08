@@ -3,6 +3,7 @@ using Otter;
 
 namespace space_invader
 {
+	// Bullet collision check tags
     enum Tags
     {
         Player,
@@ -21,17 +22,27 @@ namespace space_invader
         public float MoveSpeed;
 
         /// <summary>
-        /// Creates new bullet
+        /// Create Bullet.
         /// </summary>
         /// <param name="_MoveSpeed">Bullet speed. You can use negative values to move up and down</param>
         /// <param name="pos">Bullet position</param>
-        /// <param name="collider">collider</param>
+        /// <param name="collider">Bullet collider</param>
         public Bullet(float _MoveSpeed, Vector2 pos, BoxCollider collider)
         {
             Position = pos;
             MoveSpeed = _MoveSpeed;
 
             AddCollider(collider);
+        }
+
+        public static void Initialize()
+        {
+            InitializeImages();
+        }
+
+        public static void InitializeImages()
+        {
+
         }
 
         /// <summary>
@@ -45,6 +56,7 @@ namespace space_invader
             {
                 Y += MoveSpeed;
 
+				// Check bullet bounds and collision
                 CheckBulletBounds();
                 CheckBulletCollision();
                 

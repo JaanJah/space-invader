@@ -10,39 +10,49 @@ namespace space_invader
     /// </summary>
     class Barricade : Entity
     {
+		// Size of barricade block
         static Vector2 Size = new Vector2(24, 24);
-        static List<Image> Images = new List<Image>();
         
+		// Current barricade block Image Counter
         int CurImage = 0;
 
+		/// <summary>
+		/// Create Barricade.
+		/// </summary>
         public Barricade()
         {
-            Collider collider = new BoxCollider(Images[0].Width, Images[0].Height, Tags.Barricade);
+            // Get barrricade image
+            Image image = (Image)Program.resourceManager.GetGraphic("wall0");
+
+			// Create collider
+            Collider collider = new BoxCollider(image.Width, image.Height, Tags.Barricade);
             
-            AddGraphic(Images[0]);
+			// Add image and collider
+            AddGraphic(image);
             AddCollider(collider);
         }
 
         /// <summary>
-        /// Removes barricade health.
+        /// Remove barricade health and change image.
         /// </summary>
         public void TakeDamage()
         {
             CurImage++;
 
+            // Remove barricade
             if (CurImage > 3)
             {
                 RemoveSelf();
                 return;
             }
-                
+
             // Change Image
-            RemoveGraphic(Images[CurImage - 1]);
-            AddGraphic(Images[CurImage]);
+            RemoveGraphic(Graphic);
+            AddGraphic(Program.resourceManager.GetGraphic("wall" + CurImage));
         }
 
         /// <summary>
-        /// Initializes images and barricades.
+        /// Initialize images and barricades.
         /// </summary>
         public static void Initialize()
         {
@@ -52,23 +62,25 @@ namespace space_invader
         
 
         /// <summary>
-        /// Loads all images.
+        /// Load barricade images.
         /// </summary>
         static void InitializeImages()
         {
-            Image block100 = new Image("Assets/wall100.png");
-            Image block75 = new Image("Assets/wall75.png");
-            Image block50 = new Image("Assets/wall50.png");
-            Image block25 = new Image("Assets/wall25.png");
+            for (int i = 0; i < 4; i++)
+            {
+                // Load image
+                Image image = new Image(Program.game.GameFolder + "/Barricades/wall" + i + ".png");
 
-            Images.Add(block100);
-            Images.Add(block75);
-            Images.Add(block50);
-            Images.Add(block25);
+                // Set image name
+                image.Name = "wall" + i.ToString(); 
+
+                // Add image to resourceManager
+                Program.resourceManager.AddGraphic(image);
+            }
         }
 
         /// <summary>
-        /// Loads in barricades
+        /// Spawn barricades.
         /// </summary>
         static void InitializeBarricades()
         {
@@ -76,19 +88,23 @@ namespace space_invader
             XmlDocument doc = new XmlDocument();
             doc.Load("barricades.xml");
 
-            // Loop through each node to spawn barricade
-            
+            // Loop through each node
             foreach (XmlElement node in doc.DocumentElement.ChildNodes)
-
+			{
                 // Spawn 4 barricades
                 for (int i = 0; i < 4; i++)
                 {
+					// Create barricade
                     Barricade barricade = new Barricade();
 
-                    barricade.Position = new Vector2(Convert.ToSingle(node.GetAttribute("posx")) + i * 200, Convert.ToSingle(node.GetAttribute("posy")));
+					// Set barricade position
+                    barricade.Position = new Vector2(Convert.ToSingle(node.GetAttribute("posx")) + i * 200,
+													 Convert.ToSingle(node.GetAttribute("posy")));
 
+					// Add barricade to scene
                     Program.game.GetScene<MainScene>().Add(barricade);
                 }
+			}
         }
     }
 }
