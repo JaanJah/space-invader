@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 using Otter;
 
 namespace space_invader
@@ -14,27 +15,32 @@ namespace space_invader
 
         public static void Initialize()
         {
-
+            NodeTypes.Add(new KeyValuePair<string, Func<Graphic>("texture", XMLLoader.LoadTexture()>)
         }
 
-           
+        public static void 
 
         public static Scene Load(string filename)
         {
             // Create scene
             Scene scene = new Scene();
 
-            // Create XML document
-            XmlDocument doc = new XmlDocument();
-            doc.Load(Program.game.Filepath + filename);
-
-            // Get root element
-            XmlElement root = doc.DocumentElement;
+            // open XML document
+            XDocument doc = new XDocument(Program.game.Filepath + filename);
 
             // Get all nodes
-            XmlNodeList nodes = root.SelectNodes()
+            IEnumerable<XElement> nodes = doc.Root.Elements();
 
-            while ()
+            foreach(XElement node in nodes)
+            {
+                foreach (XAttribute type in node.Attributes())
+                {
+                    if (NodeTypes.ContainsKey(type.Value))
+                    {
+                        Console.WriteLine("test");
+                    }
+                }
+            }
 
             return scene;
         }

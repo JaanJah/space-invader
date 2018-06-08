@@ -20,6 +20,9 @@ namespace space_invader
             // Create resource manager
             resourceManager = new ResourceManager();
 
+            //Initialize scene loader
+            SceneLoader.Initialize();
+
             // Create game scene
             MainScene scene = new MainScene();
             game.AddScene(scene);
