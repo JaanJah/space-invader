@@ -16,4 +16,5 @@ Made by JaanJah and hindrekhan
 # Controls
 
 Arrow keys - Move
+
 Space - Fire
