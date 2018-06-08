@@ -8,6 +8,9 @@ using System.Xml;
 
 namespace space_invader
 {
+    /// <summary>
+    /// Barricades stop bullets.
+    /// </summary>
     class Barricade : Entity
     {
         static Vector2 Size = new Vector2(24, 24);
@@ -23,6 +26,9 @@ namespace space_invader
             AddCollider(collider);
         }
 
+        /// <summary>
+        /// Removes barricade health.
+        /// </summary>
         public void TakeDamage()
         {
             CurImage++;
@@ -33,16 +39,24 @@ namespace space_invader
                 return;
             }
                 
+            // Change Image
             RemoveGraphic(Images[CurImage - 1]);
             AddGraphic(Images[CurImage]);
         }
 
+        /// <summary>
+        /// Initializes images and barricades.
+        /// </summary>
         public static void Initialize()
         {
             InitializeImages();
             InitializeBarricades();
         }
         
+
+        /// <summary>
+        /// Loads all images.
+        /// </summary>
         static void InitializeImages()
         {
             Image block100 = new Image("../../../Assets/wall100.png");
@@ -56,12 +70,20 @@ namespace space_invader
             Images.Add(block25);
         }
 
+        /// <summary>
+        /// Loads in barricades
+        /// </summary>
         static void InitializeBarricades()
         {
+            // Open XML document
             XmlDocument doc = new XmlDocument();
             doc.Load("../../../barricades.xml");
 
+            // Loop through each node to spawn barricade
+            
             foreach (XmlElement node in doc.DocumentElement.ChildNodes)
+
+                // Spawn 4 barricades
                 for (int i = 0; i < 4; i++)
                 {
                     Barricade barricade = new Barricade();
