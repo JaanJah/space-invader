@@ -23,18 +23,11 @@ namespace space_invader
             int curScore = Int32.Parse(xmlnodes[0].Attributes["score"].Value);
 
             for (int i = 0; i < xmlnodes.Count; i++)
-            {
-
                 if (Int32.Parse(xmlnodes[i].Attributes["score"].Value) > curScore)
-                {
-                    curScore = Int32.Parse(xmlnodes[i].Attributes["score"].Value);
-                }
+                    if (xmlnodes[i].Attributes["name"].Value != "")
+                        curScore = Int32.Parse(xmlnodes[i].Attributes["score"].Value);
 
-            }
-            
-            
             return curScore.ToString();
-            
         }
 
         public static void WriteScores()
