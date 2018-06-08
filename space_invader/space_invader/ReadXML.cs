@@ -10,9 +10,9 @@ namespace space_invader
 {
     static class ReadXML
     {
-        public static void MainScreenXML()
+        public static string MainScreenXML()
         {
-            /*
+            
             MainScene scene = (MainScene)Program.game.FirstScene;
 
             XmlDocument xdoc = new XmlDocument();
@@ -31,10 +31,10 @@ namespace space_invader
                 }
 
             }
-            highScoreTxt.String = curScore.ToString();
+            
             
             return curScore.ToString();
-            */
+            
         }
 
         public static void WriteScores()

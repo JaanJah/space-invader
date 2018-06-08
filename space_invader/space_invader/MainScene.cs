@@ -17,7 +17,7 @@ namespace space_invader
         public Player player;
         public RichText livesLeftTxt;
         public RichText curScoreTxt;
-        //public RichText highScoreTxt;
+        public RichText highScoreTxt;
         UFO Ufo;
 
         public int CurLevel = 1;
@@ -73,11 +73,11 @@ namespace space_invader
 
                 var highScoreTxtLabel = new RichText("Highscore", txtConfig);
                 highScoreTxtLabel.SetPosition(350, 15);
-                /*
-                var highScoreTxt = new RichText("", txtConfig);
+                
+                highScoreTxt = new RichText(ReadXML.MainScreenXML(), txtConfig);
                 highScoreTxt.Name = "highScoreTxt";
                 highScoreTxt.SetPosition(380, 30);
-                */
+                
                 var curScoreTxtLabel = new RichText("Score", txtConfig);
                 curScoreTxtLabel.SetPosition(650, 15);
 
@@ -90,7 +90,7 @@ namespace space_invader
                 scene.AddGraphic(curScoreTxtLabel);
 
                 scene.AddGraphic(scene.livesLeftTxt);
-                //scene.AddGraphic(scene.highScoreTxt);
+                scene.AddGraphic(scene.highScoreTxt);
                 scene.AddGraphic(scene.curScoreTxt);
 
                 #endregion gameText
