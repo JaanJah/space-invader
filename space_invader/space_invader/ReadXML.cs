@@ -16,10 +16,19 @@ namespace space_invader
             
             MainScene scene = (MainScene)Program.game.FirstScene;
             //Loads in XML
-            XmlDocument xdoc = new XmlDocument();
-            xdoc.Load("savefile.xml");
+            XmlDocument xmlDoc = new XmlDocument();
 
-            var xmlnodes = xdoc.DocumentElement.ChildNodes;
+            if (!System.IO.File.Exists("savefile.xml"))
+            {
+                XmlElement root = xmlDoc.CreateElement("leaderboard");
+                xmlDoc.AppendChild(root);
+            }
+            else
+            {
+                xmlDoc.Load("savefile.xml");
+            }
+
+            var xmlnodes = xmlDoc.DocumentElement.ChildNodes;
             //Gets the score value from the "score" attribute
             int curScore;
             if (xmlnodes.Count == 0)
