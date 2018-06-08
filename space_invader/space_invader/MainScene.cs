@@ -53,10 +53,11 @@ namespace space_invader
                 {
                     TextAlign = TextAlign.Center,
                     CharColor = Color.Green,
-                    FontSize = 16,
-                    SineAmpX = 3,
+                    FontSize = 18,
+                    SineAmpX = 1,
                     SineAmpY = 2,
                     SineRateX = 1,
+                    Font = new Font("Assets/VCR_OSD_MONO.ttf"),
                 };
                 // Writing the text graphics and setting position
                 var livesLeftTxtLabel = new RichText("Lives", txtConfig);
