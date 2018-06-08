@@ -7,15 +7,23 @@ using Otter;
 
 namespace space_invader
 {
+    /// <summary>
+    /// TextBox class
+    /// </summary>
     class TextBox : Entity
     {
+        //Basic variables for textbox
         public Text text = new Text();
         public Image imageBox = Image.CreateRectangle(150, 20);
         public bool hasFocus;
         public int charLimit = 16;
         public string inputString = "";
         public int firstTime = 0;
-
+        /// <summary>
+        /// Creates textbox
+        /// </summary>
+        /// <param name="x">X coordinate for textbox</param>
+        /// <param name="y">Y coordinate for textbox</param>
         public TextBox(float x, float y) : base(x, y)
         {
             imageBox.OutlineColor = Color.Blue;
@@ -25,7 +33,7 @@ namespace space_invader
             AddGraphic(imageBox);
             AddGraphic(text);
         }
-
+        //Updates textbox
         public override void Update()
         {
             base.Update();
@@ -33,6 +41,7 @@ namespace space_invader
             if (hasFocus)
             {
                 firstTime++;
+                //Checks if the textbox hasFocus for the first time, if has, then clears textbox strings.
                 if (firstTime == 1)
                 {
                     Input.ClearKeystring();
@@ -74,6 +83,7 @@ namespace space_invader
             {
                 if (Util.InRect(Scene.MouseX, Scene.MouseY, X, Y, 150, 20))
                 {
+                    //If textbox doesn't have focus when pressed on, then give focus and change outlinecolor
                     if (!hasFocus)
                     {
 
@@ -83,6 +93,7 @@ namespace space_invader
                 }
                 else
                 {
+                    //If textbox has focus but not on textbox area, then take away focus and change outlinecolor
                     if (hasFocus)
                     {
                         hasFocus = false;
