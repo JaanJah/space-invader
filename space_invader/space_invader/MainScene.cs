@@ -41,7 +41,7 @@ namespace space_invader
                 // Create player and add to scene
                 player = new Player();
                 Add(player);
-
+                // Gametext for the entire game pretty much
                 #region gameText
 
                 var background = new Image("../../../Assets/background.png");
