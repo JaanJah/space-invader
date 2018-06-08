@@ -13,6 +13,7 @@ namespace space_invader
     /// </summary>
     class Player : Entity
     {
+        //Sets basic variables
         float MoveSpeed = 5.0f;
         public Bullet bullet;
         public int ScoreAmount = 0;
@@ -106,14 +107,14 @@ namespace space_invader
                 X = scene.PlayPosition.X + scene.PlayWidth.X;
         }
 
-
+        // Player shooting
         void Shoot()
         {
             bullet.Collidable = true;
             bullet.Visible = true;
             bullet.Position = Position;
         }
-
+        // Player death
         public void Die()
         {
             Alive = false;
