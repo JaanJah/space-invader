@@ -1,0 +1,3 @@
+<nodetypes>
+  <node class="Barricade" func="LoadBarricade"/>
+</nodetypes>

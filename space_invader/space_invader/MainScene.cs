@@ -31,7 +31,6 @@ namespace space_invader
             OnBegin = delegate
             {
                 Enemy.Initialize();
-                Barricade.Initialize();
                 MainScene scene = Program.game.GetScene<MainScene>();
 
                 Ufo = new UFO();

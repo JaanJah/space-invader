@@ -15,7 +15,7 @@ namespace space_invader
             game.Color = Color.Black;
 
             // Set Asset filepath
-            game.GameFolder = "../../../Assets/";
+            game.GameFolder = "../../../Assets";
 
             // Create resource manager
             resourceManager = new ResourceManager();
@@ -24,13 +24,12 @@ namespace space_invader
             SceneLoader.Initialize();
 
             // Create game scene
-            MainScene scene = (MainScene)SceneLoader.Load("Scenes/MainScene.xml");
-            game.AddScene(scene);
+            MainScene scene = (MainScene)SceneLoader.Load("/Scenes/MainScene.xml");
             scene.Initialize();
 
             // Change window variables
             game.WindowResize = false;
-            game.SetIcon(game.GameFolder + "logo.png");
+            game.SetIcon(game.GameFolder + "/logo.png");
 
             // Handle args
             foreach (var arg in args)

@@ -13,12 +13,32 @@ namespace space_invader
     {
         public static void LoadImage(XElement xNode)
         {
-            // Load image and set name
-            Image image = new Image(xNode.Attribute("path").Value);
+            // Load image
+            Image image = new Image(Program.game.GameFolder + xNode.Attribute("path").Value);
             image.Name = xNode.Attribute("name").Value;
 
             // Add image to resourceManager
             Program.resourceManager.AddGraphic(image);
+        }
+
+        public static void LoadBarricade(XElement xNode)
+        {
+            // Add barricade to scene
+            Program.game.GetScene<MainScene>().OnBegin = delegate
+            {
+                // Load Barricade
+                Barricade barricade = new Barricade();
+
+                Program.game.GetScene<MainScene>().Add(barricade);
+            };
+        }
+
+        public static void LoadEnemy(XElement xNode)
+        {
+            // Load enemy
+
+
+            //Program.game.
         }
     }
 }
