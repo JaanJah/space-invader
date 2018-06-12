@@ -1,6 +1,4 @@
-﻿using Otter;
-
-namespace space_invader
+﻿namespace space_invader
 {
     /// <summary>
     /// Enemy crab.

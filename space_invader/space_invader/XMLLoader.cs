@@ -23,14 +23,19 @@ namespace space_invader
 
         public static void LoadBarricade(XElement xNode, Scene scene)
         {
-            // Add barricade to scene
-            scene.OnBegin = delegate
+            // Spawn 4 barricades
+            for (int i = 0; i < 4; i++)
             {
                 // Load Barricade
                 Barricade barricade = new Barricade();
 
+                // Set barricade variables
+                barricade.SetPosition(float.Parse((xNode.Attribute("posx").Value)) + (i * 200),
+                                      float.Parse((xNode.Attribute("posy").Value)));
+
+                // Add barricade to scene
                 scene.Add(barricade);
-            };
+            }
         }
 
         public static void LoadEnemy(XElement xNode)

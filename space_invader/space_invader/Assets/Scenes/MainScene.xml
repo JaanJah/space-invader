@@ -27,14 +27,12 @@
       <barricade posx="50" posy="450"></barricade>
       <barricade posx="50" posy="474"></barricade>
       <barricade posx="50" posy="498"></barricade>
-      <barricade posx="74" posy="498"></barricade>
+      <barricade posx="74" posy="450"></barricade>
       <barricade posx="98" posy="450"></barricade>
       <barricade posx="122" posy="450"></barricade>
       <barricade posx="122" posy="474"></barricade>
       <barricade posx="122" posy="498"></barricade>
     </barricades>
-    <enemies>
-      <enemy image="squid" name="squid"/>
-    </enemies>
+
   </entities>
 </scene>

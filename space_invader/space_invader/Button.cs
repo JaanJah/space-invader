@@ -1,5 +1,4 @@
 ﻿using System;
-using Otter;
 using System.Threading;
 
 namespace space_invader

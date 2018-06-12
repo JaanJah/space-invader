@@ -1,5 +1,4 @@
 ﻿using System;
-using Otter;
 
 namespace space_invader
 {

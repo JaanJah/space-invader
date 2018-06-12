@@ -79,7 +79,7 @@ namespace space_invader
         void UpdateMovement()
         {
             // Get main scene
-            MainScene scene = Program.game.GetScene<MainScene>();
+            MainScene scene = Program.game.Scene. Program.game.GetScene<MainScene>();
 
             SetPosition(Position + MoveDir);
 
