@@ -12,7 +12,7 @@ namespace space_invader
 {
     static class SceneLoader
     {
-        static IDictionary<string, Action<XElement>> NodeTypes = new Dictionary<string, Action<XElement>>();
+        static IDictionary<string, Action<XElement, Scene>> NodeTypes = new Dictionary<string, Action<XElement, Scene>>();
         static IDictionary<string, Func<Scene>> SceneTypes = new Dictionary<string, Func<Scene>>();
 
         public static void Initialize()
@@ -23,13 +23,13 @@ namespace space_invader
 
         static void InitializeNodeTypes()
         {
-            NodeTypes["image"] = new Action<XElement>(XMLLoader.LoadImage);
-            NodeTypes["barricade"] = new Action<XElement>(XMLLoader.LoadBarricade);
+            NodeTypes["image"] = new Action<XElement, Scene>(XMLLoader.LoadImage);
+            NodeTypes["barricade"] = new Action<XElement, Scene>(XMLLoader.LoadBarricade);
         }
 
         static void InitializeSceneTypes()
         {
-            SceneTypes["mainscene"] = new Func<Scene>(add)
+            SceneTypes.Add("MainScene", () => { return new MainScene(); });
         }
 
         public static Scene Load(string filepath)
@@ -37,14 +37,19 @@ namespace space_invader
             // open XML document
             XDocument doc = XDocument.Load(Program.game.GameFolder + filepath);
 
-            // Get scene type
-            string SceneName = "space_invader." + doc.Root.Attribute("class").Value;
-            Type sceneType = Type.GetType(SceneName);
-            var a = sceneType.GetType().GetRuntimeMethods();
             // Create scene
-            dynamic scene = Convert.ChangeType(Assembly.GetExecutingAssembly().CreateInstance(SceneName), sceneType);
-            Scene convertedSene = (Scene)scene;
-            Program.game.AddScene(scene);
+            Scene scene = null;
+
+            foreach (KeyValuePair<string, Func<Scene>> type in SceneTypes)
+            {
+                if (type.Key == doc.Root.Attribute("class").Value)
+                {
+                    scene = type.Value();
+                    break;
+                }
+
+                throw new Exception("Scene not found.");
+            }
 
             // Get all nodes
             IEnumerable<XElement> nodes = doc.Descendants();
@@ -53,13 +58,13 @@ namespace space_invader
             foreach (XElement node in nodes)
             {
                 // Loop through each node type
-                foreach (KeyValuePair<string, Action<XElement>> type in NodeTypes)
+                foreach (KeyValuePair<string, Action<XElement, Scene>> type in NodeTypes)
                 {
                     // Check if node name is equal to node type
                     if (node.Name == type.Key)
                     {
                         // Call load function
-                        type.Value(node);
+                        type.Value(node, scene);
                     }
                 }
             }

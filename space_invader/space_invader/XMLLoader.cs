@@ -11,7 +11,7 @@ namespace space_invader
 {
     static class XMLLoader
     {
-        public static void LoadImage(XElement xNode)
+        public static void LoadImage(XElement xNode, Scene scene)
         {
             // Load image
             Image image = new Image(Program.game.GameFolder + xNode.Attribute("path").Value);
@@ -21,15 +21,15 @@ namespace space_invader
             Program.resourceManager.AddGraphic(image);
         }
 
-        public static void LoadBarricade(XElement xNode)
+        public static void LoadBarricade(XElement xNode, Scene scene)
         {
             // Add barricade to scene
-            Program.game.GetScene<MainScene>().OnBegin = delegate
+            scene.OnBegin = delegate
             {
                 // Load Barricade
                 Barricade barricade = new Barricade();
 
-                Program.game.GetScene<MainScene>().Add(barricade);
+                scene.Add(barricade);
             };
         }
 

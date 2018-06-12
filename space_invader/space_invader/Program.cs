@@ -40,7 +40,7 @@ namespace space_invader
             }
 
             // Start game
-            game.Start();
+            game.Start(scene);
         }
     }
 }
