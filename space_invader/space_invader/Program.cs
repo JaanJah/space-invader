@@ -4,7 +4,7 @@ namespace space_invader
 {
     class Program
     {
-        
+        public static bool pressed = false;
         public static Game game;
         public static string curScoreTxt;
         //Hides console

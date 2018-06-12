@@ -9,7 +9,7 @@ namespace space_invader
     /// </summary>
     class Button : Entity
     {
-        bool pressed = false;
+        
 
         /// <summary>
         /// Initializes new Button
@@ -33,21 +33,23 @@ namespace space_invader
             if (Input.MouseButtonReleased(MouseButton.Left))
             {
                 // Check if button is pressed before
-                if (!pressed)
+                if (!Program.pressed)
                 {
                     // Check if cursor position is in button bounds
                     if (Util.InRect(Scene.MouseX, Scene.MouseY, X, Y, 80, 30))
                     {
-                        pressed = true;
+                        Program.pressed = true;
 
                         // Get player input and adds it to leaderboard
                         var inputText = Scene.GetEntity<TextBox>().inputString;
 
-                        Program.game.GetScene<HighScoresScene>().hslb.RemoveGraphics(Program.game.GetScene<HighScoresScene>().hslb.GetGraphic<RichText>());
-
                         Leaderboard.AddScore(inputText, Program.curScoreTxt);
 
                         ReadXML.WriteScores();
+
+                        Scene scene = new HighScoresScene();
+
+                        Program.game.SwitchScene(scene);
                     }
                 }
             }
