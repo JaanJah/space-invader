@@ -5,7 +5,7 @@ This project uses Otter2D framework http://otter2d.com/index.php
 
 # How to play
 
-1.Go to our releases https://github.com/JaanJah/space-invader/releases/tag/v1.02
+1.Go to our releases https://github.com/JaanJah/space-invader/releases
 
 2.Download space-invader-release.rar and extract it
 
